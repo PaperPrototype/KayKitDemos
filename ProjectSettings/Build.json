@@ -1,13 +1,19 @@
 {
-  "Scenes": [],
-  "Platform": 0,
+  "Scenes": [
+    {
+      "Path": "Paper/PlayerController/PlayerController.scene",
+      "SceneGuid": "6bc6469a-6992-4f1f-8ecf-035b4db53010",
+      "Enabled": true
+    }
+  ],
+  "Platform": 2,
   "Config": 1,
-  "OutputDirectory": "Builds",
+  "OutputDirectory": "/Users/abdiellopez/Documents/Prowl Projects/KayKits1/Builds",
   "PackagingMode": 1,
   "AssetMode": 1,
   "MaxPakSizeMB": 2048,
   "SelfContained": true,
   "WindowWidth": 1280,
   "WindowHeight": 720,
-  "RuntimeIdentifier": "win-x64"
+  "RuntimeIdentifier": "osx-x64"
 }

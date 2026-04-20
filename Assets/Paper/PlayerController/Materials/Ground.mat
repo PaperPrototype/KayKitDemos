@@ -78,7 +78,26 @@
 
     }
   },
-  "AssetPath": "Paper/VirtualCam/Materials/Ground.mat",
+  "_overrides": [
+    "_EmissionIntensity",
+    "_AlphaCutoff",
+    "_Parallax",
+    "_TranslucencyStrength",
+    "_ScatteringPower",
+    "_ScatteringDistortion",
+    "_ScatteringScale",
+    "_ParallaxSteps",
+    "_Tiling",
+    "_Offset",
+    "_MainColor",
+    "_MainTex",
+    "_NormalTex",
+    "_SurfaceTex",
+    "_EmissionTex",
+    "_ParallaxMap",
+    "_TranslucencyMap"
+  ],
+  "AssetPath": "Paper/PlayerController/Materials/Ground.mat",
   "AssetID": "00000000-0000-0000-0000-000000000000",
   "Name": "Ground"
 }

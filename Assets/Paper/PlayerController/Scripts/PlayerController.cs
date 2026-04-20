@@ -5,12 +5,31 @@ using Prowl.Editor;
 using Prowl.Runtime.Resources;
 using Prowl.Vector;
 
-[ExecuteAlways]
+namespace Paper;
+
+public enum PlayerAnimationState
+{
+    Idle,
+    Walking,
+    // Running,
+    // Jumping,
+    // Crouching
+}
+
+//[ExecuteAlways]
 public class PlayerController : MonoBehaviour
 {
     public CharacterController? characterController;
     public GameObject? lookAtTarget;
     public GameObject? followTarget;
+    
+    public AnimationComponent? animationComponent;
+    public AssetRef<AnimationClip> idleAnimation;
+    public AssetRef<AnimationClip> walkingAnimation;
+    // public AssetRef<AnimationClip> runningAnimation;
+    // public AssetRef<AnimationClip> jumpingAnimation;
+    // public AssetRef<AnimationClip> crouchAnimation;
+    public PlayerAnimationState currentState = PlayerAnimationState.Idle;
     
     public Float3 offset = new Float3(10, 10, 10);
     
@@ -20,12 +39,18 @@ public class PlayerController : MonoBehaviour
     public float Gravity = 20.0f;
     public float StandingHeight = 1.8f;
     public float CrouchHeight = 0.9f;
+    public float IdleDeadzone = 0.2f;
     
     private Float3 velocity = Float3.Zero;
     private Float3 moveInput = Float3.Zero;
     private bool jumpInput = false;
     private bool crouchInput = false;
     private bool isCrouching = false;
+
+    public override void OnEnable()
+    {
+        animationComponent.CurrentClip = GetAnimationState(PlayerAnimationState.Idle);
+    }
 
     public override void Update()
     {
@@ -64,6 +89,65 @@ public class PlayerController : MonoBehaviour
         
         // Move the character using the CharacterController (this also updates IsGrounded)
         characterController.Move(movement);
+        
+        if (animationComponent == null ||
+            walkingAnimation == null ||
+            // runningAnimation == null ||
+            // jumpingAnimation == null ||
+            idleAnimation == null) return;
+
+        var relativeVelocityLength = Float3.Length(horizontalVelocity) / currentSpeed;
+        
+        // if walking but velocity has decreased then switch to idle
+        if (relativeVelocityLength < IdleDeadzone && currentState == PlayerAnimationState.Walking)
+        {
+            animationComponent.CurrentClip = GetAnimationState(PlayerAnimationState.Idle);
+        }
+        
+        // if we are idle but the current velocity has increased then switch to walking
+        if (relativeVelocityLength > IdleDeadzone && currentState == PlayerAnimationState.Idle)
+        {
+            animationComponent.CurrentClip = GetAnimationState(PlayerAnimationState.Walking);
+        }
+        
+        // loop the animation
+        if (!animationComponent.IsPlaying)
+        {
+            animationComponent.Play(GetAnimationState(currentState));
+        }
+        
+        if (currentState == PlayerAnimationState.Walking) {
+            animationComponent.Speed = relativeVelocityLength;
+        }
+        else
+        {
+            animationComponent.Speed = 1;
+        }
+    }
+
+    private AnimationClip GetAnimationState(PlayerAnimationState newState)
+    {
+        switch (newState)
+        {
+            case PlayerAnimationState.Idle:
+                currentState = PlayerAnimationState.Idle;
+                return idleAnimation.Res;
+            case PlayerAnimationState.Walking:
+                currentState = PlayerAnimationState.Walking;
+                return walkingAnimation.Res;
+            // case PlayerAnimationState.Running:
+            //     animationComponent.CurrentClip = runningAnimation.Res;
+            //     break;
+            // case PlayerAnimationState.Jumping:
+            //     animationComponent.CurrentClip = jumpingAnimation.Res;
+            //     break;
+            // case PlayerAnimationState.Crouching:
+            //     animationComponent.CurrentClip = crouchAnimation.Res;
+            //     break;
+                
+        }
+        
+        return idleAnimation.Res;
     }
 
     private void HandleCrouch()
