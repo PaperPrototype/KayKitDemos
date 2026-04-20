@@ -29,9 +29,7 @@ Demo scene: /Assets/KayKits/Animations/Animations.scene
 
 Fully working scene demoing all assets from https://kaylousberg.itch.io/kaykit-character-animations
 
-![](/Assets/KayKits/Animations/Screenshot.png)
-
-![](/Assets/KayKits/Animations/Recording.mov)
+https://github.com/user-attachments/assets/dec87afa-5712-45c5-9fc5-da36cb653359
 
 ## Adventurers
 README: [/Assets/KayKits/Adventurers/README.md](/Assets/KayKits/Adventurers/README.md)
