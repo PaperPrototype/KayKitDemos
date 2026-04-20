@@ -15,11 +15,12 @@ https://kaylousberg.itch.io/kaykit-skeletons
 https://quaternius.itch.io/stylized-nature-megakit
 
 ## Structure
-Asset Structure:
-/{Author}/{Project}/{...}
 
-Game Demos Structure:
-/Games/{Author}/{Project}/{...}
+Project Structure:
+
+```
+/{Author}/{Project}/{...}
+```
 
 ## Animations
 
