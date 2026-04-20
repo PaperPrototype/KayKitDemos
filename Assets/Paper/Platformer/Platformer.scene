@@ -53,9 +53,9 @@
               "$id": 5,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
-                "X": -0F,
-                "Y": 0F,
-                "Z": 0F
+                "X": 0.03681135F,
+                "Y": -1.9607538F,
+                "Z": 0.099817276F
               },
               "_localScale": {
                 "X": 1F,
@@ -882,7 +882,7 @@
                               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                               "_localPosition": {
                                 "X": 0F,
-                                "Y": 0.3919344F,
+                                "Y": 0.39196104F,
                                 "Z": 0F
                               },
                               "_localScale": {
@@ -891,9 +891,9 @@
                                 "Z": 0.99999994F
                               },
                               "_localRotation": {
-                                "X": 7.491865E-05F,
+                                "X": 5.9489957E-05F,
                                 "Y": 0.04315775F,
-                                "Z": -3.2389303E-06F,
+                                "Z": -2.5724387E-06F,
                                 "W": -0.9990683F
                               }
                             },
@@ -916,8 +916,8 @@
                                   "$id": 38,
                                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                   "_localPosition": {
-                                    "X": 0.17094508F,
-                                    "Y": 0.1135872F,
+                                    "X": 0.1709451F,
+                                    "Y": 0.11358721F,
                                     "Z": -1.5994095E-08F
                                   },
                                   "_localScale": {
@@ -926,10 +926,10 @@
                                     "Z": 1.0000008F
                                   },
                                   "_localRotation": {
-                                    "X": 0.9923058F,
-                                    "Y": 0.05813419F,
-                                    "Z": -0.07045066F,
-                                    "W": -0.083584264F
+                                    "X": 0.9923155F,
+                                    "Y": 0.058136888F,
+                                    "Z": -0.07044667F,
+                                    "W": -0.08347068F
                                   }
                                 },
                                 "Components": [
@@ -961,10 +961,10 @@
                                         "Z": 1.0000001F
                                       },
                                       "_localRotation": {
-                                        "X": 0.26419246F,
-                                        "Y": 6.174469E-08F,
-                                        "Z": 1.7725735E-07F,
-                                        "W": -0.9644701F
+                                        "X": 0.26393175F,
+                                        "Y": 6.376935E-08F,
+                                        "Z": 1.7639813E-07F,
+                                        "W": -0.96454144F
                                       }
                                     },
                                     "Components": [
@@ -996,10 +996,10 @@
                                             "Z": 0.9999993F
                                           },
                                           "_localRotation": {
-                                            "X": -0.53085285F,
-                                            "Y": -0.114337735F,
-                                            "Z": -0.04192284F,
-                                            "W": -0.8386684F
+                                            "X": -0.5307097F,
+                                            "Y": -0.11434512F,
+                                            "Z": -0.041898724F,
+                                            "W": -0.83875924F
                                           }
                                         },
                                         "Components": [
@@ -1022,7 +1022,7 @@
                                               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                               "_localPosition": {
                                                 "X": -2.1296735E-10F,
-                                                "Y": 0.16565005F,
+                                                "Y": 0.16565007F,
                                                 "Z": -1.1252338E-08F
                                               },
                                               "_localScale": {
@@ -1031,10 +1031,10 @@
                                                 "Z": 1.0000027F
                                               },
                                               "_localRotation": {
-                                                "X": -1.4788565E-05F,
-                                                "Y": -0.9202594F,
-                                                "Z": -0.39130887F,
-                                                "W": -3.2829544E-06F
+                                                "X": -1.4896605E-05F,
+                                                "Y": -0.92025954F,
+                                                "Z": -0.3913085F,
+                                                "W": -3.3113822E-06F
                                               }
                                             },
                                             "Components": [
@@ -1077,8 +1077,8 @@
                                   "$id": 46,
                                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                   "_localPosition": {
-                                    "X": -0.17094508F,
-                                    "Y": 0.11358732F,
+                                    "X": -0.1709451F,
+                                    "Y": 0.11358733F,
                                     "Z": -1.557549E-08F
                                   },
                                   "_localScale": {
@@ -1087,10 +1087,10 @@
                                     "Z": 1.0000008F
                                   },
                                   "_localRotation": {
-                                    "X": 0.99728954F,
-                                    "Y": -0.029486077F,
-                                    "Z": -0.031519145F,
-                                    "W": -0.0595877F
+                                    "X": 0.9972963F,
+                                    "Y": -0.029480174F,
+                                    "Z": -0.031521212F,
+                                    "W": -0.059477087F
                                   }
                                 },
                                 "Components": [
@@ -1122,10 +1122,10 @@
                                         "Z": 0.99999994F
                                       },
                                       "_localRotation": {
-                                        "X": 0.27526292F,
-                                        "Y": -6.7846116E-08F,
-                                        "Z": -1.9581655E-07F,
-                                        "W": -0.96136904F
+                                        "X": 0.27500564F,
+                                        "Y": -6.8178466E-08F,
+                                        "Z": -1.9609077E-07F,
+                                        "W": -0.9614427F
                                       }
                                     },
                                     "Components": [
@@ -1157,10 +1157,10 @@
                                             "Z": 0.9999992F
                                           },
                                           "_localRotation": {
-                                            "X": -0.5597255F,
-                                            "Y": 0.11450495F,
-                                            "Z": 0.00873352F,
-                                            "W": -0.8206825F
+                                            "X": -0.5595848F,
+                                            "Y": 0.11450656F,
+                                            "Z": 0.008711776F,
+                                            "W": -0.8207784F
                                           }
                                         },
                                         "Components": [
@@ -1183,8 +1183,8 @@
                                               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                               "_localPosition": {
                                                 "X": -1.4688202E-08F,
-                                                "Y": 0.16565001F,
-                                                "Z": -5.55589E-09F
+                                                "Y": 0.16565003F,
+                                                "Z": -5.5558904E-09F
                                               },
                                               "_localScale": {
                                                 "X": 1.0000002F,
@@ -1192,10 +1192,10 @@
                                                 "Z": 1.0000024F
                                               },
                                               "_localRotation": {
-                                                "X": -8.879194E-05F,
-                                                "Y": 0.92022085F,
-                                                "Z": 0.39139977F,
-                                                "W": -2.0188056E-05F
+                                                "X": -8.888737E-05F,
+                                                "Y": 0.920221F,
+                                                "Z": 0.39139926F,
+                                                "W": -2.0210757E-05F
                                               }
                                             },
                                             "Components": [
@@ -1248,9 +1248,9 @@
                                     "Z": 1.0000001F
                                   },
                                   "_localRotation": {
-                                    "X": 0.00020827662F,
-                                    "Y": 2.1239361E-09F,
-                                    "Z": -1.8028026E-05F,
+                                    "X": 0.0001653855F,
+                                    "Y": 7.1748704E-11F,
+                                    "Z": -1.4315396E-05F,
                                     "W": -1F
                                   }
                                 },
@@ -1274,7 +1274,7 @@
                                       "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                       "_localPosition": {
                                         "X": 2.220446E-16F,
-                                        "Y": 0.37498784F,
+                                        "Y": 0.37498787F,
                                         "Z": -1.3877788E-17F
                                       },
                                       "_localScale": {
@@ -1283,10 +1283,10 @@
                                         "Z": 1F
                                       },
                                       "_localRotation": {
-                                        "X": 0.0048253145F,
-                                        "Y": 1.8499144E-09F,
-                                        "Z": -0.00041766843F,
-                                        "W": -0.99998826F
+                                        "X": 0.004863278F,
+                                        "Y": 1.8501971E-09F,
+                                        "Z": -0.0004209544F,
+                                        "W": -0.9999881F
                                       }
                                     },
                                     "Components": [
@@ -1308,20 +1308,20 @@
                                           "$id": 58,
                                           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                           "_localPosition": {
-                                            "X": -0.21200736F,
+                                            "X": -0.21200737F,
                                             "Y": 0.13413227F,
                                             "Z": -8.62731E-08F
                                           },
                                           "_localScale": {
                                             "X": 0.9999992F,
-                                            "Y": 0.99999887F,
-                                            "Z": 0.9999999F
+                                            "Y": 0.9999988F,
+                                            "Z": 0.9999998F
                                           },
                                           "_localRotation": {
-                                            "X": -0.56071925F,
-                                            "Y": 0.04659635F,
-                                            "Z": -0.7367773F,
-                                            "W": -0.37494263F
+                                            "X": -0.5607004F,
+                                            "Y": 0.046645053F,
+                                            "Z": -0.73680896F,
+                                            "W": -0.37490255F
                                           }
                                         },
                                         "Components": [
@@ -1343,20 +1343,20 @@
                                               "$id": 60,
                                               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                               "_localPosition": {
-                                                "X": -6.499567E-09F,
+                                                "X": -6.526946E-08F,
                                                 "Y": 0.24189742F,
-                                                "Z": 4.561343E-10F
+                                                "Z": 5.9587624E-08F
                                               },
                                               "_localScale": {
-                                                "X": 1.0000002F,
-                                                "Y": 0.9999996F,
-                                                "Z": 0.9999999F
+                                                "X": 1.0000004F,
+                                                "Y": 0.99999976F,
+                                                "Z": 1.0000001F
                                               },
                                               "_localRotation": {
-                                                "X": 2.5658498E-09F,
-                                                "Y": 3.5601968E-08F,
-                                                "Z": -0.3766293F,
-                                                "W": -0.9263642F
+                                                "X": 3.1522301E-10F,
+                                                "Y": 3.2667163E-08F,
+                                                "Z": -0.37657633F,
+                                                "W": -0.9263856F
                                               }
                                             },
                                             "Components": [
@@ -1378,19 +1378,19 @@
                                                   "$id": 62,
                                                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                                   "_localPosition": {
-                                                    "X": -2.214794E-08F,
-                                                    "Y": 0.26004383F,
-                                                    "Z": -5.9146302E-08F
+                                                    "X": 1.3678877E-08F,
+                                                    "Y": 0.26004395F,
+                                                    "Z": 5.911669E-08F
                                                   },
                                                   "_localScale": {
                                                     "X": 0.99999994F,
-                                                    "Y": 1.0000001F,
+                                                    "Y": 0.99999994F,
                                                     "Z": 1F
                                                   },
                                                   "_localRotation": {
-                                                    "X": -7.511839E-09F,
-                                                    "Y": -5.027699E-09F,
-                                                    "Z": 0.026658092F,
+                                                    "X": 1.9716231E-10F,
+                                                    "Y": 6.7820762E-09F,
+                                                    "Z": 0.026658094F,
                                                     "W": -0.99964464F
                                                   }
                                                 },
@@ -1414,19 +1414,19 @@
                                                       "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                                       "_localPosition": {
                                                         "X": 1.4901165E-08F,
-                                                        "Y": 0.07382581F,
-                                                        "Z": 2.5981017E-10F
+                                                        "Y": 0.07382587F,
+                                                        "Z": 5.9391308E-08F
                                                       },
                                                       "_localScale": {
-                                                        "X": 0.9999996F,
-                                                        "Y": 1.0000001F,
+                                                        "X": 0.9999995F,
+                                                        "Y": 0.99999994F,
                                                         "Z": 1.0000005F
                                                       },
                                                       "_localRotation": {
-                                                        "X": -0.2124038F,
-                                                        "Y": 0.384042F,
-                                                        "Z": 0.1401177F,
-                                                        "W": -0.88756037F
+                                                        "X": -0.21241072F,
+                                                        "Y": 0.38405752F,
+                                                        "Z": 0.14014642F,
+                                                        "W": -0.88754743F
                                                       }
                                                     },
                                                     "Components": [
@@ -1448,20 +1448,20 @@
                                                           "$id": 66,
                                                           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                                           "_localPosition": {
-                                                            "X": -1.5415024E-08F,
+                                                            "X": -1.5415026E-08F,
                                                             "Y": 0.096125185F,
-                                                            "Z": 0.057499975F
+                                                            "Z": 0.057500005F
                                                           },
                                                           "_localScale": {
                                                             "X": 1F,
-                                                            "Y": 1F,
-                                                            "Z": 1F
+                                                            "Y": 1.0000001F,
+                                                            "Z": 1.0000001F
                                                           },
                                                           "_localRotation": {
-                                                            "X": 4.115578E-05F,
-                                                            "Y": -4.116778E-05F,
-                                                            "Z": -0.7069558F,
-                                                            "W": -0.7072578F
+                                                            "X": 3.268496E-05F,
+                                                            "Y": -3.2685763E-05F,
+                                                            "Z": -0.7069869F,
+                                                            "W": -0.7072267F
                                                           }
                                                         },
                                                         "Components": [
@@ -1509,9 +1509,9 @@
                                           "$id": 68,
                                           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                           "_localPosition": {
-                                            "X": -5.74465E-11F,
+                                            "X": 1.1579031E-10F,
                                             "Y": 0.26879656F,
-                                            "Z": -4.8659077E-32F
+                                            "Z": 9.8078206E-32F
                                           },
                                           "_localScale": {
                                             "X": 0.99999994F,
@@ -1519,10 +1519,10 @@
                                             "Z": 1F
                                           },
                                           "_localRotation": {
-                                            "X": -0.003644909F,
-                                            "Y": -0.03134155F,
-                                            "Z": 0.00020065854F,
-                                            "W": -0.99950206F
+                                            "X": -0.0039387853F,
+                                            "Y": -0.03134151F,
+                                            "Z": 0.00021683668F,
+                                            "W": -0.99950105F
                                           }
                                         },
                                         "Components": [
@@ -1550,9 +1550,9 @@
                                           "$id": 70,
                                           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                           "_localPosition": {
-                                            "X": 0.21200736F,
+                                            "X": 0.21200739F,
                                             "Y": 0.13413215F,
-                                            "Z": -8.3940826E-08F
+                                            "Z": -8.217142E-08F
                                           },
                                           "_localScale": {
                                             "X": 0.9999993F,
@@ -1560,10 +1560,10 @@
                                             "Z": 0.9999998F
                                           },
                                           "_localRotation": {
-                                            "X": -0.5337165F,
-                                            "Y": -0.11653521F,
-                                            "Z": 0.7715987F,
-                                            "W": -0.32588628F
+                                            "X": -0.5336956F,
+                                            "Y": -0.116584435F,
+                                            "Z": 0.77162814F,
+                                            "W": -0.32583302F
                                           }
                                         },
                                         "Components": [
@@ -1595,10 +1595,10 @@
                                                 "Z": 1F
                                               },
                                               "_localRotation": {
-                                                "X": 1.0625255E-08F,
-                                                "Y": -5.627986E-08F,
-                                                "Z": 0.35894158F,
-                                                "W": -0.9333601F
+                                                "X": 1.2592946E-08F,
+                                                "Y": -5.499351E-08F,
+                                                "Z": 0.35887036F,
+                                                "W": -0.9333874F
                                               }
                                             },
                                             "Components": [
@@ -1631,8 +1631,8 @@
                                                   },
                                                   "_localRotation": {
                                                     "X": 1.514567E-08F,
-                                                    "Y": -7.3584383E-09F,
-                                                    "Z": -0.0266581F,
+                                                    "Y": -7.3584387E-09F,
+                                                    "Z": -0.026658101F,
                                                     "W": -0.99964464F
                                                   }
                                                 },
@@ -1656,7 +1656,7 @@
                                                       "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                                                       "_localPosition": {
                                                         "X": 7.4505766E-09F,
-                                                        "Y": 0.073825866F,
+                                                        "Y": 0.07382587F,
                                                         "Z": 2.220446E-16F
                                                       },
                                                       "_localScale": {
@@ -1665,10 +1665,10 @@
                                                         "Z": 1.0000004F
                                                       },
                                                       "_localRotation": {
-                                                        "X": -0.22211327F,
-                                                        "Y": -0.3457879F,
-                                                        "Z": -0.18453564F,
-                                                        "W": -0.8927726F
+                                                        "X": -0.22212066F,
+                                                        "Y": -0.34579638F,
+                                                        "Z": -0.18455578F,
+                                                        "W": -0.8927634F
                                                       }
                                                     },
                                                     "Components": [
@@ -1700,10 +1700,10 @@
                                                             "Z": 1F
                                                           },
                                                           "_localRotation": {
-                                                            "X": 4.1151994E-05F,
-                                                            "Y": 4.117157E-05F,
-                                                            "Z": 0.7069558F,
-                                                            "W": -0.7072578F
+                                                            "X": 3.2680302E-05F,
+                                                            "Y": 3.2690416E-05F,
+                                                            "Z": 0.7069869F,
+                                                            "W": -0.7072267F
                                                           }
                                                         },
                                                         "Components": [
@@ -1827,9 +1827,9 @@
               "$id": 82,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
-                "X": 0.74368554F,
-                "Y": 6.5392594F,
-                "Z": -6.2826266F
+                "X": -0.96318734F,
+                "Y": 2.5392485F,
+                "Z": -4.9001837F
               },
               "_localScale": {
                 "X": 1F,
@@ -1837,10 +1837,10 @@
                 "Z": 1F
               },
               "_localRotation": {
-                "X": 0.3763094F,
-                "Y": -0.091220655F,
-                "Z": 0.037261974F,
-                "W": 0.92123914F
+                "X": 0.26150283F,
+                "Y": 0.09507448F,
+                "Z": -0.025893867F,
+                "W": 0.9601597F
               }
             },
             "Components": [
@@ -1878,7 +1878,7 @@
                 "StandingHeight": 1.8F,
                 "CrouchHeight": 0.9F,
                 "IdleDeadzone": 0.2F,
-                "MetersPerSecondSmooth": 1F,
+                "MetersPerSecondSmooth": 3F,
                 "_identifier": "24d72ba6-be50-4f63-bb5a-8469ba3868c0",
                 "_enabled": true,
                 "_enabledInHierarchy": true,
@@ -1998,6 +1998,13 @@
                 {
                   "$id": 91,
                   "Path": "g1.c0.animationComponent",
+                  "Value": {
+
+                  }
+                },
+                {
+                  "$id": 92,
+                  "Path": "g1.c0.MetersPerSecondSmooth",
                   "Value": {
 
                   }
@@ -2121,7 +2128,7 @@
         "$id": 84
       },
       {
-        "$id": 92,
+        "$id": 93,
         "Name": "Environment",
         "AssetPath": "",
         "Identifier": "7b41e36b-dda4-4409-ba63-cd187fef5cc1",
@@ -2132,7 +2139,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 93,
+          "$id": 94,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": 0F,
@@ -2156,7 +2163,7 @@
         ],
         "Children": [
           {
-            "$id": 94,
+            "$id": 95,
             "Name": "Directional Light",
             "AssetPath": "",
             "Identifier": "be9359c2-0f49-4d16-90a4-c448668ba897",
@@ -2167,7 +2174,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 95,
+              "$id": 96,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 0F,
@@ -2188,7 +2195,7 @@
             },
             "Components": [
               {
-                "$id": 96,
+                "$id": 97,
                 "$type": "Prowl.Runtime.DirectionalLight, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "ShadowResolution": 1024,
                 "Cascades": 4,
@@ -2221,10 +2228,10 @@
         ]
       },
       {
-        "$id": 94
+        "$id": 95
       },
       {
-        "$id": 97,
+        "$id": 98,
         "Name": "button_base_blue",
         "AssetPath": "",
         "Identifier": "12804f8e-5c4a-481e-a89b-5f9102256365",
@@ -2235,7 +2242,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 98,
+          "$id": 99,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": 2F,
@@ -2256,7 +2263,7 @@
         },
         "Components": [
           {
-            "$id": 99,
+            "$id": 100,
             "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "size": {
               "X": 1F,
@@ -2284,7 +2291,7 @@
         ],
         "Children": [
           {
-            "$id": 100,
+            "$id": 101,
             "Name": "button_base_blue",
             "AssetPath": "",
             "Identifier": "4da9bb34-f9ab-49e9-b9d5-1aa9fbb3ce9d",
@@ -2295,7 +2302,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 101,
+              "$id": 102,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 0F,
@@ -2316,7 +2323,7 @@
             },
             "Components": [
               {
-                "$id": 102,
+                "$id": 103,
                 "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "Mesh": {
                   "AssetID": "1090c3c2-e6c0-afea-5c96-f09ceb101523"
@@ -2337,7 +2344,7 @@
             ],
             "Children": [
               {
-                "$id": 103,
+                "$id": 104,
                 "Name": "button_blue",
                 "AssetPath": "",
                 "Identifier": "5aed76cc-8d3d-4b07-a849-f539118540e6",
@@ -2348,7 +2355,7 @@
                 "LayerIndex": 0,
                 "HideFlags": 0,
                 "Transform": {
-                  "$id": 104,
+                  "$id": 105,
                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                   "_localPosition": {
                     "X": 0F,
@@ -2369,7 +2376,7 @@
                 },
                 "Components": [
                   {
-                    "$id": 105,
+                    "$id": 106,
                     "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                     "Mesh": {
                       "AssetID": "7f60ad31-13da-a7bb-91ae-5ea52222dbf1"
@@ -2406,13 +2413,13 @@
         "PrefabChildCount": 1
       },
       {
-        "$id": 100
+        "$id": 101
       },
       {
-        "$id": 103
+        "$id": 104
       },
       {
-        "$id": 106,
+        "$id": 107,
         "Name": "platform_4x4x1_blue",
         "AssetPath": "",
         "Identifier": "1bc3995b-9be3-439a-a93d-a9366897a3f5",
@@ -2423,7 +2430,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 107,
+          "$id": 108,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": 2F,
@@ -2444,7 +2451,7 @@
         },
         "Components": [
           {
-            "$id": 108,
+            "$id": 109,
             "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "size": {
               "X": 4F,
@@ -2472,7 +2479,7 @@
         ],
         "Children": [
           {
-            "$id": 109,
+            "$id": 110,
             "Name": "platform_4x4x1_blue",
             "AssetPath": "",
             "Identifier": "34154e5c-401a-4f4d-ba14-a42ec3fd69f1",
@@ -2483,7 +2490,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 110,
+              "$id": 111,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 0F,
@@ -2504,7 +2511,7 @@
             },
             "Components": [
               {
-                "$id": 111,
+                "$id": 112,
                 "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "Mesh": {
                   "AssetID": "04260934-629d-e524-fbb4-6b69a39b6bc9"
@@ -2536,10 +2543,10 @@
         "PrefabChildCount": 1
       },
       {
-        "$id": 109
+        "$id": 110
       },
       {
-        "$id": 112,
+        "$id": 113,
         "Name": "Level",
         "AssetPath": "",
         "Identifier": "3d76b0ca-d7eb-43d9-b920-078893d5c400",
@@ -2550,7 +2557,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 113,
+          "$id": 114,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": 0F,
@@ -2574,13 +2581,13 @@
         ],
         "Children": [
           {
-            "$id": 97
+            "$id": 98
           },
           {
-            "$id": 106
+            "$id": 107
           },
           {
-            "$id": 114,
+            "$id": 115,
             "Name": "platform_4x4x1_blue (Copy)",
             "AssetPath": "",
             "Identifier": "ee115599-dc13-47d9-b16f-d100371acc50",
@@ -2591,7 +2598,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 115,
+              "$id": 116,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 2F,
@@ -2612,7 +2619,7 @@
             },
             "Components": [
               {
-                "$id": 116,
+                "$id": 117,
                 "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "size": {
                   "X": 4F,
@@ -2640,7 +2647,7 @@
             ],
             "Children": [
               {
-                "$id": 117,
+                "$id": 118,
                 "Name": "platform_4x4x1_blue",
                 "AssetPath": "",
                 "Identifier": "577599f0-1118-4465-9b3e-7e0497e47621",
@@ -2651,7 +2658,7 @@
                 "LayerIndex": 0,
                 "HideFlags": 0,
                 "Transform": {
-                  "$id": 118,
+                  "$id": 119,
                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                   "_localPosition": {
                     "X": 0F,
@@ -2672,7 +2679,7 @@
                 },
                 "Components": [
                   {
-                    "$id": 119,
+                    "$id": 120,
                     "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                     "Mesh": {
                       "AssetID": "04260934-629d-e524-fbb4-6b69a39b6bc9"
@@ -2704,7 +2711,7 @@
             "PrefabChildCount": 1
           },
           {
-            "$id": 120,
+            "$id": 121,
             "Name": "platform_4x4x1_blue (Copy) (Copy)",
             "AssetPath": "",
             "Identifier": "1222ef53-936a-4905-98bc-9c9e14c47aad",
@@ -2715,7 +2722,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 121,
+              "$id": 122,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 2F,
@@ -2736,7 +2743,7 @@
             },
             "Components": [
               {
-                "$id": 122,
+                "$id": 123,
                 "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "size": {
                   "X": 4F,
@@ -2764,7 +2771,7 @@
             ],
             "Children": [
               {
-                "$id": 123,
+                "$id": 124,
                 "Name": "platform_4x4x1_blue",
                 "AssetPath": "",
                 "Identifier": "58f727f0-876b-4b25-939d-1115b5ca0c53",
@@ -2775,7 +2782,7 @@
                 "LayerIndex": 0,
                 "HideFlags": 0,
                 "Transform": {
-                  "$id": 124,
+                  "$id": 125,
                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                   "_localPosition": {
                     "X": 0F,
@@ -2796,7 +2803,7 @@
                 },
                 "Components": [
                   {
-                    "$id": 125,
+                    "$id": 126,
                     "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                     "Mesh": {
                       "AssetID": "04260934-629d-e524-fbb4-6b69a39b6bc9"
@@ -2828,7 +2835,7 @@
             "PrefabChildCount": 1
           },
           {
-            "$id": 126,
+            "$id": 127,
             "Name": "platform_4x4x1_blue (Copy) (Copy) (Copy)",
             "AssetPath": "",
             "Identifier": "b30f70ac-945c-4828-8686-2cefde903df6",
@@ -2839,7 +2846,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 127,
+              "$id": 128,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 2F,
@@ -2860,7 +2867,7 @@
             },
             "Components": [
               {
-                "$id": 128,
+                "$id": 129,
                 "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "size": {
                   "X": 4F,
@@ -2888,7 +2895,7 @@
             ],
             "Children": [
               {
-                "$id": 129,
+                "$id": 130,
                 "Name": "platform_4x4x1_blue",
                 "AssetPath": "",
                 "Identifier": "1901b455-c247-4811-8105-30c486f74ccf",
@@ -2899,7 +2906,7 @@
                 "LayerIndex": 0,
                 "HideFlags": 0,
                 "Transform": {
-                  "$id": 130,
+                  "$id": 131,
                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                   "_localPosition": {
                     "X": 0F,
@@ -2920,7 +2927,7 @@
                 },
                 "Components": [
                   {
-                    "$id": 131,
+                    "$id": 132,
                     "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                     "Mesh": {
                       "AssetID": "04260934-629d-e524-fbb4-6b69a39b6bc9"
@@ -2952,7 +2959,7 @@
             "PrefabChildCount": 1
           },
           {
-            "$id": 132,
+            "$id": 133,
             "Name": "platform_4x4x1_blue (Copy) (Copy) (Copy) (Copy)",
             "AssetPath": "",
             "Identifier": "4f9459f3-f009-47b4-9e8b-26925457a781",
@@ -2963,7 +2970,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 133,
+              "$id": 134,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 2F,
@@ -2984,7 +2991,7 @@
             },
             "Components": [
               {
-                "$id": 134,
+                "$id": 135,
                 "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "size": {
                   "X": 4F,
@@ -3012,7 +3019,7 @@
             ],
             "Children": [
               {
-                "$id": 135,
+                "$id": 136,
                 "Name": "platform_4x4x1_blue",
                 "AssetPath": "",
                 "Identifier": "ea1f0b9b-7d3b-4a3f-89b6-9abc43269f94",
@@ -3023,7 +3030,7 @@
                 "LayerIndex": 0,
                 "HideFlags": 0,
                 "Transform": {
-                  "$id": 136,
+                  "$id": 137,
                   "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                   "_localPosition": {
                     "X": 0F,
@@ -3044,7 +3051,7 @@
                 },
                 "Components": [
                   {
-                    "$id": 137,
+                    "$id": 138,
                     "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                     "Mesh": {
                       "AssetID": "04260934-629d-e524-fbb4-6b69a39b6bc9"
@@ -3078,28 +3085,282 @@
         ]
       },
       {
-        "$id": 114
+        "$id": 115
       },
       {
-        "$id": 117
+        "$id": 118
       },
       {
-        "$id": 120
+        "$id": 121
       },
       {
-        "$id": 123
+        "$id": 124
       },
       {
-        "$id": 126
+        "$id": 127
       },
       {
-        "$id": 129
+        "$id": 130
       },
       {
-        "$id": 132
+        "$id": 133
       },
       {
-        "$id": 135
+        "$id": 136
+      },
+      {
+        "$id": 139,
+        "Name": "platform_slope_4x6x4_blue",
+        "AssetPath": "",
+        "Identifier": "4f5a93ef-e6f7-497c-9c8b-86288e606fb5",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 140,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 2F,
+            "Y": 0F,
+            "Z": 23F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+
+        ],
+        "Children": [
+          {
+            "$id": 141,
+            "Name": "platform_slope_4x6x4_blue",
+            "AssetPath": "",
+            "Identifier": "510b1cfb-8622-48a5-9a11-6692a4333572",
+            "Static": 0B,
+            "Enabled": 1B,
+            "EnabledInHierarchy": 1B,
+            "TagIndex": 0,
+            "LayerIndex": 0,
+            "HideFlags": 0,
+            "Transform": {
+              "$id": 142,
+              "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "_localPosition": {
+                "X": 0F,
+                "Y": 0F,
+                "Z": 0F
+              },
+              "_localScale": {
+                "X": 1F,
+                "Y": 1F,
+                "Z": 1F
+              },
+              "_localRotation": {
+                "X": 0F,
+                "Y": 0F,
+                "Z": 0F,
+                "W": 1F
+              }
+            },
+            "Components": [
+              {
+                "$id": 143,
+                "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "Mesh": {
+                  "AssetID": "b60b3a77-dca4-7b02-e391-062339648762"
+                },
+                "Materials": [
+                  {
+                    "AssetID": "44747843-c358-7e50-851a-96198cdf0837"
+                  }
+                ],
+                "_identifier": "5f77ce6f-d153-4634-9ea3-a3504d332246",
+                "_enabled": true,
+                "_enabledInHierarchy": true,
+                "HideFlags": 0,
+                "AssetPath": "",
+                "AssetID": "00000000-0000-0000-0000-000000000000",
+                "Name": "NewMeshRenderer"
+              },
+              {
+                "$id": 144,
+                "$type": "Prowl.Runtime.MeshCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "mesh": {
+                  "AssetID": "b60b3a77-dca4-7b02-e391-062339648762"
+                },
+                "convex": true,
+                "Center": {
+                  "X": 0F,
+                  "Y": 0F,
+                  "Z": 0F
+                },
+                "Rotation": {
+                  "X": 0F,
+                  "Y": 0F,
+                  "Z": 0F
+                },
+                "_identifier": "be3d7a05-016e-401a-bb5c-15028ca016b0",
+                "_enabled": true,
+                "_enabledInHierarchy": true,
+                "HideFlags": 0,
+                "AssetPath": "",
+                "AssetID": "00000000-0000-0000-0000-000000000000",
+                "Name": "NewMeshCollider"
+              }
+            ],
+            "Children": [
+
+            ],
+            "PrefabAssetId": "72c72dd2-d2b0-47a2-807e-511e8b6d7e74",
+            "PrefabComponentCount": 2,
+            "PrefabChildCount": 0
+          }
+        ],
+        "PrefabAssetId": "72c72dd2-d2b0-47a2-807e-511e8b6d7e74",
+        "PrefabComponentCount": 0,
+        "PrefabChildCount": 1
+      },
+      {
+        "$id": 141
+      },
+      {
+        "$id": 145,
+        "Name": "platform_hole_6x6x1_blue",
+        "AssetPath": "",
+        "Identifier": "4b159945-57e6-42bc-8ca0-0eaa6ea478dc",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 146,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 1.0597448F,
+            "Y": 2.5582738F,
+            "Z": 28.98737F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+
+        ],
+        "Children": [
+          {
+            "$id": 147,
+            "Name": "platform_hole_6x6x1_blue",
+            "AssetPath": "",
+            "Identifier": "5bd4f0f7-141b-4988-a97b-f45fb16c0fa6",
+            "Static": 0B,
+            "Enabled": 1B,
+            "EnabledInHierarchy": 1B,
+            "TagIndex": 0,
+            "LayerIndex": 0,
+            "HideFlags": 0,
+            "Transform": {
+              "$id": 148,
+              "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "_localPosition": {
+                "X": 0F,
+                "Y": 0F,
+                "Z": 0F
+              },
+              "_localScale": {
+                "X": 1F,
+                "Y": 1F,
+                "Z": 1F
+              },
+              "_localRotation": {
+                "X": 0F,
+                "Y": 0F,
+                "Z": 0F,
+                "W": 1F
+              }
+            },
+            "Components": [
+              {
+                "$id": 149,
+                "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "Mesh": {
+                  "AssetID": "10b07013-b245-8f76-f3fd-498e9f549b7e"
+                },
+                "Materials": [
+                  {
+                    "AssetID": "918b34f8-190d-7766-ff91-15de463f5dee"
+                  }
+                ],
+                "_identifier": "93671bd9-23d1-4d88-b9f7-f3ec3a247fca",
+                "_enabled": true,
+                "_enabledInHierarchy": true,
+                "HideFlags": 0,
+                "AssetPath": "",
+                "AssetID": "00000000-0000-0000-0000-000000000000",
+                "Name": "NewMeshRenderer"
+              },
+              {
+                "$id": 150,
+                "$type": "Prowl.Runtime.MeshCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "mesh": {
+                  "AssetID": "10b07013-b245-8f76-f3fd-498e9f549b7e"
+                },
+                "convex": false,
+                "Center": {
+                  "X": 0F,
+                  "Y": 0F,
+                  "Z": 0F
+                },
+                "Rotation": {
+                  "X": 0F,
+                  "Y": 0F,
+                  "Z": 0F
+                },
+                "_identifier": "7341013e-f0a0-43a2-b550-609c21d32f25",
+                "_enabled": true,
+                "_enabledInHierarchy": true,
+                "HideFlags": 0,
+                "AssetPath": "",
+                "AssetID": "00000000-0000-0000-0000-000000000000",
+                "Name": "NewMeshCollider"
+              }
+            ],
+            "Children": [
+
+            ],
+            "PrefabAssetId": "247c8dc9-3cd4-4940-ad7b-309c3c41532b",
+            "PrefabComponentCount": 2,
+            "PrefabChildCount": 0
+          }
+        ],
+        "PrefabAssetId": "247c8dc9-3cd4-4940-ad7b-309c3c41532b",
+        "PrefabComponentCount": 0,
+        "PrefabChildCount": 1
+      },
+      {
+        "$id": 147
       }
     ]
   },
@@ -3157,7 +3418,11 @@
       "b30f70ac-945c-4828-8686-2cefde903df6",
       "1901b455-c247-4811-8105-30c486f74ccf",
       "4f9459f3-f009-47b4-9e8b-26925457a781",
-      "ea1f0b9b-7d3b-4a3f-89b6-9abc43269f94"
+      "ea1f0b9b-7d3b-4a3f-89b6-9abc43269f94",
+      "4f5a93ef-e6f7-497c-9c8b-86288e606fb5",
+      "510b1cfb-8622-48a5-9a11-6692a4333572",
+      "4b159945-57e6-42bc-8ca0-0eaa6ea478dc",
+      "5bd4f0f7-141b-4988-a97b-f45fb16c0fa6"
     ]
   },
   "_compIdentifiers": {
@@ -3186,7 +3451,11 @@
       "2899c73e-268a-44ba-a486-511d6b55540e",
       "5885c8aa-f3a3-43e2-b70b-316dec865dcc",
       "93101066-b7e3-440d-9b86-745c8442843a",
-      "bbf4b967-967e-48f4-90b6-3dd7e40b851a"
+      "bbf4b967-967e-48f4-90b6-3dd7e40b851a",
+      "5f77ce6f-d153-4634-9ea3-a3504d332246",
+      "be3d7a05-016e-401a-bb5c-15028ca016b0",
+      "93671bd9-23d1-4d88-b9f7-f3ec3a247fca",
+      "7341013e-f0a0-43a2-b550-609c21d32f25"
     ]
   },
   "_compIdOffsets": {
@@ -3244,7 +3513,11 @@
       22,
       23,
       24,
-      25
+      25,
+      25,
+      27,
+      27,
+      29
     ]
   },
   "Fog": {
