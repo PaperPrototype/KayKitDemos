@@ -7,9 +7,13 @@ Each asset pack has an accompanying scene showing off every single asset:
 Asset packs:
 
 https://kaylousberg.itch.io/kaykit-adventurers
+
 https://kaylousberg.itch.io/kaykit-forest
+
 https://kaylousberg.itch.io/kaykit-platformer
+
 https://kaylousberg.itch.io/prototype-bits
+
 https://kaylousberg.itch.io/kaykit-skeletons
 
 https://quaternius.itch.io/stylized-nature-megakit
