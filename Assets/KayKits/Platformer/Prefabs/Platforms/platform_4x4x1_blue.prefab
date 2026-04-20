@@ -1,0 +1,119 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "Name": "platform_4x4x1_blue",
+  "AssetPath": "",
+  "Identifier": "76b8d4b8-0876-473b-a01d-1814f55cf224",
+  "Static": 0B,
+  "Enabled": 1B,
+  "EnabledInHierarchy": 1B,
+  "TagIndex": 0,
+  "LayerIndex": 0,
+  "HideFlags": 0,
+  "Transform": {
+    "$id": 2,
+    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "_localPosition": {
+      "X": 35F,
+      "Y": 0F,
+      "Z": 0F
+    },
+    "_localScale": {
+      "X": 1F,
+      "Y": 1F,
+      "Z": 1F
+    },
+    "_localRotation": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F,
+      "W": 1F
+    }
+  },
+  "Components": [
+    {
+      "$id": 3,
+      "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "size": {
+        "X": 4F,
+        "Y": 1F,
+        "Z": 4F
+      },
+      "Center": {
+        "X": 0F,
+        "Y": 0.5F,
+        "Z": 0F
+      },
+      "Rotation": {
+        "X": 0F,
+        "Y": 0F,
+        "Z": 0F
+      },
+      "_identifier": "c2d072ab-e180-4366-9897-abff7135f27e",
+      "_enabled": true,
+      "_enabledInHierarchy": true,
+      "HideFlags": 0,
+      "AssetPath": "",
+      "AssetID": "00000000-0000-0000-0000-000000000000",
+      "Name": "NewBoxCollider"
+    }
+  ],
+  "Children": [
+    {
+      "$id": 4,
+      "Name": "platform_4x4x1_blue",
+      "AssetPath": "",
+      "Identifier": "5307a4de-74f6-42e8-872c-13e158634986",
+      "Static": 0B,
+      "Enabled": 1B,
+      "EnabledInHierarchy": 1B,
+      "TagIndex": 0,
+      "LayerIndex": 0,
+      "HideFlags": 0,
+      "Transform": {
+        "$id": 5,
+        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "_localPosition": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F
+        },
+        "_localScale": {
+          "X": 1F,
+          "Y": 1F,
+          "Z": 1F
+        },
+        "_localRotation": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F,
+          "W": 1F
+        }
+      },
+      "Components": [
+        {
+          "$id": 6,
+          "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "Mesh": {
+            "AssetID": "04260934-629d-e524-fbb4-6b69a39b6bc9"
+          },
+          "Materials": [
+            {
+              "AssetID": "bb1a8a3e-afde-e3be-6fb5-3da61a0b06e1"
+            }
+          ],
+          "_identifier": "0e60abf6-5a79-4ee2-9ce0-aef642098aca",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewMeshRenderer"
+        }
+      ],
+      "Children": [
+
+      ]
+    }
+  ]
+}

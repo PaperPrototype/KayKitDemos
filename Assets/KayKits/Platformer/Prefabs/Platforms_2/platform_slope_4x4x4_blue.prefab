@@ -1,0 +1,94 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "Name": "platform_slope_4x4x4_blue",
+  "AssetPath": "",
+  "Identifier": "4b418038-bda4-4175-af31-a95d5da7240b",
+  "Static": 0B,
+  "Enabled": 1B,
+  "EnabledInHierarchy": 1B,
+  "TagIndex": 0,
+  "LayerIndex": 0,
+  "HideFlags": 0,
+  "Transform": {
+    "$id": 2,
+    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "_localPosition": {
+      "X": 45F,
+      "Y": 0F,
+      "Z": 0F
+    },
+    "_localScale": {
+      "X": 1F,
+      "Y": 1F,
+      "Z": 1F
+    },
+    "_localRotation": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F,
+      "W": 1F
+    }
+  },
+  "Components": [
+
+  ],
+  "Children": [
+    {
+      "$id": 3,
+      "Name": "platform_slope_4x4x4_blue",
+      "AssetPath": "",
+      "Identifier": "ef834182-f449-4832-b20d-e6fc72af937a",
+      "Static": 0B,
+      "Enabled": 1B,
+      "EnabledInHierarchy": 1B,
+      "TagIndex": 0,
+      "LayerIndex": 0,
+      "HideFlags": 0,
+      "Transform": {
+        "$id": 4,
+        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "_localPosition": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F
+        },
+        "_localScale": {
+          "X": 1F,
+          "Y": 1F,
+          "Z": 1F
+        },
+        "_localRotation": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F,
+          "W": 1F
+        }
+      },
+      "Components": [
+        {
+          "$id": 5,
+          "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "Mesh": {
+            "AssetID": "70208417-73bd-cdc4-ec3c-e731085c7aa7"
+          },
+          "Materials": [
+            {
+              "AssetID": "625177d8-ee91-e938-2db7-d0df1767197c"
+            }
+          ],
+          "_identifier": "1902f2e9-a7c3-4d2b-aea6-e33700acffb3",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewMeshRenderer"
+        }
+      ],
+      "Children": [
+
+      ]
+    }
+  ]
+}

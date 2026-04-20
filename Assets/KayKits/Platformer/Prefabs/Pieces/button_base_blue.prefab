@@ -1,0 +1,174 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "Name": "button_base_blue",
+  "AssetPath": "",
+  "Identifier": "cebc9c63-3291-433b-8a70-68a1b2d5d137",
+  "Static": 0B,
+  "Enabled": 1B,
+  "EnabledInHierarchy": 1B,
+  "TagIndex": 0,
+  "LayerIndex": 0,
+  "HideFlags": 0,
+  "Transform": {
+    "$id": 2,
+    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "_localPosition": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F
+    },
+    "_localScale": {
+      "X": 1F,
+      "Y": 1F,
+      "Z": 1F
+    },
+    "_localRotation": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F,
+      "W": 1F
+    }
+  },
+  "Components": [
+    {
+      "$id": 3,
+      "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "size": {
+        "X": 1F,
+        "Y": 0.5F,
+        "Z": 1F
+      },
+      "Center": {
+        "X": 0F,
+        "Y": 0F,
+        "Z": 0F
+      },
+      "Rotation": {
+        "X": 0F,
+        "Y": 0F,
+        "Z": 0F
+      },
+      "_identifier": "62aded3d-5c9c-47c1-b17f-0c8d3edb3846",
+      "_enabled": true,
+      "_enabledInHierarchy": true,
+      "HideFlags": 0,
+      "AssetPath": "",
+      "AssetID": "00000000-0000-0000-0000-000000000000",
+      "Name": "NewBoxCollider"
+    }
+  ],
+  "Children": [
+    {
+      "$id": 4,
+      "Name": "button_base_blue",
+      "AssetPath": "",
+      "Identifier": "2cf9a1dd-6666-49e4-a209-04d893bf9a38",
+      "Static": 0B,
+      "Enabled": 1B,
+      "EnabledInHierarchy": 1B,
+      "TagIndex": 0,
+      "LayerIndex": 0,
+      "HideFlags": 0,
+      "Transform": {
+        "$id": 5,
+        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "_localPosition": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F
+        },
+        "_localScale": {
+          "X": 1F,
+          "Y": 1F,
+          "Z": 1F
+        },
+        "_localRotation": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F,
+          "W": 1F
+        }
+      },
+      "Components": [
+        {
+          "$id": 6,
+          "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "Mesh": {
+            "AssetID": "1090c3c2-e6c0-afea-5c96-f09ceb101523"
+          },
+          "Materials": [
+            {
+              "AssetID": "bcc59fae-ced9-2878-d13d-3173bf82b88e"
+            }
+          ],
+          "_identifier": "7fdcb442-3ae4-4795-b63e-ce6f480e4e47",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewMeshRenderer"
+        }
+      ],
+      "Children": [
+        {
+          "$id": 7,
+          "Name": "button_blue",
+          "AssetPath": "",
+          "Identifier": "bc793283-0810-46d4-98aa-56363b800ade",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 8,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 9,
+              "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "Mesh": {
+                "AssetID": "7f60ad31-13da-a7bb-91ae-5ea52222dbf1"
+              },
+              "Materials": [
+                {
+                  "AssetID": "bcc59fae-ced9-2878-d13d-3173bf82b88e"
+                }
+              ],
+              "_identifier": "e1b1e127-0b9c-43f0-93c2-25239d2a04a3",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        }
+      ]
+    }
+  ]
+}
