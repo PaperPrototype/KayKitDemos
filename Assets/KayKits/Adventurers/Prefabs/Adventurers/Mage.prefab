@@ -1,0 +1,1651 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "Name": "Mage",
+  "AssetPath": "",
+  "Identifier": "b40f55ad-8023-470e-aea0-a432dfd14c7a",
+  "Static": 0B,
+  "Enabled": 1B,
+  "EnabledInHierarchy": 1B,
+  "TagIndex": 0,
+  "LayerIndex": 0,
+  "HideFlags": 0,
+  "Transform": {
+    "$id": 2,
+    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "_localPosition": {
+      "X": 6F,
+      "Y": 0F,
+      "Z": 0F
+    },
+    "_localScale": {
+      "X": 1F,
+      "Y": 1F,
+      "Z": 1F
+    },
+    "_localRotation": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F,
+      "W": 1F
+    }
+  },
+  "Components": [
+
+  ],
+  "Children": [
+    {
+      "$id": 3,
+      "Name": "Rig_Medium",
+      "AssetPath": "",
+      "Identifier": "3a5871d4-ac0d-47ea-9311-bc67be48246b",
+      "Static": 0B,
+      "Enabled": 1B,
+      "EnabledInHierarchy": 1B,
+      "TagIndex": 0,
+      "LayerIndex": 0,
+      "HideFlags": 0,
+      "Transform": {
+        "$id": 4,
+        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "_localPosition": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F
+        },
+        "_localScale": {
+          "X": 1F,
+          "Y": 1F,
+          "Z": 1F
+        },
+        "_localRotation": {
+          "X": 0F,
+          "Y": 1F,
+          "Z": 0F,
+          "W": -4.371139E-08F
+        }
+      },
+      "Components": [
+
+      ],
+      "Children": [
+        {
+          "$id": 5,
+          "Name": "Mage_ArmLeft",
+          "AssetPath": "",
+          "Identifier": "fa94be5c-03e9-49db-bcf9-c62b2f12a8d3",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 6,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 7,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "dd11a67d-a7bc-b5cf-ffda-455f363c9d06"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "abb82f70-0a85-4af2-bb08-89de05988795",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 8,
+          "Name": "Mage_ArmRight",
+          "AssetPath": "",
+          "Identifier": "d51bd03b-c46c-4ef0-8cdf-4bc0a6680be2",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 9,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 10,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "5e8b1186-50cd-2ee6-7c9f-9918e9ecc12b"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "02b574a5-518a-4171-be00-029a531d32af",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 11,
+          "Name": "Mage_Body",
+          "AssetPath": "",
+          "Identifier": "3202a9c3-83ef-49ce-83cd-ae6a8f031dc7",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 12,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 13,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "24059c8d-a314-7d39-9e04-f24df6c69025"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "ef11e0d6-7c99-4079-a7c1-4a17cfc9d335",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 14,
+          "Name": "Mage_Cape",
+          "AssetPath": "",
+          "Identifier": "a582cf64-e684-4cf0-a878-595411da68f2",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 15,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 16,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "ab20d541-e8cb-77dc-d906-1e24bfb2bcb6"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "761e68b9-b712-412f-9e4e-fc19dc2c2792",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 17,
+          "Name": "Mage_Hat",
+          "AssetPath": "",
+          "Identifier": "ba3cc4a8-8e15-40e3-92a3-2e497cd18d4d",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 18,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 19,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "decbcbff-595d-fe7a-ce30-c641f63d2298"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "40fd2b36-3aea-48cf-9d53-d0395bc8314a",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 20,
+          "Name": "Mage_Head",
+          "AssetPath": "",
+          "Identifier": "9a6462ca-5d27-4376-ab80-8cc3b95ecc93",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 21,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 22,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "75bbfadf-52c7-040c-9b5c-7e1b548f4d93"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "8ae90309-9a0d-450c-8e20-ee57cc852e17",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 23,
+          "Name": "Mage_LegLeft",
+          "AssetPath": "",
+          "Identifier": "4f185566-aeba-4775-be06-7b01479e0ad6",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 24,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 25,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "32bd37a3-2ca0-6e94-fd2c-353fd6082880"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "8f4ddbea-0fbf-49f3-81ec-98ee6ce82afd",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 26,
+          "Name": "Mage_LegRight",
+          "AssetPath": "",
+          "Identifier": "812675ed-9d0b-4b17-8726-a76f814c7fce",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 27,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F,
+              "W": 1F
+            }
+          },
+          "Components": [
+            {
+              "$id": 28,
+              "$type": "Prowl.Runtime.SkinnedMeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "SharedMesh": {
+                "AssetID": "784349c3-cc22-4e1e-7131-737c2bbd1dd7"
+              },
+              "Materials": [
+                {
+                  "AssetID": "254be11f-016f-4091-26b7-bdff88dea6e2"
+                }
+              ],
+              "RootBonePath": "Rig_Medium/root",
+              "BonePaths": {
+                "array": [
+                  "Rig_Medium/root",
+                  "Rig_Medium/root/hips",
+                  "Rig_Medium/root/hips/upperleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r",
+                  "Rig_Medium/root/hips/upperleg.r/lowerleg.r/foot.r/toes.r",
+                  "Rig_Medium/root/hips/spine",
+                  "Rig_Medium/root/hips/spine/chest",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.l/lowerarm.l/wrist.l/hand.l/handslot.l",
+                  "Rig_Medium/root/hips/spine/chest/head",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r",
+                  "Rig_Medium/root/hips/spine/chest/upperarm.r/lowerarm.r/wrist.r/hand.r/handslot.r",
+                  "Rig_Medium/root/hips/upperleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l",
+                  "Rig_Medium/root/hips/upperleg.l/lowerleg.l/foot.l/toes.l"
+                ]
+              },
+              "MainColor": {
+                "R": 1F,
+                "G": 1F,
+                "B": 1F,
+                "A": 1F
+              },
+              "_identifier": "13251c7a-edef-40c8-ab99-7cab8fc34408",
+              "_enabled": true,
+              "_enabledInHierarchy": true,
+              "HideFlags": 0,
+              "AssetPath": "",
+              "AssetID": "00000000-0000-0000-0000-000000000000",
+              "Name": "NewSkinnedMeshRenderer"
+            }
+          ],
+          "Children": [
+
+          ]
+        },
+        {
+          "$id": 29,
+          "Name": "root",
+          "AssetPath": "",
+          "Identifier": "45057967-2d02-4783-a74b-058526e477df",
+          "Static": 0B,
+          "Enabled": 1B,
+          "EnabledInHierarchy": 1B,
+          "TagIndex": 0,
+          "LayerIndex": 0,
+          "HideFlags": 0,
+          "Transform": {
+            "$id": 30,
+            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "_localPosition": {
+              "X": 0F,
+              "Y": 0F,
+              "Z": 0F
+            },
+            "_localScale": {
+              "X": 1F,
+              "Y": 1F,
+              "Z": 1F
+            },
+            "_localRotation": {
+              "X": 0F,
+              "Y": 1.19209275E-07F,
+              "Z": -0F,
+              "W": -1F
+            }
+          },
+          "Components": [
+
+          ],
+          "Children": [
+            {
+              "$id": 31,
+              "Name": "hips",
+              "AssetPath": "",
+              "Identifier": "3b722c2e-b803-4997-8025-087a6778fe27",
+              "Static": 0B,
+              "Enabled": 1B,
+              "EnabledInHierarchy": 1B,
+              "TagIndex": 0,
+              "LayerIndex": 0,
+              "HideFlags": 0,
+              "Transform": {
+                "$id": 32,
+                "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "_localPosition": {
+                  "X": 0F,
+                  "Y": 0.40566343F,
+                  "Z": -0F
+                },
+                "_localScale": {
+                  "X": 1F,
+                  "Y": 1F,
+                  "Z": 1F
+                },
+                "_localRotation": {
+                  "X": 0F,
+                  "Y": -1.19209275E-07F,
+                  "Z": -0F,
+                  "W": -1F
+                }
+              },
+              "Components": [
+
+              ],
+              "Children": [
+                {
+                  "$id": 33,
+                  "Name": "upperleg.r",
+                  "AssetPath": "",
+                  "Identifier": "ce338601-cf8e-4288-9f86-2ee1db4a6d99",
+                  "Static": 0B,
+                  "Enabled": 1B,
+                  "EnabledInHierarchy": 1B,
+                  "TagIndex": 0,
+                  "LayerIndex": 0,
+                  "HideFlags": 0,
+                  "Transform": {
+                    "$id": 34,
+                    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "_localPosition": {
+                      "X": -0.17094506F,
+                      "Y": 0.11358726F,
+                      "Z": -1.3923272E-08F
+                    },
+                    "_localScale": {
+                      "X": 1F,
+                      "Y": 0.9999998F,
+                      "Z": 1.0000012F
+                    },
+                    "_localRotation": {
+                      "X": 0.9998491F,
+                      "Y": 7.426573E-08F,
+                      "Z": 3.172628E-08F,
+                      "W": -0.017373191F
+                    }
+                  },
+                  "Components": [
+
+                  ],
+                  "Children": [
+                    {
+                      "$id": 35,
+                      "Name": "lowerleg.r",
+                      "AssetPath": "",
+                      "Identifier": "ca9ca2f9-4747-4305-80d0-f2d123fdf335",
+                      "Static": 0B,
+                      "Enabled": 1B,
+                      "EnabledInHierarchy": 1B,
+                      "TagIndex": 0,
+                      "LayerIndex": 0,
+                      "HideFlags": 0,
+                      "Transform": {
+                        "$id": 36,
+                        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "_localPosition": {
+                          "X": -3.5797574E-09F,
+                          "Y": 0.2270775F,
+                          "Z": 6.140325E-09F
+                        },
+                        "_localScale": {
+                          "X": 1F,
+                          "Y": 1.0000005F,
+                          "Z": 1.0000001F
+                        },
+                        "_localRotation": {
+                          "X": 0.10622514F,
+                          "Y": -6.865229E-08F,
+                          "Z": -7.377026E-08F,
+                          "W": -0.9943422F
+                        }
+                      },
+                      "Components": [
+
+                      ],
+                      "Children": [
+                        {
+                          "$id": 37,
+                          "Name": "foot.r",
+                          "AssetPath": "",
+                          "Identifier": "cbb5a9d2-d5e3-413c-a17a-21be0013f23e",
+                          "Static": 0B,
+                          "Enabled": 1B,
+                          "EnabledInHierarchy": 1B,
+                          "TagIndex": 0,
+                          "LayerIndex": 0,
+                          "HideFlags": 0,
+                          "Transform": {
+                            "$id": 38,
+                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "_localPosition": {
+                              "X": -1.8339222E-10F,
+                              "Y": 0.14943703F,
+                              "Z": -9.658786E-10F
+                            },
+                            "_localScale": {
+                              "X": 1F,
+                              "Y": 1.0000008F,
+                              "Z": 0.99999875F
+                            },
+                            "_localRotation": {
+                              "X": -0.45523903F,
+                              "Y": 1.6598203E-07F,
+                              "Z": -2.2504847E-09F,
+                              "W": -0.8903693F
+                            }
+                          },
+                          "Components": [
+
+                          ],
+                          "Children": [
+                            {
+                              "$id": 39,
+                              "Name": "toes.r",
+                              "AssetPath": "",
+                              "Identifier": "0a07336f-b4f5-4813-a7c4-e107da67f638",
+                              "Static": 0B,
+                              "Enabled": 1B,
+                              "EnabledInHierarchy": 1B,
+                              "TagIndex": 0,
+                              "LayerIndex": 0,
+                              "HideFlags": 0,
+                              "Transform": {
+                                "$id": 40,
+                                "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                "_localPosition": {
+                                  "X": 2.1323326E-10F,
+                                  "Y": 0.16565003F,
+                                  "Z": -5.1714E-09F
+                                },
+                                "_localScale": {
+                                  "X": 1F,
+                                  "Y": 0.9999966F,
+                                  "Z": 1.0000037F
+                                },
+                                "_localRotation": {
+                                  "X": 2.1219815E-08F,
+                                  "Y": 0.92035496F,
+                                  "Z": 0.3910841F,
+                                  "W": -6.450591E-08F
+                                }
+                              },
+                              "Components": [
+
+                              ],
+                              "Children": [
+
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$id": 41,
+                  "Name": "spine",
+                  "AssetPath": "",
+                  "Identifier": "cec7f207-ef43-4792-a09b-0c7bf7318ee0",
+                  "Static": 0B,
+                  "Enabled": 1B,
+                  "EnabledInHierarchy": 1B,
+                  "TagIndex": 0,
+                  "LayerIndex": 0,
+                  "HideFlags": 0,
+                  "Transform": {
+                    "$id": 42,
+                    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "_localPosition": {
+                      "X": 0F,
+                      "Y": 0.1919775F,
+                      "Z": -0F
+                    },
+                    "_localScale": {
+                      "X": 1F,
+                      "Y": 1F,
+                      "Z": 1F
+                    },
+                    "_localRotation": {
+                      "X": 0F,
+                      "Y": 7.1054274E-15F,
+                      "Z": -0F,
+                      "W": -1F
+                    }
+                  },
+                  "Components": [
+
+                  ],
+                  "Children": [
+                    {
+                      "$id": 43,
+                      "Name": "chest",
+                      "AssetPath": "",
+                      "Identifier": "264b195e-6104-41fd-9785-d9b58f592dfd",
+                      "Static": 0B,
+                      "Enabled": 1B,
+                      "EnabledInHierarchy": 1B,
+                      "TagIndex": 0,
+                      "LayerIndex": 0,
+                      "HideFlags": 0,
+                      "Transform": {
+                        "$id": 44,
+                        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "_localPosition": {
+                          "X": 0F,
+                          "Y": 0.37498796F,
+                          "Z": -0F
+                        },
+                        "_localScale": {
+                          "X": 1F,
+                          "Y": 0.99999994F,
+                          "Z": 1F
+                        },
+                        "_localRotation": {
+                          "X": 0F,
+                          "Y": -8.4703295E-22F,
+                          "Z": -0F,
+                          "W": -1F
+                        }
+                      },
+                      "Components": [
+
+                      ],
+                      "Children": [
+                        {
+                          "$id": 45,
+                          "Name": "upperarm.l",
+                          "AssetPath": "",
+                          "Identifier": "12a7ca67-01df-4a80-8284-38ebb077e496",
+                          "Static": 0B,
+                          "Enabled": 1B,
+                          "EnabledInHierarchy": 1B,
+                          "TagIndex": 0,
+                          "LayerIndex": 0,
+                          "HideFlags": 0,
+                          "Transform": {
+                            "$id": 46,
+                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "_localPosition": {
+                              "X": 0.21200737F,
+                              "Y": 0.13413215F,
+                              "Z": -8.402462E-08F
+                            },
+                            "_localScale": {
+                              "X": 0.99999934F,
+                              "Y": 0.99999934F,
+                              "Z": 0.99999976F
+                            },
+                            "_localRotation": {
+                              "X": -0.5141215F,
+                              "Y": -0.4854678F,
+                              "Z": 0.48546776F,
+                              "W": -0.5141219F
+                            }
+                          },
+                          "Components": [
+
+                          ],
+                          "Children": [
+                            {
+                              "$id": 47,
+                              "Name": "lowerarm.l",
+                              "AssetPath": "",
+                              "Identifier": "c724192a-0e54-47be-93d2-209931002431",
+                              "Static": 0B,
+                              "Enabled": 1B,
+                              "EnabledInHierarchy": 1B,
+                              "TagIndex": 0,
+                              "LayerIndex": 0,
+                              "HideFlags": 0,
+                              "Transform": {
+                                "$id": 48,
+                                "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                "_localPosition": {
+                                  "X": -3.2196643E-09F,
+                                  "Y": 0.2418973F,
+                                  "Z": 1.1940561E-07F
+                                },
+                                "_localScale": {
+                                  "X": 1.0000002F,
+                                  "Y": 0.9999999F,
+                                  "Z": 0.99999994F
+                                },
+                                "_localRotation": {
+                                  "X": 1.4942596E-09F,
+                                  "Y": -6.228115E-08F,
+                                  "Z": 0.05528552F,
+                                  "W": -0.9984706F
+                                }
+                              },
+                              "Components": [
+
+                              ],
+                              "Children": [
+                                {
+                                  "$id": 49,
+                                  "Name": "wrist.l",
+                                  "AssetPath": "",
+                                  "Identifier": "cd0241a7-20f9-4ff1-9b5d-0592fc29460c",
+                                  "Static": 0B,
+                                  "Enabled": 1B,
+                                  "EnabledInHierarchy": 1B,
+                                  "TagIndex": 0,
+                                  "LayerIndex": 0,
+                                  "HideFlags": 0,
+                                  "Transform": {
+                                    "$id": 50,
+                                    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                    "_localPosition": {
+                                      "X": 7.426282E-09F,
+                                      "Y": 0.26004383F,
+                                      "Z": -6.127964E-11F
+                                    },
+                                    "_localScale": {
+                                      "X": 0.99999994F,
+                                      "Y": 0.99999994F,
+                                      "Z": 0.99999994F
+                                    },
+                                    "_localRotation": {
+                                      "X": 5.1184557E-11F,
+                                      "Y": -3.0774255E-10F,
+                                      "Z": -0.0266581F,
+                                      "W": -0.9996447F
+                                    }
+                                  },
+                                  "Components": [
+
+                                  ],
+                                  "Children": [
+                                    {
+                                      "$id": 51,
+                                      "Name": "hand.l",
+                                      "AssetPath": "",
+                                      "Identifier": "b6d466fe-0122-48a2-9d1a-32f95831f6d5",
+                                      "Static": 0B,
+                                      "Enabled": 1B,
+                                      "EnabledInHierarchy": 1B,
+                                      "TagIndex": 0,
+                                      "LayerIndex": 0,
+                                      "HideFlags": 0,
+                                      "Transform": {
+                                        "$id": 52,
+                                        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                        "_localPosition": {
+                                          "X": 9.054979E-13F,
+                                          "Y": 0.073825836F,
+                                          "Z": 2.220446E-16F
+                                        },
+                                        "_localScale": {
+                                          "X": 1F,
+                                          "Y": 0.99999994F,
+                                          "Z": 0.99999994F
+                                        },
+                                        "_localRotation": {
+                                          "X": 1.2001639E-09F,
+                                          "Y": 1.3589292E-07F,
+                                          "Z": 5.4551956E-06F,
+                                          "W": -1F
+                                        }
+                                      },
+                                      "Components": [
+
+                                      ],
+                                      "Children": [
+                                        {
+                                          "$id": 53,
+                                          "Name": "handslot.l",
+                                          "AssetPath": "",
+                                          "Identifier": "2065b1e5-7933-4143-a753-7d71885f4cb5",
+                                          "Static": 0B,
+                                          "Enabled": 1B,
+                                          "EnabledInHierarchy": 1B,
+                                          "TagIndex": 0,
+                                          "LayerIndex": 0,
+                                          "HideFlags": 0,
+                                          "Transform": {
+                                            "$id": 54,
+                                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                            "_localPosition": {
+                                              "X": 5.1389204E-10F,
+                                              "Y": 0.09612507F,
+                                              "Z": 0.057500124F
+                                            },
+                                            "_localScale": {
+                                              "X": 0.99999994F,
+                                              "Y": 1F,
+                                              "Z": 0.99999994F
+                                            },
+                                            "_localRotation": {
+                                              "X": 1.6806123E-09F,
+                                              "Y": 1.6806122E-09F,
+                                              "Z": 0.7071068F,
+                                              "W": -0.7071067F
+                                            }
+                                          },
+                                          "Components": [
+
+                                          ],
+                                          "Children": [
+
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "$id": 55,
+                          "Name": "head",
+                          "AssetPath": "",
+                          "Identifier": "d9c9c09e-7631-4e03-8780-dba2ea321d1e",
+                          "Static": 0B,
+                          "Enabled": 1B,
+                          "EnabledInHierarchy": 1B,
+                          "TagIndex": 0,
+                          "LayerIndex": 0,
+                          "HideFlags": 0,
+                          "Transform": {
+                            "$id": 56,
+                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "_localPosition": {
+                              "X": 0F,
+                              "Y": 0.26879656F,
+                              "Z": -0F
+                            },
+                            "_localScale": {
+                              "X": 1F,
+                              "Y": 1F,
+                              "Z": 1F
+                            },
+                            "_localRotation": {
+                              "X": 0F,
+                              "Y": 4.2351647E-22F,
+                              "Z": -0F,
+                              "W": -1F
+                            }
+                          },
+                          "Components": [
+
+                          ],
+                          "Children": [
+
+                          ]
+                        },
+                        {
+                          "$id": 57,
+                          "Name": "upperarm.r",
+                          "AssetPath": "",
+                          "Identifier": "c4f9e864-05b6-4d9b-918b-196956e6a550",
+                          "Static": 0B,
+                          "Enabled": 1B,
+                          "EnabledInHierarchy": 1B,
+                          "TagIndex": 0,
+                          "LayerIndex": 0,
+                          "HideFlags": 0,
+                          "Transform": {
+                            "$id": 58,
+                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "_localPosition": {
+                              "X": -0.21200737F,
+                              "Y": 0.13413215F,
+                              "Z": -8.402462E-08F
+                            },
+                            "_localScale": {
+                              "X": 0.99999934F,
+                              "Y": 0.99999934F,
+                              "Z": 0.99999976F
+                            },
+                            "_localRotation": {
+                              "X": -0.5141214F,
+                              "Y": 0.48546773F,
+                              "Z": -0.48546776F,
+                              "W": -0.51412195F
+                            }
+                          },
+                          "Components": [
+
+                          ],
+                          "Children": [
+                            {
+                              "$id": 59,
+                              "Name": "lowerarm.r",
+                              "AssetPath": "",
+                              "Identifier": "5df74338-b909-465d-b18a-425648e4482f",
+                              "Static": 0B,
+                              "Enabled": 1B,
+                              "EnabledInHierarchy": 1B,
+                              "TagIndex": 0,
+                              "LayerIndex": 0,
+                              "HideFlags": 0,
+                              "Transform": {
+                                "$id": 60,
+                                "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                "_localPosition": {
+                                  "X": -7.1219225E-11F,
+                                  "Y": 0.24189733F,
+                                  "Z": 1.1940561E-07F
+                                },
+                                "_localScale": {
+                                  "X": 1.0000002F,
+                                  "Y": 0.9999999F,
+                                  "Z": 0.99999994F
+                                },
+                                "_localRotation": {
+                                  "X": 1.4942596E-09F,
+                                  "Y": 6.228115E-08F,
+                                  "Z": -0.05528552F,
+                                  "W": -0.9984706F
+                                }
+                              },
+                              "Components": [
+
+                              ],
+                              "Children": [
+                                {
+                                  "$id": 61,
+                                  "Name": "wrist.r",
+                                  "AssetPath": "",
+                                  "Identifier": "145add26-479d-4645-9d35-6bbc487ad371",
+                                  "Static": 0B,
+                                  "Enabled": 1B,
+                                  "EnabledInHierarchy": 1B,
+                                  "TagIndex": 0,
+                                  "LayerIndex": 0,
+                                  "HideFlags": 0,
+                                  "Transform": {
+                                    "$id": 62,
+                                    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                    "_localPosition": {
+                                      "X": -7.426282E-09F,
+                                      "Y": 0.26004383F,
+                                      "Z": -6.127964E-11F
+                                    },
+                                    "_localScale": {
+                                      "X": 0.99999994F,
+                                      "Y": 0.99999994F,
+                                      "Z": 0.99999994F
+                                    },
+                                    "_localRotation": {
+                                      "X": 5.1184272E-11F,
+                                      "Y": 3.0773722E-10F,
+                                      "Z": 0.0266581F,
+                                      "W": -0.9996447F
+                                    }
+                                  },
+                                  "Components": [
+
+                                  ],
+                                  "Children": [
+                                    {
+                                      "$id": 63,
+                                      "Name": "hand.r",
+                                      "AssetPath": "",
+                                      "Identifier": "6d8a9a10-c141-405c-9264-22bada7bc51d",
+                                      "Static": 0B,
+                                      "Enabled": 1B,
+                                      "EnabledInHierarchy": 1B,
+                                      "TagIndex": 0,
+                                      "LayerIndex": 0,
+                                      "HideFlags": 0,
+                                      "Transform": {
+                                        "$id": 64,
+                                        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                        "_localPosition": {
+                                          "X": 3.996803E-15F,
+                                          "Y": 0.073825836F,
+                                          "Z": 2.220446E-16F
+                                        },
+                                        "_localScale": {
+                                          "X": 1F,
+                                          "Y": 0.99999994F,
+                                          "Z": 0.99999994F
+                                        },
+                                        "_localRotation": {
+                                          "X": 1.1999163E-09F,
+                                          "Y": -9.210969E-08F,
+                                          "Z": -5.4551956E-06F,
+                                          "W": -1F
+                                        }
+                                      },
+                                      "Components": [
+
+                                      ],
+                                      "Children": [
+                                        {
+                                          "$id": 65,
+                                          "Name": "handslot.r",
+                                          "AssetPath": "",
+                                          "Identifier": "3766300e-9817-4e37-bc24-106d8e019ce6",
+                                          "Static": 0B,
+                                          "Enabled": 1B,
+                                          "EnabledInHierarchy": 1B,
+                                          "TagIndex": 0,
+                                          "LayerIndex": 0,
+                                          "HideFlags": 0,
+                                          "Transform": {
+                                            "$id": 66,
+                                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                            "_localPosition": {
+                                              "X": -5.1389204E-10F,
+                                              "Y": 0.09612507F,
+                                              "Z": 0.057500124F
+                                            },
+                                            "_localScale": {
+                                              "X": 0.99999994F,
+                                              "Y": 1F,
+                                              "Z": 0.99999994F
+                                            },
+                                            "_localRotation": {
+                                              "X": 1.6805922E-09F,
+                                              "Y": -1.6805921E-09F,
+                                              "Z": -0.7071068F,
+                                              "W": -0.7071067F
+                                            }
+                                          },
+                                          "Components": [
+
+                                          ],
+                                          "Children": [
+
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$id": 67,
+                  "Name": "upperleg.l",
+                  "AssetPath": "",
+                  "Identifier": "a7043749-5868-4247-acbc-d5f20d5a579b",
+                  "Static": 0B,
+                  "Enabled": 1B,
+                  "EnabledInHierarchy": 1B,
+                  "TagIndex": 0,
+                  "LayerIndex": 0,
+                  "HideFlags": 0,
+                  "Transform": {
+                    "$id": 68,
+                    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "_localPosition": {
+                      "X": 0.17094506F,
+                      "Y": 0.11358726F,
+                      "Z": -1.3923272E-08F
+                    },
+                    "_localScale": {
+                      "X": 1F,
+                      "Y": 0.9999998F,
+                      "Z": 1.0000012F
+                    },
+                    "_localRotation": {
+                      "X": 0.9998491F,
+                      "Y": -7.1327655E-08F,
+                      "Z": 1.2042731E-08F,
+                      "W": -0.017373191F
+                    }
+                  },
+                  "Components": [
+
+                  ],
+                  "Children": [
+                    {
+                      "$id": 69,
+                      "Name": "lowerleg.l",
+                      "AssetPath": "",
+                      "Identifier": "ac835913-352d-4382-8e39-0ddcfdc470eb",
+                      "Static": 0B,
+                      "Enabled": 1B,
+                      "EnabledInHierarchy": 1B,
+                      "TagIndex": 0,
+                      "LayerIndex": 0,
+                      "HideFlags": 0,
+                      "Transform": {
+                        "$id": 70,
+                        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "_localPosition": {
+                          "X": 3.5797574E-09F,
+                          "Y": 0.2270775F,
+                          "Z": 6.140325E-09F
+                        },
+                        "_localScale": {
+                          "X": 1F,
+                          "Y": 1.0000005F,
+                          "Z": 1.0000001F
+                        },
+                        "_localRotation": {
+                          "X": 0.10622514F,
+                          "Y": 6.865228E-08F,
+                          "Z": 7.377026E-08F,
+                          "W": -0.9943422F
+                        }
+                      },
+                      "Components": [
+
+                      ],
+                      "Children": [
+                        {
+                          "$id": 71,
+                          "Name": "foot.l",
+                          "AssetPath": "",
+                          "Identifier": "dfa7a943-576f-4f0b-929e-eb83de36b6bb",
+                          "Static": 0B,
+                          "Enabled": 1B,
+                          "EnabledInHierarchy": 1B,
+                          "TagIndex": 0,
+                          "LayerIndex": 0,
+                          "HideFlags": 0,
+                          "Transform": {
+                            "$id": 72,
+                            "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                            "_localPosition": {
+                              "X": 1.8339347E-10F,
+                              "Y": 0.14943703F,
+                              "Z": -9.658738E-10F
+                            },
+                            "_localScale": {
+                              "X": 1F,
+                              "Y": 1.0000008F,
+                              "Z": 0.99999875F
+                            },
+                            "_localRotation": {
+                              "X": -0.45523903F,
+                              "Y": 1.619755E-08F,
+                              "Z": 3.4356397E-08F,
+                              "W": -0.8903693F
+                            }
+                          },
+                          "Components": [
+
+                          ],
+                          "Children": [
+                            {
+                              "$id": 73,
+                              "Name": "toes.l",
+                              "AssetPath": "",
+                              "Identifier": "5536b4fb-fa53-4fb6-9eb9-d185f17b2a96",
+                              "Static": 0B,
+                              "Enabled": 1B,
+                              "EnabledInHierarchy": 1B,
+                              "TagIndex": 0,
+                              "LayerIndex": 0,
+                              "HideFlags": 0,
+                              "Transform": {
+                                "$id": 74,
+                                "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                                "_localPosition": {
+                                  "X": -1.5114397E-08F,
+                                  "Y": 0.16565003F,
+                                  "Z": -5.171392E-09F
+                                },
+                                "_localScale": {
+                                  "X": 1F,
+                                  "Y": 0.9999966F,
+                                  "Z": 1.0000037F
+                                },
+                                "_localRotation": {
+                                  "X": 4.775988E-08F,
+                                  "Y": 0.92035496F,
+                                  "Z": 0.3910841F,
+                                  "W": -5.801561E-08F
+                                }
+                              },
+                              "Components": [
+
+                              ],
+                              "Children": [
+
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
