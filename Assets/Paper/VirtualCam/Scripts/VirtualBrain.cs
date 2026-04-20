@@ -14,15 +14,14 @@ public class VirtualBrain : MonoBehaviour
 
     public override void Update()
     {
-        if (Input.GetKey(KeyCode.Number1))
-        {
-            Focus();
-        }
+        this.Transform.Position = followTarget.Res.Transform.Position + offset;
+        
+        var eyePosition = followTarget.Res.Transform.Position + offset;
+        var targetTransform = Float4x4.CreateLookAt(eyePosition, lookAtTarget.Res.Transform.Position, Float3.UnitY);
+        this.GameObject.Transform.Position = (Float4)targetTransform.Translation;
+        this.GameObject.Transform.Rotation = Quaternion.FromMatrix(targetTransform);
 
-        this.Transform.Position = followTarget.Position + offset;
-        this.Transform.LookAt(lookAtTarget.Position);
-
-        Float3 movement;
+        Float3 movement = Float3.Zero;
         if (Input.GetKey(KeyCode.W))
         {
             movement += Float3.UnitZ * Time.DeltaTime * metersPerSecond;
@@ -40,6 +39,6 @@ public class VirtualBrain : MonoBehaviour
             movement -= Float3.UnitX * Time.DeltaTime * metersPerSecond;
         }
 
-        playerController.Move(movement);
+        characterController.Res.Move(movement);
     }
 }
