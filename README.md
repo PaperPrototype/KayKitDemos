@@ -21,6 +21,18 @@ Asset Structure:
 Game Demos Structure:
 /Games/{Author}/{Project}/{...}
 
+## Animations
+
+README: [/Assets/KayKits/Animations/README.md](/Assets/KayKits/Animations/README.md)
+
+Demo scene: /Assets/KayKits/Animations/Animations.scene
+
+Fully working scene demoing all assets from https://kaylousberg.itch.io/kaykit-character-animations
+
+![](/Assets/KayKits/Animations/Screenshot.png)
+
+![](/Assets/KayKits/Animations/Recording.mov)
+
 ## Adventurers
 README: [/Assets/KayKits/Adventurers/README.md](/Assets/KayKits/Adventurers/README.md)
 
