@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour
     public float StandingHeight = 1.8f;
     public float CrouchHeight = 0.9f;
     public float IdleDeadzone = 0.2f;
+    public float MetersPerSecondSmooth = 1f;
     
+    private Float3 smoothedLookAtTarget = Float3.Zero;
     private Float3 velocity = Float3.Zero;
     private Float3 moveInput = Float3.Zero;
     private bool jumpInput = false;
@@ -57,9 +59,12 @@ public class PlayerController : MonoBehaviour
         if (characterController == null ||
             lookAtTarget == null ||
             followTarget == null) return;
+
+        smoothedLookAtTarget = Float3.Slerp(smoothedLookAtTarget, lookAtTarget.Transform.Position,
+            Time.DeltaTime * MetersPerSecondSmooth);
         
-        this.GameObject.Transform.Position = followTarget.Transform.Position + offset;
-        this.GameObject.Transform.LookAt(lookAtTarget.Transform.Position, Float3.UnitY);
+        this.GameObject.Transform.Position = Float3.Slerp(this.GameObject.Transform.Position, followTarget.Transform.Position + offset, Time.DeltaTime * MetersPerSecondSmooth);
+        this.GameObject.Transform.LookAt(smoothedLookAtTarget, Float3.UnitY);
         
         if (!Application.IsPlaying) return;
         
@@ -82,6 +87,8 @@ public class PlayerController : MonoBehaviour
         velocity.X = horizontalVelocity.X;
         velocity.Z = horizontalVelocity.Z;
         
+        characterController.Transform.Forward = horizontalVelocity;
+
         HandleGravityAndJump();
         
         // Calculate total movement for this frame

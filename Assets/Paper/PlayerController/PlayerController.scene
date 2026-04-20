@@ -378,7 +378,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 20,
@@ -468,7 +469,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 23,
@@ -558,7 +560,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 26,
@@ -648,7 +651,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 29,
@@ -738,7 +742,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 32,
@@ -828,7 +833,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 35,
@@ -918,7 +924,8 @@
                     ],
                     "Children": [
 
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   },
                   {
                     "$id": 38,
@@ -1131,13 +1138,17 @@
                                         ],
                                         "Children": [
 
-                                        ]
+                                        ],
+                                        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                       }
-                                    ]
+                                    ],
+                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                   }
-                                ]
+                                ],
+                                "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                               }
-                            ]
+                            ],
+                            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                           },
                           {
                             "$id": 50,
@@ -1280,13 +1291,17 @@
                                         ],
                                         "Children": [
 
-                                        ]
+                                        ],
+                                        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                       }
-                                    ]
+                                    ],
+                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                   }
-                                ]
+                                ],
+                                "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                               }
-                            ]
+                            ],
+                            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                           },
                           {
                             "$id": 58,
@@ -1534,15 +1549,20 @@
                                                     ],
                                                     "Children": [
 
-                                                    ]
+                                                    ],
+                                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                                   }
-                                                ]
+                                                ],
+                                                "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                               }
-                                            ]
+                                            ],
+                                            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                           }
-                                        ]
+                                        ],
+                                        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                       }
-                                    ]
+                                    ],
+                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                   },
                                   {
                                     "$id": 72,
@@ -1580,7 +1600,8 @@
                                     ],
                                     "Children": [
 
-                                    ]
+                                    ],
+                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                   },
                                   {
                                     "$id": 74,
@@ -1758,27 +1779,38 @@
                                                     ],
                                                     "Children": [
 
-                                                    ]
+                                                    ],
+                                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                                   }
-                                                ]
+                                                ],
+                                                "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                               }
-                                            ]
+                                            ],
+                                            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                           }
-                                        ]
+                                        ],
+                                        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                       }
-                                    ]
+                                    ],
+                                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                                   }
-                                ]
+                                ],
+                                "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                               }
-                            ]
+                            ],
+                            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                           }
-                        ]
+                        ],
+                        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                       }
-                    ]
+                    ],
+                    "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
                   }
-                ]
+                ],
+                "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
               }
-            ]
+            ],
+            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
           },
           {
             "$id": 84,
@@ -1816,9 +1848,11 @@
             ],
             "Children": [
 
-            ]
+            ],
+            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
           }
-        ]
+        ],
+        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
       },
       {
         "$id": 12
@@ -2070,12 +2104,58 @@
             ],
             "Children": [
 
-            ]
+            ],
+            "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
           }
-        ]
+        ],
+        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
       },
       {
         "$id": 89
+      },
+      {
+        "$id": 93,
+        "Name": "PlayerRig",
+        "AssetPath": "",
+        "Identifier": "2375353e-6f35-4f61-bd87-b543dcdaad29",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 94,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+
+        ],
+        "Children": [
+          {
+            "$id": 9
+          },
+          {
+            "$id": 86
+          }
+        ],
+        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
       }
     ]
   },
@@ -2118,7 +2198,8 @@
       "1ebba625-b394-4e8a-843c-ad430167e75f",
       "4e44f4c2-ed17-4791-bfe4-6e5e7fd2fb3f",
       "b7348f2e-d62d-4d60-94de-4e3779c96390",
-      "ba4a73c2-35ed-4d19-950e-9e3cc99591d2"
+      "ba4a73c2-35ed-4d19-950e-9e3cc99591d2",
+      "2375353e-6f35-4f61-bd87-b543dcdaad29"
     ]
   },
   "_compIdentifiers": {
@@ -2179,6 +2260,7 @@
       12,
       12,
       13,
+      14,
       14
     ]
   },
