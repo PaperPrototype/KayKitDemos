@@ -1,0 +1,13 @@
+{
+  "Scenes": [],
+  "Platform": 0,
+  "Config": 1,
+  "OutputDirectory": "Builds",
+  "PackagingMode": 1,
+  "AssetMode": 1,
+  "MaxPakSizeMB": 2048,
+  "SelfContained": true,
+  "WindowWidth": 1280,
+  "WindowHeight": 720,
+  "RuntimeIdentifier": "win-x64"
+}

@@ -1,0 +1,287 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.Resources.Scene, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "serializeObj": {
+    "array": [
+      {
+        "$id": 2,
+        "Name": "Directional Light",
+        "AssetPath": "",
+        "Identifier": "da42403c-dbab-480d-9fef-c16949375349",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 3,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": -0.4082179F,
+            "Y": 0.23456971F,
+            "Z": 0.10938165F,
+            "W": 0.87542605F
+          }
+        },
+        "Components": [
+          {
+            "$id": 4,
+            "$type": "Prowl.Runtime.DirectionalLight, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "ShadowResolution": 1024,
+            "Cascades": 4,
+            "ShadowDistance": 100F,
+            "Color": {
+              "R": 1F,
+              "G": 1F,
+              "B": 1F,
+              "A": 1F
+            },
+            "Intensity": 8F,
+            "ShadowStrength": 1F,
+            "ShadowBias": 0.001F,
+            "ShadowNormalBias": 0F,
+            "CastShadows": true,
+            "ShadowQuality": 0,
+            "_identifier": "76f700f9-d7d4-4e86-95d5-349e6f862085",
+            "_enabled": true,
+            "_enabledInHierarchy": true,
+            "HideFlags": 0,
+            "AssetPath": "",
+            "AssetID": "00000000-0000-0000-0000-000000000000",
+            "Name": "NewDirectionalLight"
+          }
+        ],
+        "Children": [
+
+        ],
+        "PrefabAssetId": "a2a62583-c2c7-4c8f-88f9-2af54907a734"
+      },
+      {
+        "$id": 5,
+        "Name": "Camera",
+        "AssetPath": "",
+        "Identifier": "a2451499-5487-48c4-86a2-0a5ca596d887",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 6,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 0F,
+            "Y": 5F,
+            "Z": -15F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": 0.1305262F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 0.9914449F
+          }
+        },
+        "Components": [
+          {
+            "$id": 7,
+            "$type": "Prowl.Runtime.Camera, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Effects": [
+              {
+                "$id": 8,
+                "$type": "Prowl.Runtime.Rendering.BokehDepthOfFieldEffect, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "UseAutoFocus": true,
+                "ManualFocusPoint": 0.5F,
+                "FocusStrength": 1000F,
+                "MaxBlurRadius": 4F,
+                "Resolution": 4,
+                "Enabled": true
+              },
+              {
+                "$id": 9,
+                "$type": "Prowl.Runtime.Rendering.TonemapperEffect, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "Contrast": 1.1F,
+                "Saturation": 1.1F,
+                "Enabled": true
+              }
+            ],
+            "ClearFlags": 3,
+            "ClearColor": {
+              "R": 0F,
+              "G": 0F,
+              "B": 0F,
+              "A": 1F
+            },
+            "CullingMask": {
+              "mask": 4294967295U
+            },
+            "ProjectionMode": 0,
+            "FieldOfView": 60F,
+            "OrthographicSize": 0.5F,
+            "NearClipPlane": 0.1F,
+            "FarClipPlane": 100F,
+            "Depth": -1,
+            "Pipeline": NULL,
+            "Target": NULL,
+            "HDR": false,
+            "RenderScale": 1F,
+            "_identifier": "1dd0b837-9f55-4156-b203-3827396ac001",
+            "_enabled": true,
+            "_enabledInHierarchy": true,
+            "HideFlags": 0,
+            "AssetPath": "",
+            "AssetID": "00000000-0000-0000-0000-000000000000",
+            "Name": "NewCamera"
+          }
+        ],
+        "Children": [
+
+        ],
+        "PrefabAssetId": "a2a62583-c2c7-4c8f-88f9-2af54907a734"
+      },
+      {
+        "$id": 10,
+        "Name": "SharedSetup",
+        "AssetPath": "",
+        "Identifier": "ed9fcf96-7c91-4a5f-9899-16ff6cf03706",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 11,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+
+        ],
+        "Children": [
+          {
+            "$id": 5
+          },
+          {
+            "$id": 2
+          }
+        ],
+        "PrefabAssetId": "a2a62583-c2c7-4c8f-88f9-2af54907a734"
+      }
+    ]
+  },
+  "_goIdentifiers": {
+    "array": [
+      "da42403c-dbab-480d-9fef-c16949375349",
+      "a2451499-5487-48c4-86a2-0a5ca596d887",
+      "ed9fcf96-7c91-4a5f-9899-16ff6cf03706"
+    ]
+  },
+  "_compIdentifiers": {
+    "array": [
+      "76f700f9-d7d4-4e86-95d5-349e6f862085",
+      "1dd0b837-9f55-4156-b203-3827396ac001"
+    ]
+  },
+  "_compIdOffsets": {
+    "array": [
+      0,
+      1,
+      2,
+      2
+    ]
+  },
+  "Fog": {
+    "Mode": 3,
+    "Color": {
+      "R": 0.5F,
+      "G": 0.5F,
+      "B": 0.5F,
+      "A": 1F
+    },
+    "Start": 20F,
+    "End": 100F,
+    "Density": 0.01F
+  },
+  "Ambient": {
+    "Mode": 0,
+    "Strength": 1F,
+    "Color": {
+      "X": 0.2F,
+      "Y": 0.2F,
+      "Z": 0.2F,
+      "W": 1F
+    },
+    "SkyColor": {
+      "X": 0.3F,
+      "Y": 0.3F,
+      "Z": 0.4F,
+      "W": 1F
+    },
+    "GroundColor": {
+      "X": 0.2F,
+      "Y": 0.2F,
+      "Z": 0.2F,
+      "W": 1F
+    }
+  },
+  "Skybox": {
+    "Mode": 0,
+    "SolidColor": {
+      "R": 0.2F,
+      "G": 0.3F,
+      "B": 0.5F,
+      "A": 1F
+    },
+    "GradientTop": {
+      "R": 0.4F,
+      "G": 0.6F,
+      "B": 0.9F,
+      "A": 1F
+    },
+    "GradientBottom": {
+      "R": 0.8F,
+      "G": 0.8F,
+      "B": 0.7F,
+      "A": 1F
+    },
+    "GradientExponent": 1F,
+    "CustomMaterial": {
+      "AssetID": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "AssetPath": "",
+  "AssetID": "00000000-0000-0000-0000-000000000000",
+  "Name": "Demo"
+}

@@ -1,0 +1,178 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "Name": "SharedSetup",
+  "AssetPath": "",
+  "Identifier": "2337cf50-c0e0-4ad4-b314-9e4a068f28dd",
+  "Static": 0B,
+  "Enabled": 1B,
+  "EnabledInHierarchy": 1B,
+  "TagIndex": 0,
+  "LayerIndex": 0,
+  "HideFlags": 0,
+  "Transform": {
+    "$id": 2,
+    "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "_localPosition": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F
+    },
+    "_localScale": {
+      "X": 1F,
+      "Y": 1F,
+      "Z": 1F
+    },
+    "_localRotation": {
+      "X": 0F,
+      "Y": 0F,
+      "Z": 0F,
+      "W": 1F
+    }
+  },
+  "Components": [
+
+  ],
+  "Children": [
+    {
+      "$id": 3,
+      "Name": "Camera",
+      "AssetPath": "",
+      "Identifier": "32a54b90-0829-421c-9092-f2782d6cf8eb",
+      "Static": 0B,
+      "Enabled": 1B,
+      "EnabledInHierarchy": 1B,
+      "TagIndex": 0,
+      "LayerIndex": 0,
+      "HideFlags": 0,
+      "Transform": {
+        "$id": 4,
+        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "_localPosition": {
+          "X": 0F,
+          "Y": 5F,
+          "Z": -15F
+        },
+        "_localScale": {
+          "X": 1F,
+          "Y": 1F,
+          "Z": 1F
+        },
+        "_localRotation": {
+          "X": 0.1305262F,
+          "Y": 0F,
+          "Z": 0F,
+          "W": 0.9914449F
+        }
+      },
+      "Components": [
+        {
+          "$id": 5,
+          "$type": "Prowl.Runtime.Camera, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "Effects": [
+            {
+              "$id": 6,
+              "$type": "Prowl.Runtime.Rendering.TonemapperEffect, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+              "Contrast": 1.1F,
+              "Saturation": 1.1F,
+              "Enabled": true
+            }
+          ],
+          "ClearFlags": 3,
+          "ClearColor": {
+            "R": 0F,
+            "G": 0F,
+            "B": 0F,
+            "A": 1F
+          },
+          "CullingMask": {
+            "mask": 4294967295U
+          },
+          "ProjectionMode": 0,
+          "FieldOfView": 60F,
+          "OrthographicSize": 0.5F,
+          "NearClipPlane": 0.1F,
+          "FarClipPlane": 100F,
+          "Depth": -1,
+          "Pipeline": NULL,
+          "Target": NULL,
+          "HDR": false,
+          "RenderScale": 1F,
+          "_identifier": "f1e272e6-50d1-43b4-9ee0-a8024d97eafa",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewCamera"
+        }
+      ],
+      "Children": [
+
+      ]
+    },
+    {
+      "$id": 7,
+      "Name": "Directional Light",
+      "AssetPath": "",
+      "Identifier": "06b808f5-db84-48ff-a522-86eccdeab04d",
+      "Static": 0B,
+      "Enabled": 1B,
+      "EnabledInHierarchy": 1B,
+      "TagIndex": 0,
+      "LayerIndex": 0,
+      "HideFlags": 0,
+      "Transform": {
+        "$id": 8,
+        "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "_localPosition": {
+          "X": 0F,
+          "Y": 0F,
+          "Z": 0F
+        },
+        "_localScale": {
+          "X": 1F,
+          "Y": 1F,
+          "Z": 1F
+        },
+        "_localRotation": {
+          "X": -0.4082179F,
+          "Y": 0.23456971F,
+          "Z": 0.10938165F,
+          "W": 0.87542605F
+        }
+      },
+      "Components": [
+        {
+          "$id": 9,
+          "$type": "Prowl.Runtime.DirectionalLight, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "ShadowResolution": 1024,
+          "Cascades": 4,
+          "ShadowDistance": 100F,
+          "Color": {
+            "R": 1F,
+            "G": 1F,
+            "B": 1F,
+            "A": 1F
+          },
+          "Intensity": 8F,
+          "ShadowStrength": 1F,
+          "ShadowBias": 0.001F,
+          "ShadowNormalBias": 0F,
+          "CastShadows": true,
+          "ShadowQuality": 0,
+          "_identifier": "83fa28e6-01a3-4297-8ecf-daa2a035b416",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewDirectionalLight"
+        }
+      ],
+      "Children": [
+
+      ]
+    }
+  ]
+}
