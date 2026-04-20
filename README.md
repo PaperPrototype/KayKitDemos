@@ -4,10 +4,7 @@ A monorepo for stress testing the Prowl Engine using using assets from KayKits a
 
 Each asset pack has an accompanying scene showing off every single asset:
 
-
-
 Asset packs:
-https://quaternius.itch.io/stylized-nature-megakit
 
 https://kaylousberg.itch.io/kaykit-adventurers
 https://kaylousberg.itch.io/kaykit-forest
@@ -15,13 +12,18 @@ https://kaylousberg.itch.io/kaykit-platformer
 https://kaylousberg.itch.io/prototype-bits
 https://kaylousberg.itch.io/kaykit-skeletons
 
+https://quaternius.itch.io/stylized-nature-megakit
+
+## Structure
 Asset Structure:
 /{Author}/{Project}/{...}
 
 Game Demos Structure:
 /Games/{Author}/{Project}/{...}
 
-### Adventurers
+## Adventurers
+README: [/Assets/KayKits/Adventurers/README.md](/Assets/KayKits/Adventurers/README.md)
+
 Demo scene: /Assets/KayKits/Adventurers/Adventurers.scene
 
 Fully working scene demoing all assets from 
@@ -29,7 +31,9 @@ https://kaylousberg.itch.io/kaykit-adventurers
 
 ![](/Assets/KayKits/Adventurers/Screenshot.png)
 
-### Forest Nature
+## Forest Nature
+README: [/Assets/KayKits/ForestNature/README.md](/Assets/KayKits/ForestNature/README.md)
+
 Demo scene: /Assets/KayKits/ForestNature/ForestNature.scene
 
 Fully working scene demoing all assets from 
@@ -37,7 +41,9 @@ https://kaylousberg.itch.io/kaykit-forest
 
 ![](/Assets/KayKits/ForestNature/Screenshot.png)
 
-### Platformer
+## Platformer
+README: [/Assets/KayKits/Platformer/README.md](/Assets/KayKits/Platformer/README.md)
+
 Demo scene: /Assets/KayKits/Platformer/Platformer.scene
 
 Fully working scene demoing all assets from 
@@ -45,14 +51,18 @@ https://kaylousberg.itch.io/kaykit-platformer
 
 ![](/Assets/KayKits/Platformer/Screenshot.png)
 
-### Prototype
+## Prototype
+README: [/Assets/KayKits/Prototype/README.md](/Assets/KayKits/Prototype/README.md)
+
 Demo scene: /Assets/KayKits/Prototype/Prototype.scene
 
 Fully working scene demoing all assets from https://kaylousberg.itch.io/prototype-bits
 
 ![](/Assets/KayKits/Prototype/Screenshot.png)
 
-### Skeletons
+## Skeletons
+README: [/Assets/KayKits/Skeletons/README.md](/Assets/KayKits/Skeletons/README.md)
+
 Demo scene: /Assets/KayKits/Skeletons/Skeletons.scene
 
 Fully working scene demoing all assets from 
