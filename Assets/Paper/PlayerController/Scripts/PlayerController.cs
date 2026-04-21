@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public float CrouchHeight = 0.9f;
     public float IdleDeadzone = 0.2f;
     public float MetersPerSecondSmooth = 1f;
+    public float DegreesPerSecondSmooth = 1f;
     
     private Float3 smoothedLookAtTarget = Float3.Zero;
     private Float3 velocity = Float3.Zero;
@@ -48,14 +49,36 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput = false;
     private bool crouchInput = false;
     private bool isCrouching = false;
+    
+    private Float3 startPos = Float3.Zero;
 
     public override void OnEnable()
     {
+        startPos = characterController.Transform.Position;
         animationComponent.CurrentClip = GetAnimationState(PlayerAnimationState.Idle);
     }
 
     public override void Update()
     {
+        if (characterController.Transform.Position.Y < -5)
+        {
+            characterController.Transform.Position = startPos;
+            this.GameObject.Transform.Position = followTarget.Transform.Position + offset;
+            this.GameObject.Transform.LookAt(lookAtTarget.Transform.Position, Float3.UnitY);
+        }
+        
+        Quaternion MoveTowards(Quaternion from, Quaternion to, float maxDegreesDelta)
+        {
+            float angle = Quaternion.Angle(from, to);
+
+            if (angle == 0f)
+                return to;
+
+            float t = Maths.Min(1f, maxDegreesDelta / angle);
+
+            return Quaternion.Slerp(from, to, t);
+        }
+        
         if (characterController == null ||
             lookAtTarget == null ||
             followTarget == null) return;
@@ -87,7 +110,12 @@ public class PlayerController : MonoBehaviour
         velocity.X = horizontalVelocity.X;
         velocity.Z = horizontalVelocity.Z;
         
-        characterController.Transform.Forward = horizontalVelocity;
+        // rotate character to look in move velocity
+        // characterController.Transform.Forward = horizontalVelocity;
+
+        var targetRot = Quaternion.LookRotation(horizontalVelocity, Float3.UnitY);
+        var currentRot = characterController.Transform.Rotation;
+        characterController.Transform.Rotation = MoveTowards(currentRot, targetRot, Time.DeltaTime * DegreesPerSecondSmooth);
 
         HandleGravityAndJump();
         
