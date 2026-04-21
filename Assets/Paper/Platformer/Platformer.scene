@@ -1976,38 +1976,23 @@
               "$value": [
                 {
                   "$id": 88,
-                  "Path": "g1.c0.characterController",
-                  "Value": {
-
-                  }
+                  "Path": "g1.c0.characterController"
                 },
                 {
                   "$id": 89,
-                  "Path": "g1.c0.lookAtTarget",
-                  "Value": {
-
-                  }
+                  "Path": "g1.c0.lookAtTarget"
                 },
                 {
                   "$id": 90,
-                  "Path": "g1.c0.followTarget",
-                  "Value": {
-
-                  }
+                  "Path": "g1.c0.followTarget"
                 },
                 {
                   "$id": 91,
-                  "Path": "g1.c0.animationComponent",
-                  "Value": {
-
-                  }
+                  "Path": "g1.c0.animationComponent"
                 },
                 {
                   "$id": 92,
-                  "Path": "g1.c0.MetersPerSecondSmooth",
-                  "Value": {
-
-                  }
+                  "Path": "g1.c0.MetersPerSecondSmooth"
                 }
               ]
             },
