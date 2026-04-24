@@ -2019,6 +2019,8 @@
             "StandingHeight": 1.8F,
             "CrouchHeight": 0.9F,
             "IdleDeadzone": 0.2F,
+            "MetersPerSecondSmooth": 5F,
+            "DegreesPerSecondSmooth": 15F,
             "_identifier": "d409405e-9199-461e-88f8-7b0d8261415e",
             "_enabled": true,
             "_enabledInHierarchy": true,
@@ -2108,13 +2110,38 @@
             "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
           }
         ],
-        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5"
+        "PrefabAssetId": "dec25a25-2eb0-4ff4-96f1-a7fdf25547d5",
+        "PrefabOverrides": {
+          "$type": "System.Collections.Generic.List`1[[Prowl.Runtime.PropertyOverride, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+          "$value": [
+            {
+              "$id": 93,
+              "Path": "g1.c0.characterController"
+            },
+            {
+              "$id": 94,
+              "Path": "g1.c0.lookAtTarget"
+            },
+            {
+              "$id": 95,
+              "Path": "g1.c0.followTarget"
+            },
+            {
+              "$id": 96,
+              "Path": "g1.c0.animationComponent"
+            },
+            {
+              "$id": 97,
+              "Path": "g1.c0.MetersPerSecondSmooth"
+            }
+          ]
+        }
       },
       {
         "$id": 89
       },
       {
-        "$id": 93,
+        "$id": 98,
         "Name": "PlayerRig",
         "AssetPath": "",
         "Identifier": "2375353e-6f35-4f61-bd87-b543dcdaad29",
@@ -2125,7 +2152,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 94,
+          "$id": 99,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": 0F,
