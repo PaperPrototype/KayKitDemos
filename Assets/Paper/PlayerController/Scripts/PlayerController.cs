@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public float IdleDeadzone = 0.2f;
     public float MetersPerSecondSmooth = 1f;
     public float DegreesPerSecondSmooth = 1f;
+    public float DieIfBelowHeightOf = -30;
     
     private Float3 smoothedLookAtTarget = Float3.Zero;
     private Float3 velocity = Float3.Zero;
@@ -60,9 +61,10 @@ public class PlayerController : MonoBehaviour
 
     public override void Update()
     {
-        if (characterController.Transform.Position.Y < -5)
+        if (characterController.Transform.Position.Y < DieIfBelowHeightOf)
         {
             characterController.Transform.Position = startPos;
+            smoothedLookAtTarget = lookAtTarget.Transform.Position;
             this.GameObject.Transform.Position = followTarget.Transform.Position + offset;
             this.GameObject.Transform.LookAt(lookAtTarget.Transform.Position, Float3.UnitY);
         }

@@ -3,7 +3,7 @@
   "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "Name": "signage_arrows_right_blue",
   "AssetPath": "",
-  "Identifier": "4e1c9e5f-02ad-4052-aa4c-5ff7248d4393",
+  "Identifier": "f183a5c8-71fd-4a83-9524-d7045aee3c13",
   "Static": 0B,
   "Enabled": 1B,
   "EnabledInHierarchy": 1B,
@@ -38,7 +38,7 @@
       "$id": 3,
       "Name": "signage_arrows_right_blue",
       "AssetPath": "",
-      "Identifier": "5b1d8095-e808-4220-bd11-6b0f24473527",
+      "Identifier": "b29299a4-fd12-4d81-bd51-e215d4ffa978",
       "Static": 0B,
       "Enabled": 1B,
       "EnabledInHierarchy": 1B,
@@ -77,7 +77,7 @@
               "AssetID": "5dc7814c-f71b-0cc6-b755-973ad607fde8"
             }
           ],
-          "_identifier": "b15dd6f4-6fd8-4d0a-8aef-2b1c77ab5458",
+          "_identifier": "b47f3e12-a809-415c-88f2-98a10d77c4dd",
           "_enabled": true,
           "_enabledInHierarchy": true,
           "HideFlags": 0,
@@ -102,7 +102,7 @@
             "Y": 0F,
             "Z": 0F
           },
-          "_identifier": "539eca99-31f1-4440-911d-1bc312926d0e",
+          "_identifier": "e1ffe984-abec-4dde-93e6-261766c602b0",
           "_enabled": true,
           "_enabledInHierarchy": true,
           "HideFlags": 0,
