@@ -3,7 +3,7 @@
   "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "Name": "platform_slope_4x4x4_blue",
   "AssetPath": "",
-  "Identifier": "4b418038-bda4-4175-af31-a95d5da7240b",
+  "Identifier": "bd350e26-72ab-46f0-981c-8cbdda02b62e",
   "Static": 0B,
   "Enabled": 1B,
   "EnabledInHierarchy": 1B,
@@ -38,7 +38,7 @@
       "$id": 3,
       "Name": "platform_slope_4x4x4_blue",
       "AssetPath": "",
-      "Identifier": "ef834182-f449-4832-b20d-e6fc72af937a",
+      "Identifier": "c2326437-bb40-4d22-8374-069e58e8ba6d",
       "Static": 0B,
       "Enabled": 1B,
       "EnabledInHierarchy": 1B,
@@ -77,13 +77,38 @@
               "AssetID": "625177d8-ee91-e938-2db7-d0df1767197c"
             }
           ],
-          "_identifier": "1902f2e9-a7c3-4d2b-aea6-e33700acffb3",
+          "_identifier": "f972c56d-80be-4745-aabf-4c0540f37b06",
           "_enabled": true,
           "_enabledInHierarchy": true,
           "HideFlags": 0,
           "AssetPath": "",
           "AssetID": "00000000-0000-0000-0000-000000000000",
           "Name": "NewMeshRenderer"
+        },
+        {
+          "$id": 6,
+          "$type": "Prowl.Runtime.MeshCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "mesh": {
+            "AssetID": "70208417-73bd-cdc4-ec3c-e731085c7aa7"
+          },
+          "convex": true,
+          "Center": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F
+          },
+          "Rotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F
+          },
+          "_identifier": "51b3ae03-256f-4eab-86ee-e64b0cb98373",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewMeshCollider"
         }
       ],
       "Children": [

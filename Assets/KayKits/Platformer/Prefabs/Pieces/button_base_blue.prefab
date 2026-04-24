@@ -3,7 +3,7 @@
   "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "Name": "button_base_blue",
   "AssetPath": "",
-  "Identifier": "cebc9c63-3291-433b-8a70-68a1b2d5d137",
+  "Identifier": "8f173848-cc35-4265-ac97-efdd6d4b96f8",
   "Static": 0B,
   "Enabled": 1B,
   "EnabledInHierarchy": 1B,
@@ -31,39 +31,14 @@
     }
   },
   "Components": [
-    {
-      "$id": 3,
-      "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "size": {
-        "X": 1F,
-        "Y": 0.5F,
-        "Z": 1F
-      },
-      "Center": {
-        "X": 0F,
-        "Y": 0F,
-        "Z": 0F
-      },
-      "Rotation": {
-        "X": 0F,
-        "Y": 0F,
-        "Z": 0F
-      },
-      "_identifier": "62aded3d-5c9c-47c1-b17f-0c8d3edb3846",
-      "_enabled": true,
-      "_enabledInHierarchy": true,
-      "HideFlags": 0,
-      "AssetPath": "",
-      "AssetID": "00000000-0000-0000-0000-000000000000",
-      "Name": "NewBoxCollider"
-    }
+
   ],
   "Children": [
     {
-      "$id": 4,
+      "$id": 3,
       "Name": "button_base_blue",
       "AssetPath": "",
-      "Identifier": "2cf9a1dd-6666-49e4-a209-04d893bf9a38",
+      "Identifier": "0af5a9dc-ce31-47b2-a651-ccaaf40d5226",
       "Static": 0B,
       "Enabled": 1B,
       "EnabledInHierarchy": 1B,
@@ -71,7 +46,7 @@
       "LayerIndex": 0,
       "HideFlags": 0,
       "Transform": {
-        "$id": 5,
+        "$id": 4,
         "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
         "_localPosition": {
           "X": 0F,
@@ -92,7 +67,7 @@
       },
       "Components": [
         {
-          "$id": 6,
+          "$id": 5,
           "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "Mesh": {
             "AssetID": "1090c3c2-e6c0-afea-5c96-f09ceb101523"
@@ -102,13 +77,39 @@
               "AssetID": "bcc59fae-ced9-2878-d13d-3173bf82b88e"
             }
           ],
-          "_identifier": "7fdcb442-3ae4-4795-b63e-ce6f480e4e47",
+          "_identifier": "80eb0f4b-87c7-41be-b704-4e0b28e18615",
           "_enabled": true,
           "_enabledInHierarchy": true,
           "HideFlags": 0,
           "AssetPath": "",
           "AssetID": "00000000-0000-0000-0000-000000000000",
           "Name": "NewMeshRenderer"
+        },
+        {
+          "$id": 6,
+          "$type": "Prowl.Runtime.BoxCollider, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "size": {
+            "X": 1F,
+            "Y": 0.25F,
+            "Z": 1F
+          },
+          "Center": {
+            "X": 0F,
+            "Y": 0.125F,
+            "Z": 0F
+          },
+          "Rotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F
+          },
+          "_identifier": "7059a1d6-9f99-41a5-be80-04a1aa1072eb",
+          "_enabled": true,
+          "_enabledInHierarchy": true,
+          "HideFlags": 0,
+          "AssetPath": "",
+          "AssetID": "00000000-0000-0000-0000-000000000000",
+          "Name": "NewBoxCollider"
         }
       ],
       "Children": [
@@ -116,7 +117,7 @@
           "$id": 7,
           "Name": "button_blue",
           "AssetPath": "",
-          "Identifier": "bc793283-0810-46d4-98aa-56363b800ade",
+          "Identifier": "8c93b637-af89-4d10-9b15-e8eeff439798",
           "Static": 0B,
           "Enabled": 1B,
           "EnabledInHierarchy": 1B,
@@ -155,7 +156,7 @@
                   "AssetID": "bcc59fae-ced9-2878-d13d-3173bf82b88e"
                 }
               ],
-              "_identifier": "e1b1e127-0b9c-43f0-93c2-25239d2a04a3",
+              "_identifier": "a6f052b6-abaa-4fef-b765-5a5630bbe50c",
               "_enabled": true,
               "_enabledInHierarchy": true,
               "HideFlags": 0,

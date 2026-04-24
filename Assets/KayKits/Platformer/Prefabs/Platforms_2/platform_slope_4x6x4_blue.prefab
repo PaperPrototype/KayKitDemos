@@ -3,7 +3,7 @@
   "$type": "Prowl.Runtime.GameObject, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "Name": "platform_slope_4x6x4_blue",
   "AssetPath": "",
-  "Identifier": "9c9bcc08-e9a2-4034-8473-2883752c3bae",
+  "Identifier": "b23d2434-8011-4249-acfa-ccb9db851ad8",
   "Static": 0B,
   "Enabled": 1B,
   "EnabledInHierarchy": 1B,
@@ -38,7 +38,7 @@
       "$id": 3,
       "Name": "platform_slope_4x6x4_blue",
       "AssetPath": "",
-      "Identifier": "ffed34be-d15e-4e69-8f82-4f629c2cf5f4",
+      "Identifier": "712a83c8-1185-4666-9581-b472351ab519",
       "Static": 0B,
       "Enabled": 1B,
       "EnabledInHierarchy": 1B,
@@ -77,7 +77,7 @@
               "AssetID": "44747843-c358-7e50-851a-96198cdf0837"
             }
           ],
-          "_identifier": "c0681b54-1214-4474-8885-8eab7924b65f",
+          "_identifier": "f5312382-2f54-401e-9aea-419d5c9407ce",
           "_enabled": true,
           "_enabledInHierarchy": true,
           "HideFlags": 0,
@@ -102,7 +102,7 @@
             "Y": 0F,
             "Z": 0F
           },
-          "_identifier": "9c025573-7ca8-4e43-90a2-b10352240424",
+          "_identifier": "54827233-ec7e-46b9-ba4e-9bb6c4ee6b1c",
           "_enabled": true,
           "_enabledInHierarchy": true,
           "HideFlags": 0,
