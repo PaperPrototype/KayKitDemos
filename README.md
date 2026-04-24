@@ -2,15 +2,13 @@
 
 Each asset pack has an accompanying scene showing off every single asset:
 
-## Structure
-
 Project Structure:
 
 ```
 /{Author}/{Project}/{...}
 ```
 
-## Animations
+### KayKits/Animations
 
 README: [/Assets/KayKits/Animations/README.md](/Assets/KayKits/Animations/README.md)
 
@@ -20,7 +18,7 @@ Fully working scene demoing all assets from https://kaylousberg.itch.io/kaykit-c
 
 https://github.com/user-attachments/assets/dec87afa-5712-45c5-9fc5-da36cb653359
 
-## Adventurers
+### KayKits/Adventurers
 README: [/Assets/KayKits/Adventurers/README.md](/Assets/KayKits/Adventurers/README.md)
 
 Demo scene: /Assets/KayKits/Adventurers/Adventurers.scene
@@ -30,7 +28,7 @@ https://kaylousberg.itch.io/kaykit-adventurers
 
 ![](/Assets/KayKits/Adventurers/Screenshot.png)
 
-## Forest Nature
+### KayKits/ForestNature
 README: [/Assets/KayKits/ForestNature/README.md](/Assets/KayKits/ForestNature/README.md)
 
 Demo scene: /Assets/KayKits/ForestNature/ForestNature.scene
@@ -40,7 +38,7 @@ https://kaylousberg.itch.io/kaykit-forest
 
 ![](/Assets/KayKits/ForestNature/Screenshot.png)
 
-## Platformer
+### KayKits/Platformer
 README: [/Assets/KayKits/Platformer/README.md](/Assets/KayKits/Platformer/README.md)
 
 Demo scene: /Assets/KayKits/Platformer/Platformer.scene
@@ -50,7 +48,7 @@ https://kaylousberg.itch.io/kaykit-platformer
 
 ![](/Assets/KayKits/Platformer/Screenshot.png)
 
-## Prototype
+### KayKits/Prototype
 README: [/Assets/KayKits/Prototype/README.md](/Assets/KayKits/Prototype/README.md)
 
 Demo scene: /Assets/KayKits/Prototype/Prototype.scene
@@ -59,7 +57,7 @@ Fully working scene demoing all assets from https://kaylousberg.itch.io/prototyp
 
 ![](/Assets/KayKits/Prototype/Screenshot.png)
 
-## Skeletons
+### KayKits/Skeletons
 README: [/Assets/KayKits/Skeletons/README.md](/Assets/KayKits/Skeletons/README.md)
 
 Demo scene: /Assets/KayKits/Skeletons/Skeletons.scene
@@ -69,8 +67,7 @@ https://kaylousberg.itch.io/kaykit-skeletons
 
 ![](/Assets/KayKits/Skeletons/Screenshot.png)
 
-
-## Asset Packs
+### Asset Packs
 
 https://kaylousberg.itch.io/kaykit-adventurers
 
