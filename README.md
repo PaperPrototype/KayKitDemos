@@ -1,22 +1,6 @@
-# KayKits1
-
-A monorepo for stress testing the Prowl Engine using using assets from KayKits and Quaternius.
+# KayKitsDemos
 
 Each asset pack has an accompanying scene showing off every single asset:
-
-Asset packs:
-
-https://kaylousberg.itch.io/kaykit-adventurers
-
-https://kaylousberg.itch.io/kaykit-forest
-
-https://kaylousberg.itch.io/kaykit-platformer
-
-https://kaylousberg.itch.io/prototype-bits
-
-https://kaylousberg.itch.io/kaykit-skeletons
-
-https://quaternius.itch.io/stylized-nature-megakit
 
 ## Structure
 
@@ -84,3 +68,18 @@ Fully working scene demoing all assets from
 https://kaylousberg.itch.io/kaykit-skeletons
 
 ![](/Assets/KayKits/Skeletons/Screenshot.png)
+
+
+## Asset Packs
+
+https://kaylousberg.itch.io/kaykit-adventurers
+
+https://kaylousberg.itch.io/kaykit-forest
+
+https://kaylousberg.itch.io/kaykit-platformer
+
+https://kaylousberg.itch.io/prototype-bits
+
+https://kaylousberg.itch.io/kaykit-skeletons
+
+https://quaternius.itch.io/stylized-nature-megakit
