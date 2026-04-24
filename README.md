@@ -8,6 +8,16 @@ Project Structure:
 /{Author}/{Project}/{...}
 ```
 
+### Paper/Platformer
+
+README: [/Assets/Paper/Platformer/README.md](/Assets/Paper/Platformer/README.md)
+
+Demo scene: /Assets/Paper/Platformer/Platformer.scene
+
+Fully working platformer demo
+
+![](/Assets/Paper/Platformer/Screenshot.png)
+
 ### KayKits/Animations
 
 README: [/Assets/KayKits/Animations/README.md](/Assets/KayKits/Animations/README.md)
