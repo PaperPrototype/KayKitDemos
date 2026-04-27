@@ -1978,27 +1978,45 @@
               "$value": [
                 {
                   "$id": 88,
-                  "Path": "g1.c0.characterController"
+                  "Path": "g1.c0.characterController",
+                  "Value": {
+
+                  }
                 },
                 {
                   "$id": 89,
-                  "Path": "g1.c0.lookAtTarget"
+                  "Path": "g1.c0.lookAtTarget",
+                  "Value": {
+
+                  }
                 },
                 {
                   "$id": 90,
-                  "Path": "g1.c0.followTarget"
+                  "Path": "g1.c0.followTarget",
+                  "Value": {
+
+                  }
                 },
                 {
                   "$id": 91,
-                  "Path": "g1.c0.animationComponent"
+                  "Path": "g1.c0.animationComponent",
+                  "Value": {
+
+                  }
                 },
                 {
                   "$id": 92,
-                  "Path": "g1.c0.offset"
+                  "Path": "g1.c0.offset",
+                  "Value": {
+
+                  }
                 },
                 {
                   "$id": 93,
-                  "Path": "g1.c0.MetersPerSecondSmooth"
+                  "Path": "g1.c0.MetersPerSecondSmooth",
+                  "Value": {
+
+                  }
                 }
               ]
             },
@@ -4693,7 +4711,10 @@
                   "$value": [
                     {
                       "$id": 217,
-                      "Path": "g0.c1.convex"
+                      "Path": "g0.c1.convex",
+                      "Value": {
+
+                      }
                     }
                   ]
                 },

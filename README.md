@@ -18,6 +18,14 @@ Fully working platformer demo
 
 ![](/Assets/Paper/Platformer/Screenshot.png)
 
+### Paper/VoxelTerrain
+
+Demo scene: /Assets/Paper/VoxelTerrain/VoxelTerrain.scene
+
+Fully working platformer demo
+
+![](/Assets/Paper/VoxelTerrain/Screenshot.png)
+
 ### KayKits/Animations
 
 README: [/Assets/KayKits/Animations/README.md](/Assets/KayKits/Animations/README.md)
