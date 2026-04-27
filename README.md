@@ -22,7 +22,7 @@ Fully working platformer demo
 
 Demo scene: /Assets/Paper/VoxelTerrain/VoxelTerrain.scene
 
-Fully working platformer demo
+Simple voxel terrain in prowl
 
 ![](/Assets/Paper/VoxelTerrain/Screenshot.png)
 
