@@ -11,34 +11,95 @@ namespace Paper.VoxelTerrain;
 
 public class VoxelWorld : MonoBehaviour
 {
+    public GameObject Player;
     public AssetRef<Material> Material;
 
     private const int ChunkWidth = 16;
     private const int ChunkHeight = 256;
     private const int ChunkDepth = 16;
-    private const int RenderDistance = 3; // Chunks in each direction
+    private const int RenderDistance = 3;
+
+    // How often (in seconds) to check if the player has crossed a chunk boundary
+    private const float UpdateInterval = 0.5f;
+    private float _updateTimer = 0f;
 
     private Dictionary<Int3, VoxelChunk> chunks = [];
     public FastNoiseLite noise;
+
+    // The chunk the player was in during the last update
+    private Int3 _lastPlayerChunk = new(int.MaxValue, 0, int.MaxValue);
 
     public override void OnEnable()
     {
         noise = new FastNoiseLite();
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-        GenerateWorld();
+        UpdateChunksAroundPlayer(force: true);
     }
 
-    public void GenerateWorld()
+    public override void Update()
     {
-        // Generate chunks in a grid around origin
-        for (int x = -RenderDistance; x <= RenderDistance; x++)
+        if (Player == null) return;
+
+        _updateTimer -= Time.DeltaTime;
+        if (_updateTimer > 0f) return;
+        _updateTimer = UpdateInterval;
+
+        Int3 currentPlayerChunk = WorldToChunkPos(new Int3(
+            (int)Maths.Floor(Player.Transform.Position.X),
+            0,
+            (int)Maths.Floor(Player.Transform.Position.Z)
+        ));
+
+        // Only rebuild if the player has moved into a different chunk
+        if (currentPlayerChunk != _lastPlayerChunk)
+            UpdateChunksAroundPlayer(force: false);
+    }
+
+    private void UpdateChunksAroundPlayer(bool force)
+    {
+        Int3 playerChunk;
+        if (Player != null)
         {
-            for (int z = -RenderDistance; z <= RenderDistance; z++)
-            {
-                CreateChunk(new Int3(x, 0, z));
-            }
+            playerChunk = WorldToChunkPos(new Int3(
+                (int)Maths.Floor(Player.Transform.Position.X),
+                0,
+                (int)Maths.Floor(Player.Transform.Position.Z)
+            ));
+        }
+        else
+        {
+            playerChunk = new Int3(0, 0, 0);
+        }
+
+        if (!force && playerChunk == _lastPlayerChunk) return;
+        _lastPlayerChunk = playerChunk;
+
+        // Build the set of chunk positions that should be loaded
+        HashSet<Int3> desired = [];
+        for (int x = -RenderDistance; x <= RenderDistance; x++)
+        for (int z = -RenderDistance; z <= RenderDistance; z++)
+            desired.Add(new Int3(playerChunk.X + x, 0, playerChunk.Z + z));
+
+        // Unload chunks that are no longer in range
+        List<Int3> toRemove = [];
+        foreach (var (pos, chunk) in chunks)
+        {
+            if (!desired.Contains(pos))
+                toRemove.Add(pos);
+        }
+
+        foreach (var pos in toRemove)
+            DestroyChunk(pos);
+
+        // Load chunks that are missing
+        foreach (var pos in desired)
+        {
+            if (!chunks.ContainsKey(pos))
+                CreateChunk(pos);
         }
     }
+
+    // Removed GenerateWorld() — replaced by UpdateChunksAroundPlayer
 
     private void CreateChunk(Int3 chunkPos)
     {
@@ -55,6 +116,14 @@ public class VoxelWorld : MonoBehaviour
 
         chunks[chunkPos] = chunk;
         GameObject.Scene.Add(chunkGO);
+    }
+
+    private void DestroyChunk(Int3 chunkPos)
+    {
+        if (!chunks.TryGetValue(chunkPos, out VoxelChunk? chunk)) return;
+
+        chunks.Remove(chunkPos);
+        Scene.Remove(chunk.GameObject);
     }
 
     public byte GetVoxel(Int3 worldPos)

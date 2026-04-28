@@ -53,9 +53,9 @@
               "$id": 5,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
-                "X": 0F,
-                "Y": 5F,
-                "Z": -15F
+                "X": 8.494528F,
+                "Y": 64.322365F,
+                "Z": -29.478506F
               },
               "_localScale": {
                 "X": 1F,
@@ -63,10 +63,10 @@
                 "Z": 1F
               },
               "_localRotation": {
-                "X": 0.1305262F,
-                "Y": 0F,
-                "Z": 0F,
-                "W": 0.9914449F
+                "X": 0.10253614F,
+                "Y": 0.58581847F,
+                "Z": -0.07504511F,
+                "W": 0.80041945F
               }
             },
             "Components": [
@@ -109,17 +109,28 @@
                 "AssetPath": "",
                 "AssetID": "00000000-0000-0000-0000-000000000000",
                 "Name": "NewCamera"
+              },
+              {
+                "$id": 8,
+                "$type": "FlyCamera, KayKits1.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "MoveSpeed": 10F,
+                "SprintMultiplier": 3F,
+                "LookSensitivity": 0.2F,
+                "_identifier": "924cca11-55d3-4514-ae44-67c3c4eec9fa",
+                "_enabled": true,
+                "_enabledInHierarchy": true,
+                "HideFlags": 0,
+                "AssetPath": "",
+                "AssetID": "00000000-0000-0000-0000-000000000000",
+                "Name": "NewFlyCamera"
               }
             ],
             "Children": [
 
-            ],
-            "PrefabAssetId": "a2a62583-c2c7-4c8f-88f9-2af54907a734",
-            "PrefabComponentCount": 1,
-            "PrefabChildCount": 0
+            ]
           },
           {
-            "$id": 8,
+            "$id": 9,
             "Name": "Directional Light",
             "AssetPath": "",
             "Identifier": "ac726f6b-c724-4174-b345-d3e7f540d83b",
@@ -130,7 +141,7 @@
             "LayerIndex": 0,
             "HideFlags": 0,
             "Transform": {
-              "$id": 9,
+              "$id": 10,
               "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
               "_localPosition": {
                 "X": 0F,
@@ -151,7 +162,7 @@
             },
             "Components": [
               {
-                "$id": 10,
+                "$id": 11,
                 "$type": "Prowl.Runtime.DirectionalLight, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "ShadowResolution": 1024,
                 "Cascades": 4,
@@ -179,18 +190,18 @@
             ],
             "Children": [
 
-            ],
-            "PrefabAssetId": "a2a62583-c2c7-4c8f-88f9-2af54907a734",
-            "PrefabComponentCount": 1,
-            "PrefabChildCount": 0
+            ]
           }
-        ],
-        "PrefabAssetId": "a2a62583-c2c7-4c8f-88f9-2af54907a734",
-        "PrefabComponentCount": 0,
-        "PrefabChildCount": 2
+        ]
       },
       {
-        "$id": 11,
+        "$id": 4
+      },
+      {
+        "$id": 9
+      },
+      {
+        "$id": 12,
         "Name": "VoxelWorld",
         "AssetPath": "",
         "Identifier": "f5286a40-8548-4bf9-8dee-864f7e2ece3e",
@@ -201,7 +212,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 12,
+          "$id": 13,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": 0F,
@@ -222,8 +233,11 @@
         },
         "Components": [
           {
-            "$id": 13,
+            "$id": 14,
             "$type": "Paper.VoxelTerrain.VoxelWorld, KayKits1.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Player": {
+              "$id": 4
+            },
             "Material": {
               "AssetID": "ddb8669d-a9af-481f-924f-131bc05200e8"
             },
@@ -240,37 +254,32 @@
         "Children": [
 
         ]
-      },
-      {
-        "$id": 4
-      },
-      {
-        "$id": 8
       }
     ]
   },
   "_goIdentifiers": {
     "array": [
       "5703766e-e1d5-4460-ba26-68d04048e42e",
-      "f5286a40-8548-4bf9-8dee-864f7e2ece3e",
       "21a5dbff-5d0a-4898-87ac-2ac6b4f53116",
-      "ac726f6b-c724-4174-b345-d3e7f540d83b"
+      "ac726f6b-c724-4174-b345-d3e7f540d83b",
+      "f5286a40-8548-4bf9-8dee-864f7e2ece3e"
     ]
   },
   "_compIdentifiers": {
     "array": [
-      "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
       "bdc15ebe-27d7-4b53-8778-9147fa1d01ab",
-      "f67f538b-3fb2-4452-a374-09abecd6dedb"
+      "924cca11-55d3-4514-ae44-67c3c4eec9fa",
+      "f67f538b-3fb2-4452-a374-09abecd6dedb",
+      "646e2944-4a99-409f-b5fb-bb5135bfb7c3"
     ]
   },
   "_compIdOffsets": {
     "array": [
       0,
       0,
-      1,
       2,
-      3
+      3,
+      4
     ]
   },
   "Fog": {
