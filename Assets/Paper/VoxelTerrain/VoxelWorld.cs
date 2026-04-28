@@ -99,8 +99,6 @@ public class VoxelWorld : MonoBehaviour
         }
     }
 
-    // Removed GenerateWorld() — replaced by UpdateChunksAroundPlayer
-
     private void CreateChunk(Int3 chunkPos)
     {
         GameObject chunkGO = new($"Chunk_{chunkPos.X}_{chunkPos.Y}_{chunkPos.Z}");
@@ -116,7 +114,7 @@ public class VoxelWorld : MonoBehaviour
         chunk.GenerateChunk();
 
         chunks[chunkPos] = chunk;
-        GameObject.Scene.Add(chunkGO);
+        Scene.Add(chunkGO);
     }
 
     private void DestroyChunk(Int3 chunkPos)

@@ -14,8 +14,8 @@
       "ExposedToInspector": true,
       "Id": "4669cfe7-9512-4947-9db0-3ec513bfa2fc",
       "Position": {
-        "X": 60F,
-        "Y": 40F
+        "X": 683.3251F,
+        "Y": -152.8743F
       },
       "Messages": [
 
@@ -23,27 +23,6 @@
     },
     {
       "$id": 3,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.ColorPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Name": "_MainColor",
-      "Label": "Tint",
-      "Value": {
-        "R": 1F,
-        "G": 1F,
-        "B": 1F,
-        "A": 1F
-      },
-      "ExposedToInspector": true,
-      "Id": "76f57641-f543-4ec8-8b52-b612ca4b35e4",
-      "Position": {
-        "X": 60F,
-        "Y": 200F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 4,
       "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "Name": "_SurfaceTex",
       "Label": "Surface (AO, Roughness, Metallic)",
@@ -51,47 +30,15 @@
       "ExposedToInspector": true,
       "Id": "71cab04a-f282-47dd-9920-e43bed2ebaf1",
       "Position": {
-        "X": 60F,
-        "Y": 400F
+        "X": -19.92096F,
+        "Y": 414.35156F
       },
       "Messages": [
 
       ]
     },
     {
-      "$id": 5,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Name": "_EmissionTex",
-      "Label": "Emission",
-      "Default": "emission",
-      "ExposedToInspector": true,
-      "Id": "74ed4d34-34fd-434b-b2e5-fa8c1a4a047b",
-      "Position": {
-        "X": 60F,
-        "Y": 580F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 6,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.FloatPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Name": "_EmissionIntensity",
-      "Label": "Emission Intensity",
-      "Value": 1F,
-      "ExposedToInspector": true,
-      "Id": "175de156-d50b-4409-b8dd-13991be67c16",
-      "Position": {
-        "X": 60F,
-        "Y": 740F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 7,
+      "$id": 4,
       "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.FloatPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "Name": "_AlphaCutoff",
       "Label": "Alpha Cutoff",
@@ -99,8 +46,44 @@
       "ExposedToInspector": true,
       "Id": "821a5328-e140-4a19-b3de-e2bec5fba365",
       "Position": {
-        "X": 60F,
-        "Y": 900F
+        "X": 815.69745F,
+        "Y": 550.5042F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 5,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "e17c8c68-5411-4c96-8984-93d5afca0b3b",
+      "Position": {
+        "X": 1006.32635F,
+        "Y": -79.104706F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 6,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "494c4f19-4300-48e7-8fd3-eff8c67db901",
+      "Position": {
+        "X": 268.42664F,
+        "Y": 418.6965F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 7,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.OneMinusNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "6e4370a1-8b45-419a-b0b6-905138672ab9",
+      "Position": {
+        "X": 558.9143F,
+        "Y": 360.36734F
       },
       "Messages": [
 
@@ -108,78 +91,6 @@
     },
     {
       "$id": 8,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Id": "e17c8c68-5411-4c96-8984-93d5afca0b3b",
-      "Position": {
-        "X": 460F,
-        "Y": 80F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 9,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Id": "494c4f19-4300-48e7-8fd3-eff8c67db901",
-      "Position": {
-        "X": 460F,
-        "Y": 400F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 10,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Id": "a16ce403-d597-4b15-9a0b-b930670889c5",
-      "Position": {
-        "X": 460F,
-        "Y": 620F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 11,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.MultiplyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Id": "678e4657-c794-435f-b916-3bed5cf10fb8",
-      "Position": {
-        "X": 820F,
-        "Y": 120F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 12,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.OneMinusNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Id": "6e4370a1-8b45-419a-b0b6-905138672ab9",
-      "Position": {
-        "X": 820F,
-        "Y": 360F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 13,
-      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.MultiplyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Id": "f2eed915-8c05-415b-b4f3-7869bd22313a",
-      "Position": {
-        "X": 820F,
-        "Y": 640F
-      },
-      "Messages": [
-
-      ]
-    },
-    {
-      "$id": 14,
       "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.SurfaceMasterNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "Lighting": 1,
       "Id": "533fe179-1003-41e7-8495-faa42dc16533",
@@ -190,11 +101,87 @@
       "Messages": [
 
       ]
+    },
+    {
+      "$id": 9,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.ParallaxOcclusionNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "c86ce855-6f6f-4b23-bfef-2809c1cda48d",
+      "Position": {
+        "X": 676.7102F,
+        "Y": 24.658081F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 10,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DAssetNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_Tex",
+      "Label": "Texture",
+      "Default": "white",
+      "Id": "04608534-6c0e-4eb9-9b75-bbd766507086",
+      "Position": {
+        "X": 411.70325F,
+        "Y": -59.00946F
+      },
+      "Messages": [
+        {
+          "Severity": 2,
+          "Text": "Property name '_Tex' is used by 2 property nodes names must be unique."
+        }
+      ]
+    },
+    {
+      "$id": 11,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.FloatPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_Value",
+      "Label": "Value",
+      "Value": 0.5F,
+      "ExposedToInspector": true,
+      "Id": "ee364f1c-1a91-4dac-b518-65717aeeae53",
+      "Position": {
+        "X": 374.11868F,
+        "Y": 58.771408F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 12,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DAssetNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_Tex",
+      "Label": "Texture",
+      "Default": "white",
+      "Id": "4e2d6d7a-f985-467c-9aac-cbdbdf110252",
+      "Position": {
+        "X": 555.96844F,
+        "Y": 207.793F
+      },
+      "Messages": [
+        {
+          "Severity": 2,
+          "Text": "Property name '_Tex' is used by 2 property nodes names must be unique."
+        }
+      ]
+    },
+    {
+      "$id": 13,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "09d2eb54-77a2-42c0-83ca-ed8735b631f0",
+      "Position": {
+        "X": 985.1981F,
+        "Y": 255.19247F
+      },
+      "Messages": [
+
+      ]
     }
   ],
   "Edges": [
     {
-      "$id": 15,
+      "$id": 14,
       "Id": "22a9f5d8-9ac7-4320-b292-6579875a2428",
       "SourceNodeId": "4669cfe7-9512-4947-9db0-3ec513bfa2fc",
       "SourcePortName": "Sampler",
@@ -202,31 +189,7 @@
       "TargetPortName": "Sampler"
     },
     {
-      "$id": 16,
-      "Id": "26832322-c814-48ff-b49a-06718c23ab0e",
-      "SourceNodeId": "e17c8c68-5411-4c96-8984-93d5afca0b3b",
-      "SourcePortName": "RGBA",
-      "TargetNodeId": "678e4657-c794-435f-b916-3bed5cf10fb8",
-      "TargetPortName": "A"
-    },
-    {
-      "$id": 17,
-      "Id": "8079761c-9325-460e-9a35-4c00dc786c2a",
-      "SourceNodeId": "76f57641-f543-4ec8-8b52-b612ca4b35e4",
-      "SourcePortName": "RGBA",
-      "TargetNodeId": "678e4657-c794-435f-b916-3bed5cf10fb8",
-      "TargetPortName": "B"
-    },
-    {
-      "$id": 18,
-      "Id": "eeb2cc5e-f6a1-42a4-b58b-0181b121d99a",
-      "SourceNodeId": "678e4657-c794-435f-b916-3bed5cf10fb8",
-      "SourcePortName": "Out",
-      "TargetNodeId": "533fe179-1003-41e7-8495-faa42dc16533",
-      "TargetPortName": "Albedo"
-    },
-    {
-      "$id": 19,
+      "$id": 15,
       "Id": "463eff53-43dc-46aa-8382-dd88afcd2af0",
       "SourceNodeId": "71cab04a-f282-47dd-9920-e43bed2ebaf1",
       "SourcePortName": "Sampler",
@@ -234,7 +197,7 @@
       "TargetPortName": "Sampler"
     },
     {
-      "$id": 20,
+      "$id": 16,
       "Id": "4611c146-a91c-4a6d-aaa2-951f4557bc36",
       "SourceNodeId": "494c4f19-4300-48e7-8fd3-eff8c67db901",
       "SourcePortName": "R",
@@ -242,7 +205,7 @@
       "TargetPortName": "In"
     },
     {
-      "$id": 21,
+      "$id": 17,
       "Id": "afdfb9be-1ec9-42b2-bda6-a79685f3b409",
       "SourceNodeId": "6e4370a1-8b45-419a-b0b6-905138672ab9",
       "SourcePortName": "Out",
@@ -250,7 +213,7 @@
       "TargetPortName": "Occlusion"
     },
     {
-      "$id": 22,
+      "$id": 18,
       "Id": "da8d9125-b2b5-4e80-9ba3-9fcccd430334",
       "SourceNodeId": "494c4f19-4300-48e7-8fd3-eff8c67db901",
       "SourcePortName": "G",
@@ -258,7 +221,7 @@
       "TargetPortName": "Roughness"
     },
     {
-      "$id": 23,
+      "$id": 19,
       "Id": "350bca46-6469-463f-aa64-05b3c369b5cb",
       "SourceNodeId": "494c4f19-4300-48e7-8fd3-eff8c67db901",
       "SourcePortName": "B",
@@ -266,44 +229,68 @@
       "TargetPortName": "Metallic"
     },
     {
-      "$id": 24,
-      "Id": "b72d67b9-8d06-41df-aaa6-b9da8fc2f08b",
-      "SourceNodeId": "74ed4d34-34fd-434b-b2e5-fa8c1a4a047b",
-      "SourcePortName": "Sampler",
-      "TargetNodeId": "a16ce403-d597-4b15-9a0b-b930670889c5",
-      "TargetPortName": "Sampler"
-    },
-    {
-      "$id": 25,
-      "Id": "91359430-972e-45f4-a4f2-88019a14d162",
-      "SourceNodeId": "a16ce403-d597-4b15-9a0b-b930670889c5",
-      "SourcePortName": "RGB",
-      "TargetNodeId": "f2eed915-8c05-415b-b4f3-7869bd22313a",
-      "TargetPortName": "A"
-    },
-    {
-      "$id": 26,
-      "Id": "0eac806b-6b30-4056-818b-58e26e7bcf80",
-      "SourceNodeId": "175de156-d50b-4409-b8dd-13991be67c16",
-      "SourcePortName": "Out",
-      "TargetNodeId": "f2eed915-8c05-415b-b4f3-7869bd22313a",
-      "TargetPortName": "B"
-    },
-    {
-      "$id": 27,
-      "Id": "363f57fe-3b3c-43d0-94df-48737e14ad43",
-      "SourceNodeId": "f2eed915-8c05-415b-b4f3-7869bd22313a",
-      "SourcePortName": "Out",
-      "TargetNodeId": "533fe179-1003-41e7-8495-faa42dc16533",
-      "TargetPortName": "Emission"
-    },
-    {
-      "$id": 28,
+      "$id": 20,
       "Id": "34586a19-9c1a-427c-8637-c584fec03436",
       "SourceNodeId": "821a5328-e140-4a19-b3de-e2bec5fba365",
       "SourcePortName": "Out",
       "TargetNodeId": "533fe179-1003-41e7-8495-faa42dc16533",
       "TargetPortName": "Alpha Cutoff"
+    },
+    {
+      "$id": 21,
+      "Id": "8c7b822d-b82f-41fd-ade8-1707de221d06",
+      "SourceNodeId": "04608534-6c0e-4eb9-9b75-bbd766507086",
+      "SourcePortName": "Sampler",
+      "TargetNodeId": "c86ce855-6f6f-4b23-bfef-2809c1cda48d",
+      "TargetPortName": "Height Tex"
+    },
+    {
+      "$id": 22,
+      "Id": "ada9a758-1cc5-4e13-b54e-186529e199b3",
+      "SourceNodeId": "ee364f1c-1a91-4dac-b518-65717aeeae53",
+      "SourcePortName": "Out",
+      "TargetNodeId": "c86ce855-6f6f-4b23-bfef-2809c1cda48d",
+      "TargetPortName": "Steps"
+    },
+    {
+      "$id": 23,
+      "Id": "9b6b2814-a56b-451b-8968-7311734b14db",
+      "SourceNodeId": "c86ce855-6f6f-4b23-bfef-2809c1cda48d",
+      "SourcePortName": "Out",
+      "TargetNodeId": "e17c8c68-5411-4c96-8984-93d5afca0b3b",
+      "TargetPortName": "UV"
+    },
+    {
+      "$id": 24,
+      "Id": "27e38a51-f130-401b-8e6f-a734c85a38ec",
+      "SourceNodeId": "e17c8c68-5411-4c96-8984-93d5afca0b3b",
+      "SourcePortName": "RGBA",
+      "TargetNodeId": "533fe179-1003-41e7-8495-faa42dc16533",
+      "TargetPortName": "Albedo"
+    },
+    {
+      "$id": 25,
+      "Id": "aef24bb2-ea05-493e-8797-517e4512c130",
+      "SourceNodeId": "4e2d6d7a-f985-467c-9aac-cbdbdf110252",
+      "SourcePortName": "Sampler",
+      "TargetNodeId": "09d2eb54-77a2-42c0-83ca-ed8735b631f0",
+      "TargetPortName": "Sampler"
+    },
+    {
+      "$id": 26,
+      "Id": "8c708af1-f452-4712-bf40-05dc2b00012b",
+      "SourceNodeId": "09d2eb54-77a2-42c0-83ca-ed8735b631f0",
+      "SourcePortName": "RGBA",
+      "TargetNodeId": "533fe179-1003-41e7-8495-faa42dc16533",
+      "TargetPortName": "Normal"
+    },
+    {
+      "$id": 27,
+      "Id": "b8b6faf5-b8d4-4f09-af6b-5386e49fc63a",
+      "SourceNodeId": "c86ce855-6f6f-4b23-bfef-2809c1cda48d",
+      "SourcePortName": "Out",
+      "TargetNodeId": "09d2eb54-77a2-42c0-83ca-ed8735b631f0",
+      "TargetPortName": "UV"
     }
   ],
   "Blackboard": [
@@ -316,10 +303,10 @@
 
   ],
   "ViewportPan": {
-    "X": 45.355698F,
-    "Y": 60.80017F
+    "X": 125.84357F,
+    "Y": 182.87393F
   },
-  "ViewportZoom": 0.9090906F,
+  "ViewportZoom": 0.6904544F,
   "ShaderTypeId": "Surface",
   "RenderSettings": {
     "Cull": 0,
@@ -332,7 +319,7 @@
     "BlendOp": 0,
     "Queue": 1,
     "ReceivesAmbient": true,
-    "ReceivesShadows": true,
+    "ReceivesShadows": false,
     "CastsShadows": true
   }
 }
