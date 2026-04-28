@@ -104,6 +104,7 @@ public class VoxelWorld : MonoBehaviour
     private void CreateChunk(Int3 chunkPos)
     {
         GameObject chunkGO = new($"Chunk_{chunkPos.X}_{chunkPos.Y}_{chunkPos.Z}");
+        chunkGO.Transform.SetParent(Transform);
         chunkGO.Transform.Position = new Float3(
             chunkPos.X * ChunkWidth,
             chunkPos.Y * ChunkHeight,
