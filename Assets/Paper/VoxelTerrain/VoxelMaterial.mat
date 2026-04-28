@@ -19,7 +19,7 @@
 
     },
     "_floats": {
-      "_Parallax": 1F
+      "_Parallax": 0.1F
     },
     "_ints": {
 
@@ -36,9 +36,6 @@
       },
       "_NormalTex": {
         "AssetID": "3523ee51-42c3-4958-8aa4-cd2e0f5b721f"
-      },
-      "_SurfaceTex": {
-        "AssetID": "4c3c161c-acce-43fe-8ad7-91329bf36f8c"
       },
       "_ParallaxMap": {
         "AssetID": "016032a3-2c7b-4a4d-88fe-e3752db27d39"
@@ -57,7 +54,6 @@
   "_overrides": [
     "_MainTex",
     "_NormalTex",
-    "_SurfaceTex",
     "_ParallaxMap",
     "_Parallax"
   ],
