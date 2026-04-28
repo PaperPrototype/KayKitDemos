@@ -18,7 +18,7 @@ public enum BlockType : byte
     Grass = 3,
 }
 
-public class VoxelChunk : MonoBehaviour
+public class VoxelChunk : VoxelChunkBase
 {
     private const int ChunkWidth = 16;
     private const int ChunkHeight = 256;
@@ -60,7 +60,7 @@ public class VoxelChunk : MonoBehaviour
         1.0f,  // Grass
     };
     
-    public void Initialize(Int3 chunkPos, VoxelWorld voxelWorld)
+    public override void Initialize(Int3 chunkPos, VoxelWorld voxelWorld)
     {
         this.voxelWorld = voxelWorld;
         chunkPosition = chunkPos;
@@ -69,14 +69,14 @@ public class VoxelChunk : MonoBehaviour
         meshRenderer.Material = voxelWorld.Material;
     }
 
-    public byte GetVoxel(int x, int y, int z)
+    public override byte GetVoxel(int x, int y, int z)
     {
         if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
             return 0;
         return voxels[x, y, z];
     }
 
-    public void SetVoxel(int x, int y, int z, byte value)
+    public override void SetVoxel(int x, int y, int z, byte value)
     {
         if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
             return;
@@ -84,7 +84,7 @@ public class VoxelChunk : MonoBehaviour
         GenerateMesh();
     }
 
-    public void GenerateChunk()
+    public override void GenerateChunk()
     {
         // Generate simple terrain with world coordinates
         int worldOffsetX = chunkPosition.X * ChunkWidth;
@@ -138,7 +138,7 @@ public class VoxelChunk : MonoBehaviour
         }
     }
 
-    public void GenerateMesh()
+    public override void GenerateMesh()
     {    
         var stopWatch = Stopwatch.StartNew();
         List<Float3> vertices = [];
