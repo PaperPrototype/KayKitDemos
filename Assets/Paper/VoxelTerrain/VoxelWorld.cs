@@ -11,11 +11,8 @@ namespace Paper.VoxelTerrain;
 
 public class VoxelWorld : MonoBehaviour
 {
-    public enum TerrainMode { VoxelSmoothed, MarchingCubes }
-
     public GameObject Player;
     public AssetRef<Material> Material;
-    public TerrainMode Terrain = TerrainMode.VoxelSmoothed;
 
     private const int ChunkWidth = 16;
     private const int ChunkHeight = 256;
@@ -26,7 +23,7 @@ public class VoxelWorld : MonoBehaviour
     private const float UpdateInterval = 0.5f;
     private float _updateTimer = 0f;
 
-    private Dictionary<Int3, VoxelChunkBase> chunks = [];
+    private Dictionary<Int3, VoxelChunk> chunks = [];
     public FastNoiseLite noise;
 
     // The chunk the player was in during the last update
@@ -112,11 +109,7 @@ public class VoxelWorld : MonoBehaviour
             chunkPos.Z * ChunkDepth
         );
 
-        VoxelChunkBase chunk;
-        if (Terrain == TerrainMode.MarchingCubes)
-            chunk = chunkGO.AddComponent<MarchingChunk>();
-        else
-            chunk = chunkGO.AddComponent<VoxelChunk>();
+        VoxelChunk chunk = chunkGO.AddComponent<VoxelChunk>();
         chunk.Initialize(chunkPos, this);
 
         // Register before generating mesh so neighbor chunks can query this chunk's
@@ -132,14 +125,14 @@ public class VoxelWorld : MonoBehaviour
         Int3[] neighborOffsets = [new(-1, 0, 0), new(1, 0, 0), new(0, 0, -1), new(0, 0, 1)];
         foreach (var offset in neighborOffsets)
         {
-            if (chunks.TryGetValue(chunkPos + offset, out VoxelChunkBase? neighbor))
+            if (chunks.TryGetValue(chunkPos + offset, out VoxelChunk? neighbor))
                 neighbor.GenerateMesh();
         }
     }
 
     private void DestroyChunk(Int3 chunkPos)
     {
-        if (!chunks.TryGetValue(chunkPos, out VoxelChunkBase? chunk)) return;
+        if (!chunks.TryGetValue(chunkPos, out VoxelChunk? chunk)) return;
 
         chunks.Remove(chunkPos);
         Scene.Remove(chunk.GameObject);
@@ -148,7 +141,7 @@ public class VoxelWorld : MonoBehaviour
     public byte GetVoxel(Int3 worldPos)
     {
         Int3 chunkPos = WorldToChunkPos(worldPos);
-        if (!chunks.TryGetValue(chunkPos, out VoxelChunkBase? chunk))
+        if (!chunks.TryGetValue(chunkPos, out VoxelChunk? chunk))
             return 0;
 
         Int3 localPos = WorldToLocalPos(worldPos);
@@ -158,20 +151,20 @@ public class VoxelWorld : MonoBehaviour
     public void SetVoxel(Int3 worldPos, byte value)
     {
         Int3 chunkPos = WorldToChunkPos(worldPos);
-        if (!chunks.TryGetValue(chunkPos, out VoxelChunkBase? chunk))
+        if (!chunks.TryGetValue(chunkPos, out VoxelChunk? chunk))
             return;
 
         Int3 localPos = WorldToLocalPos(worldPos);
         chunk.SetVoxel(localPos.X, localPos.Y, localPos.Z, value);
 
         // Update neighboring chunks if on edge
-        if (localPos.X == 0 && chunks.TryGetValue(chunkPos + new Int3(-1, 0, 0), out VoxelChunkBase? leftChunk))
+        if (localPos.X == 0 && chunks.TryGetValue(chunkPos + new Int3(-1, 0, 0), out VoxelChunk? leftChunk))
             leftChunk.GenerateMesh();
-        if (localPos.X == ChunkWidth - 1 && chunks.TryGetValue(chunkPos + new Int3(1, 0, 0), out VoxelChunkBase? rightChunk))
+        if (localPos.X == ChunkWidth - 1 && chunks.TryGetValue(chunkPos + new Int3(1, 0, 0), out VoxelChunk? rightChunk))
             rightChunk.GenerateMesh();
-        if (localPos.Z == 0 && chunks.TryGetValue(chunkPos + new Int3(0, 0, -1), out VoxelChunkBase? backChunk))
+        if (localPos.Z == 0 && chunks.TryGetValue(chunkPos + new Int3(0, 0, -1), out VoxelChunk? backChunk))
             backChunk.GenerateMesh();
-        if (localPos.Z == ChunkDepth - 1 && chunks.TryGetValue(chunkPos + new Int3(0, 0, 1), out VoxelChunkBase? frontChunk))
+        if (localPos.Z == ChunkDepth - 1 && chunks.TryGetValue(chunkPos + new Int3(0, 0, 1), out VoxelChunk? frontChunk))
             frontChunk.GenerateMesh();
     }
 
