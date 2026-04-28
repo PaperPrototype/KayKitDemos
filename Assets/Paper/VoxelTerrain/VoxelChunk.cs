@@ -8,7 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Paper.VoxelTerrain;
-    
+
+public enum BlockType : byte
+{
+    Air   = 0,
+    Stone = 1,
+    Dirt  = 2,
+    Grass = 3,
+}
+
 public class VoxelChunk : MonoBehaviour
 {
     private const int ChunkWidth = 16;
@@ -27,6 +35,14 @@ public class VoxelChunk : MonoBehaviour
         new Float2(1.0f, 0.0f),
         new Float2(1.0f, 1.0f),
         new Float2(0.0f, 1.0f)
+    };
+
+    private static readonly Color[] BlockColors = new Color[]
+    {
+        new Color(0f, 0f, 0f, 0f),               // Air      (unused)
+        new Color(0.50f, 0.50f, 0.50f, 1f),      // Stone    - grey
+        new Color(0.55f, 0.36f, 0.18f, 1f),      // Dirt     - brown
+        new Color(0.27f, 0.62f, 0.18f, 1f),      // Grass    - green
     };
     
     public void Initialize(Int3 chunkPos, VoxelWorld voxelWorld)
@@ -105,6 +121,7 @@ public class VoxelChunk : MonoBehaviour
         List<Float3> vertices = [];
         List<int> triangles = [];
         List<Float2> uvs = [];
+        List<Color> colors = [];
 
         for (int x = 0; x < ChunkWidth; x++)
         {
@@ -112,32 +129,35 @@ public class VoxelChunk : MonoBehaviour
             {
                 for (int z = 0; z < ChunkDepth; z++)
                 {
-                    if (voxels[x, y, z] == 0) continue; // Skip air
+                    byte block = voxels[x, y, z];
+                    if (block == 0) continue; // Skip air
+
+                    Color blockColor = BlockColors[block < BlockColors.Length ? block : 0];
 
                     // Check each face and only add if adjacent voxel is air
                     // Top face (+Y)
                     if (y == ChunkHeight - 1 || voxels[x, y + 1, z] == 0)
-                        AddFace(vertices, triangles, uvs, x, y, z, 0, faceUVs);
+                        AddFace(vertices, triangles, uvs, colors, x, y, z, 0, faceUVs, blockColor);
 
                     // Bottom face (-Y)
                     if (y == 0 || voxels[x, y - 1, z] == 0)
-                        AddFace(vertices, triangles, uvs, x, y, z, 1, faceUVs);
+                        AddFace(vertices, triangles, uvs, colors, x, y, z, 1, faceUVs, blockColor);
 
                     // Front face (+Z)
                     if (z == ChunkDepth - 1 || voxels[x, y, z + 1] == 0)
-                        AddFace(vertices, triangles, uvs, x, y, z, 2, faceUVs);
+                        AddFace(vertices, triangles, uvs, colors, x, y, z, 2, faceUVs, blockColor);
 
                     // Back face (-Z)
                     if (z == 0 || voxels[x, y, z - 1] == 0)
-                        AddFace(vertices, triangles, uvs, x, y, z, 3, faceUVs);
+                        AddFace(vertices, triangles, uvs, colors, x, y, z, 3, faceUVs, blockColor);
 
                     // Right face (+X)
                     if (x == ChunkWidth - 1 || voxels[x + 1, y, z] == 0)
-                        AddFace(vertices, triangles, uvs, x, y, z, 4, faceUVs);
+                        AddFace(vertices, triangles, uvs, colors, x, y, z, 4, faceUVs, blockColor);
 
                     // Left face (-X)
                     if (x == 0 || voxels[x - 1, y, z] == 0)
-                        AddFace(vertices, triangles, uvs, x, y, z, 5, faceUVs);
+                        AddFace(vertices, triangles, uvs, colors, x, y, z, 5, faceUVs, blockColor);
                 }
             }
         }
@@ -157,6 +177,7 @@ public class VoxelChunk : MonoBehaviour
         mesh.Vertices = [.. vertices.Select(v => new Float3((float)v.X, (float)v.Y, (float)v.Z))];
         mesh.Indices = [.. triangles.Select(i => (uint)i)];
         mesh.UV = [.. uvs];
+        mesh.Colors = [.. colors];
 
         // Generate normals for proper lighting
         mesh.RecalculateNormals();
@@ -165,9 +186,9 @@ public class VoxelChunk : MonoBehaviour
 
         meshRenderer!.Mesh = mesh;
     }
-    
-    private void AddFace(List<Float3> vertices, List<int> triangles, List<Float2> uvs,
-                        int x, int y, int z, int face, Float2[] faceUVs)
+
+    private void AddFace(List<Float3> vertices, List<int> triangles, List<Float2> uvs, List<Color> colors,
+                        int x, int y, int z, int face, Float2[] faceUVs, Color blockColor)
     {
         int vertexIndex = vertices.Count;
         
@@ -213,11 +234,12 @@ public class VoxelChunk : MonoBehaviour
             _ => throw new ArgumentException("Invalid face index")
         };
 
-        // Add vertices and UVs
+        // Add vertices, UVs, and colors
         foreach (int i in Enumerable.Range(0, 4))
         {
             vertices.Add(faceVertices[i]);
             uvs.Add(faceUVs[i]);
+            colors.Add(blockColor);
         }
 
         // Add triangles (two triangles per face)

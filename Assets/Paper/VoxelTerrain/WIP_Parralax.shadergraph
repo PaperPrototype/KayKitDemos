@@ -1,0 +1,373 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.ShaderGraph, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "Name": "New Shader Graph",
+  "AssetPath": "Paper/VoxelTerrain/WIP_Parralax.shadergraph",
+  "AssetID": "33b4a89f-e17a-45f0-b7e7-7df7bb3c2902",
+  "Nodes": [
+    {
+      "$id": 2,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_MainTex",
+      "Label": "Albedo",
+      "Default": "grid",
+      "ExposedToInspector": true,
+      "Id": "5c943839-4c9e-4fbe-969e-fd9637af3a84",
+      "Position": {
+        "X": -88.21286F,
+        "Y": -111.040535F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 3,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_SurfaceTex",
+      "Label": "Surface (AO, Roughness, Metallic)",
+      "Default": "surface",
+      "ExposedToInspector": true,
+      "Id": "f6719971-b160-43b5-9c85-ef7c6723cb65",
+      "Position": {
+        "X": 60F,
+        "Y": 304.16794F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 4,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Texture2DPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_EmissionTex",
+      "Label": "Emission",
+      "Default": "emission",
+      "ExposedToInspector": true,
+      "Id": "92072b6a-8567-4b64-bc8a-e26cb746024d",
+      "Position": {
+        "X": 63F,
+        "Y": 548F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 5,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.FloatPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_EmissionIntensity",
+      "Label": "Emission Intensity",
+      "Value": 1F,
+      "ExposedToInspector": true,
+      "Id": "3dd50551-56a4-4137-aa6c-f42077fe8318",
+      "Position": {
+        "X": 72.31702F,
+        "Y": 669.401F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 6,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.FloatPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_AlphaCutoff",
+      "Label": "Alpha Cutoff",
+      "Value": 0.5F,
+      "ExposedToInspector": true,
+      "Id": "955e0503-164f-434c-b1fb-6bcd12e59f6d",
+      "Position": {
+        "X": 887.88245F,
+        "Y": 778.8789F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 7,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "0cf3ccc7-2d92-4ea7-9668-49d9c214ea9e",
+      "Position": {
+        "X": 442.352F,
+        "Y": 278.82993F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 8,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.Tex2DSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "a6236d1b-f047-4083-be39-6f9c51b671bc",
+      "Position": {
+        "X": 445.69696F,
+        "Y": 516.1259F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 9,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.OneMinusNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "9f6e9418-a3de-4bbd-9d91-3d9730a83e4d",
+      "Position": {
+        "X": 911.6691F,
+        "Y": 329.72498F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 10,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.MultiplyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "8d704332-8a35-4eae-8cf8-2336cbd23f15",
+      "Position": {
+        "X": 681.91394F,
+        "Y": 647.93005F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 11,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.SurfaceMasterNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Lighting": 1,
+      "Id": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "Position": {
+        "X": 1180F,
+        "Y": 260F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 12,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.TriplanarSampleNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "ba123df0-a7ba-47c9-b307-482f10f7a5d9",
+      "Position": {
+        "X": 172.47241F,
+        "Y": -108.58565F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 13,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.VertexColorNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "1c4ec71a-009b-41ef-bb72-870c95667185",
+      "Position": {
+        "X": 441.49823F,
+        "Y": 82.710655F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 14,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.MultiplyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "38742c6f-4c8b-48d4-acc3-5c05fdd0f148",
+      "Position": {
+        "X": 912.636F,
+        "Y": 88.06692F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 15,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.DesaturateNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Id": "3baa6b7c-d369-486c-9657-875615461797",
+      "Position": {
+        "X": 674.5214F,
+        "Y": -74.99167F
+      },
+      "Messages": [
+
+      ]
+    },
+    {
+      "$id": 16,
+      "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.Nodes.FloatPropertyNode, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Name": "_Value",
+      "Label": "Value",
+      "Value": 0.5F,
+      "ExposedToInspector": true,
+      "Id": "e93defcf-2180-4426-a550-f31a14229776",
+      "Position": {
+        "X": 436.72888F,
+        "Y": -18.833057F
+      },
+      "Messages": [
+
+      ]
+    }
+  ],
+  "Edges": [
+    {
+      "$id": 17,
+      "Id": "22a0fa07-2b5b-4a2e-9020-524b9970e0a9",
+      "SourceNodeId": "f6719971-b160-43b5-9c85-ef7c6723cb65",
+      "SourcePortName": "Sampler",
+      "TargetNodeId": "0cf3ccc7-2d92-4ea7-9668-49d9c214ea9e",
+      "TargetPortName": "Sampler"
+    },
+    {
+      "$id": 18,
+      "Id": "5447dacb-0f18-4047-90e4-d92b08791ee4",
+      "SourceNodeId": "0cf3ccc7-2d92-4ea7-9668-49d9c214ea9e",
+      "SourcePortName": "R",
+      "TargetNodeId": "9f6e9418-a3de-4bbd-9d91-3d9730a83e4d",
+      "TargetPortName": "In"
+    },
+    {
+      "$id": 19,
+      "Id": "514514a5-34d3-4b51-a2c4-2d6b64046a32",
+      "SourceNodeId": "9f6e9418-a3de-4bbd-9d91-3d9730a83e4d",
+      "SourcePortName": "Out",
+      "TargetNodeId": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "TargetPortName": "Occlusion"
+    },
+    {
+      "$id": 20,
+      "Id": "87885834-8dc0-4082-be28-cb009e2bca64",
+      "SourceNodeId": "0cf3ccc7-2d92-4ea7-9668-49d9c214ea9e",
+      "SourcePortName": "G",
+      "TargetNodeId": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "TargetPortName": "Roughness"
+    },
+    {
+      "$id": 21,
+      "Id": "c0255b59-ab1c-41a3-a92f-fe7916d42108",
+      "SourceNodeId": "0cf3ccc7-2d92-4ea7-9668-49d9c214ea9e",
+      "SourcePortName": "B",
+      "TargetNodeId": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "TargetPortName": "Metallic"
+    },
+    {
+      "$id": 22,
+      "Id": "2588f277-0555-47a1-b164-6d02825d8c90",
+      "SourceNodeId": "92072b6a-8567-4b64-bc8a-e26cb746024d",
+      "SourcePortName": "Sampler",
+      "TargetNodeId": "a6236d1b-f047-4083-be39-6f9c51b671bc",
+      "TargetPortName": "Sampler"
+    },
+    {
+      "$id": 23,
+      "Id": "d1cafd69-ce77-46a0-871e-3ada79793289",
+      "SourceNodeId": "a6236d1b-f047-4083-be39-6f9c51b671bc",
+      "SourcePortName": "RGB",
+      "TargetNodeId": "8d704332-8a35-4eae-8cf8-2336cbd23f15",
+      "TargetPortName": "A"
+    },
+    {
+      "$id": 24,
+      "Id": "70f26bc4-00b4-4b39-bfdd-409ab7c6e0ef",
+      "SourceNodeId": "3dd50551-56a4-4137-aa6c-f42077fe8318",
+      "SourcePortName": "Out",
+      "TargetNodeId": "8d704332-8a35-4eae-8cf8-2336cbd23f15",
+      "TargetPortName": "B"
+    },
+    {
+      "$id": 25,
+      "Id": "6df03162-eb6c-416b-bec3-c6b7a0ac6fe1",
+      "SourceNodeId": "8d704332-8a35-4eae-8cf8-2336cbd23f15",
+      "SourcePortName": "Out",
+      "TargetNodeId": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "TargetPortName": "Emission"
+    },
+    {
+      "$id": 26,
+      "Id": "f7266bce-9c56-40cd-b5e6-9ff0f8abdea4",
+      "SourceNodeId": "955e0503-164f-434c-b1fb-6bcd12e59f6d",
+      "SourcePortName": "Out",
+      "TargetNodeId": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "TargetPortName": "Alpha Cutoff"
+    },
+    {
+      "$id": 27,
+      "Id": "64dc1a7a-bcdf-45ff-b291-a98a7e67f85b",
+      "SourceNodeId": "5c943839-4c9e-4fbe-969e-fd9637af3a84",
+      "SourcePortName": "Sampler",
+      "TargetNodeId": "ba123df0-a7ba-47c9-b307-482f10f7a5d9",
+      "TargetPortName": "Sampler"
+    },
+    {
+      "$id": 28,
+      "Id": "3aaf8356-e5de-4601-91d7-ca3e6e38e20b",
+      "SourceNodeId": "38742c6f-4c8b-48d4-acc3-5c05fdd0f148",
+      "SourcePortName": "Out",
+      "TargetNodeId": "2ece299e-209c-4334-8aad-887eea67db0b",
+      "TargetPortName": "Albedo"
+    },
+    {
+      "$id": 29,
+      "Id": "182077fb-4c70-477b-a8d8-60d1ada6d261",
+      "SourceNodeId": "1c4ec71a-009b-41ef-bb72-870c95667185",
+      "SourcePortName": "RGBA",
+      "TargetNodeId": "38742c6f-4c8b-48d4-acc3-5c05fdd0f148",
+      "TargetPortName": "B"
+    },
+    {
+      "$id": 30,
+      "Id": "99638a90-8c7f-440c-abc3-407e1ef50375",
+      "SourceNodeId": "ba123df0-a7ba-47c9-b307-482f10f7a5d9",
+      "SourcePortName": "RGBA",
+      "TargetNodeId": "3baa6b7c-d369-486c-9657-875615461797",
+      "TargetPortName": "Color"
+    },
+    {
+      "$id": 31,
+      "Id": "e5c3890b-8fbd-4d34-8a37-c9d553fd8ed9",
+      "SourceNodeId": "3baa6b7c-d369-486c-9657-875615461797",
+      "SourcePortName": "Out",
+      "TargetNodeId": "38742c6f-4c8b-48d4-acc3-5c05fdd0f148",
+      "TargetPortName": "A"
+    },
+    {
+      "$id": 32,
+      "Id": "ec296b41-292c-4b28-8a8c-55a341840320",
+      "SourceNodeId": "e93defcf-2180-4426-a550-f31a14229776",
+      "SourcePortName": "Out",
+      "TargetNodeId": "3baa6b7c-d369-486c-9657-875615461797",
+      "TargetPortName": "Amount"
+    }
+  ],
+  "Blackboard": [
+
+  ],
+  "StickyNotes": [
+
+  ],
+  "Groups": [
+
+  ],
+  "ViewportPan": {
+    "X": 46.337708F,
+    "Y": 250.40099F
+  },
+  "ViewportZoom": 0.789993F,
+  "ShaderTypeId": "Surface",
+  "RenderSettings": {
+    "Cull": 0,
+    "Winding": 0,
+    "ZWrite": true,
+    "ZTest": 4,
+    "Blend": 0,
+    "BlendSrc": 6,
+    "BlendDst": 7,
+    "BlendOp": 0,
+    "Queue": 1,
+    "ReceivesAmbient": true,
+    "ReceivesShadows": true,
+    "CastsShadows": true
+  }
+}
