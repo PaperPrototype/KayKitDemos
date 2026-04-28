@@ -22,7 +22,7 @@
       "_Parallax": 0.1F
     },
     "_ints": {
-
+      "_ParallaxSteps": 8
     },
     "_matrices": {
 
@@ -55,7 +55,8 @@
     "_MainTex",
     "_NormalTex",
     "_ParallaxMap",
-    "_Parallax"
+    "_Parallax",
+    "_ParallaxSteps"
   ],
   "AssetPath": "Paper/VoxelTerrain/VoxelMaterial.mat",
   "AssetID": "00000000-0000-0000-0000-000000000000",

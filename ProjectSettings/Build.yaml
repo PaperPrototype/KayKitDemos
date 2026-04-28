@@ -1,9 +1,20 @@
-Scenes: []
+Scenes:
+  - Path: "Paper/VoxelTerrain/VoxelTerrain.scene"
+    SceneGuid: "03ce48f1-3b02-4cea-91a9-19c256010e9d"
+    Enabled: true
+    $id: 2
 Config: 1
-OutputDirectory: "Builds"
+OutputDirectory: "Builds/MacOS"
 PackagingMode: 1
 AssetMode: 1
 MaxPakSizeMB: 2048
-PlatformProfiles: []
+PlatformProfiles:
+  - Platform: 2
+    SelfContained: true
+    PublishTrimmed: false
+    WindowWidth: 1280
+    WindowHeight: 720
+    $id: 3
+    $type: "Prowl.Editor.Build.DesktopBuildProfile, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
 $id: 1
 $type: "Prowl.Editor.BuildSettings, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"

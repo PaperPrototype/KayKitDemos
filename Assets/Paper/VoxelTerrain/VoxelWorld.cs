@@ -111,10 +111,23 @@ public class VoxelWorld : MonoBehaviour
 
         VoxelChunk chunk = chunkGO.AddComponent<VoxelChunk>();
         chunk.Initialize(chunkPos, this);
-        chunk.GenerateChunk();
 
+        // Register before generating mesh so neighbor chunks can query this chunk's
+        // voxel data during their own border smoothing, and vice versa.
         chunks[chunkPos] = chunk;
         Scene.Add(chunkGO);
+
+        chunk.GenerateChunk();
+        chunk.GenerateMesh();
+
+        // Re-mesh adjacent already-loaded neighbors so they can incorporate this
+        // chunk's border data into their smoothing.
+        Int3[] neighborOffsets = [new(-1, 0, 0), new(1, 0, 0), new(0, 0, -1), new(0, 0, 1)];
+        foreach (var offset in neighborOffsets)
+        {
+            if (chunks.TryGetValue(chunkPos + offset, out VoxelChunk? neighbor))
+                neighbor.GenerateMesh();
+        }
     }
 
     private void DestroyChunk(Int3 chunkPos)
