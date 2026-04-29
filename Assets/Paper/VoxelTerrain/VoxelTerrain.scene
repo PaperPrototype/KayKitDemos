@@ -1956,8 +1956,8 @@
         "AssetPath": "",
         "Identifier": "f5286a40-8548-4bf9-8dee-864f7e2ece3e",
         "Static": 0B,
-        "Enabled": 0B,
-        "EnabledInHierarchy": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
         "TagIndex": 0,
         "LayerIndex": 0,
         "HideFlags": 0,
@@ -1994,7 +1994,7 @@
             "noise": NULL,
             "_identifier": "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
             "_enabled": true,
-            "_enabledInHierarchy": false,
+            "_enabledInHierarchy": true,
             "HideFlags": 0,
             "AssetPath": "",
             "AssetID": "00000000-0000-0000-0000-000000000000",
@@ -2116,57 +2116,6 @@
         "Children": [
 
         ]
-      },
-      {
-        "$id": 92,
-        "Name": "Marching",
-        "AssetPath": "",
-        "Identifier": "17cce6a5-a192-47c4-88b2-4c842176411e",
-        "Static": 0B,
-        "Enabled": 1B,
-        "EnabledInHierarchy": 1B,
-        "TagIndex": 0,
-        "LayerIndex": 0,
-        "HideFlags": 0,
-        "Transform": {
-          "$id": 93,
-          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "_localPosition": {
-            "X": 0F,
-            "Y": 0F,
-            "Z": 0F
-          },
-          "_localScale": {
-            "X": 1F,
-            "Y": 1F,
-            "Z": 1F
-          },
-          "_localRotation": {
-            "X": 0F,
-            "Y": 0F,
-            "Z": 0F,
-            "W": 1F
-          }
-        },
-        "Components": [
-          {
-            "$id": 94,
-            "$type": "Marching, KayKits1.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Material": {
-              "AssetID": "04e77000-1949-4f81-8768-d37d8b5205b8"
-            },
-            "_identifier": "bdc01951-a19a-4ed8-9d4b-c71bd444b737",
-            "_enabled": true,
-            "_enabledInHierarchy": true,
-            "HideFlags": 0,
-            "AssetPath": "",
-            "AssetID": "00000000-0000-0000-0000-000000000000",
-            "Name": "NewMarching"
-          }
-        ],
-        "Children": [
-
-        ]
       }
     ]
   },
@@ -2209,8 +2158,7 @@
       "100287d9-c954-4dfe-b16c-f4987b8a0a39",
       "f5286a40-8548-4bf9-8dee-864f7e2ece3e",
       "3b9ffb0a-3911-4ded-a56d-fd2ef0828e10",
-      "c58548d5-da5a-44e8-99ab-bf714f769ec9",
-      "17cce6a5-a192-47c4-88b2-4c842176411e"
+      "c58548d5-da5a-44e8-99ab-bf714f769ec9"
     ]
   },
   "_compIdentifiers": {
@@ -2227,8 +2175,7 @@
       "f26b2471-0166-461f-965c-12695e91d4dd",
       "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
       "a50a404b-fb40-41e7-85d4-ef33906bf2eb",
-      "7509373e-4933-47e8-9c18-0f83cfad06ad",
-      "bdc01951-a19a-4ed8-9d4b-c71bd444b737"
+      "7509373e-4933-47e8-9c18-0f83cfad06ad"
     ]
   },
   "_compIdOffsets": {
@@ -2271,8 +2218,7 @@
       10,
       11,
       12,
-      13,
-      14
+      13
     ]
   },
   "Fog": {

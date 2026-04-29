@@ -162,20 +162,21 @@ public class InterpolatedCubeChunk : MonoBehaviour
         int x, int y, int z, int face,
         Dictionary<(int, int, int), Float3> cache)
     {
-        // The 4 integer-grid corner positions for each face, matching VoxelChunk winding.
-        (int cx, int cy, int cz)[] corners = face switch
-        {
-            0 => [(x,   y+1, z  ), (x,   y+1, z+1), (x+1, y+1, z+1), (x+1, y+1, z  )], // Top    (+Y)
-            1 => [(x,   y,   z+1), (x,   y,   z  ), (x+1, y,   z  ), (x+1, y,   z+1)], // Bottom (-Y)
-            2 => [(x,   y,   z+1), (x+1, y,   z+1), (x+1, y+1, z+1), (x,   y+1, z+1)], // Front  (+Z)
-            3 => [(x+1, y,   z  ), (x,   y,   z  ), (x,   y+1, z  ), (x+1, y+1, z  )], // Back   (-Z)
-            4 => [(x+1, y,   z+1), (x+1, y,   z  ), (x+1, y+1, z  ), (x+1, y+1, z+1)], // Right  (+X)
-            _ => [(x,   y,   z  ), (x,   y,   z+1), (x,   y+1, z+1), (x,   y+1, z  )], // Left   (-X)
+        var cornerLookup = new(int cx, int cy, int cz)[][]{
+            [(x,   y+1, z  ), (x,   y+1, z+1), (x+1, y+1, z+1), (x+1, y+1, z  )], // Top    (+Y)
+            [(x,   y,   z+1), (x,   y,   z  ), (x+1, y,   z  ), (x+1, y,   z+1)], // Bottom (-Y)
+            [(x,   y,   z+1), (x+1, y,   z+1), (x+1, y+1, z+1), (x,   y+1, z+1)], // Front  (+Z)
+            [(x+1, y,   z  ), (x,   y,   z  ), (x,   y+1, z  ), (x+1, y+1, z  )], // Back   (-Z)
+            [(x+1, y,   z+1), (x+1, y,   z  ), (x+1, y+1, z  ), (x+1, y+1, z+1)], // Right  (+X)
+            [(x,   y,   z  ), (x,   y,   z+1), (x,   y+1, z+1), (x,   y+1, z  )], // Left   (-X)
         };
+
+        var corners = cornerLookup[face];
 
         uint baseIdx = (uint)vertices.Count;
         foreach (var (cx, cy, cz) in corners)
             vertices.Add(GetInterpolatedCorner(cx, cy, cz, cache));
+
 
         triangles.Add(baseIdx);
         triangles.Add(baseIdx + 1);
