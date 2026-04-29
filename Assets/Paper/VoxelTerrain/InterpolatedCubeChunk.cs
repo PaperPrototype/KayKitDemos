@@ -278,15 +278,27 @@ public class InterpolatedCubeChunk : MonoBehaviour
 
         // return GetVoxel(localX, localY, localZ) != 0 ? 1f : -1f;
 
-
         int worldChunkX = chunkPosition.X * ChunkWidth;
-        int worldChunkY = chunkPosition.Y * ChunkDepth;
+        int worldChunkY = chunkPosition.Y * ChunkHeight;
         int worldChunkZ = chunkPosition.Z * ChunkDepth;
 
         float worldX = worldChunkX + localX;
         float worldY = worldChunkY + localY;
         float worldZ  = worldChunkZ + localZ;
 
-        return voxelWorld.noise.GetNoise(worldX * 0.9f, worldY * 0.9f, worldZ * 0.9f);
+        // // height falloff so noise gets smaller (zero) as we go up, to reduce floating islands and make caves less tall.
+        // float heightFalloff = 1f - (worldY / (ChunkHeight * 4f));
+        // heightFalloff = Maths.Max(heightFalloff, 0f);
+
+        // add gradient from bottom up so terrain is much more likely to be solid near the bottom and less likely near the top
+        float normalizedY = worldY / ChunkHeight;
+        // normalizedY = Maths.Min(normalizedY, 1f);
+
+        // float heightFalloff = 1f - (normalizedY * normalizedY * normalizedY);
+        // heightFalloff = Maths.Max(heightFalloff, 0f);
+
+        float frequency = 2f; // controls horizontal feature size
+
+        return Maths.Clamp(voxelWorld.noise.GetNoise(worldX * frequency, worldY * frequency, worldZ * frequency) + normalizedY, -1f, 1f);
     }
 }
