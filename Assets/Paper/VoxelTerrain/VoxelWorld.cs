@@ -114,7 +114,7 @@ public class VoxelWorld : MonoBehaviour
         chunks[chunkPos] = chunk;
         Scene.Add(chunkGO);
 
-        chunk.GenerateChunk();
+        // chunk.GenerateChunk();
         chunk.GenerateMesh();
 
         // Re-mesh adjacent already-loaded neighbors so they can incorporate this

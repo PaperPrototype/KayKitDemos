@@ -30,7 +30,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
     private const int ChunkDepth  = 16;
 
     private Int3 chunkPosition;
-    private byte[,,] voxels = new byte[ChunkWidth, ChunkHeight, ChunkDepth];
+    // private byte[,,] voxels = new byte[ChunkWidth, ChunkHeight, ChunkDepth];
     private MeshRenderer? meshRenderer;
     private VoxelWorld voxelWorld;
 
@@ -63,49 +63,49 @@ public class InterpolatedCubeChunk : MonoBehaviour
         meshRenderer.Material = world.Material;
     }
 
-    public byte GetVoxel(int x, int y, int z)
-    {
-        if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
-            return 0;
-        return voxels[x, y, z];
-    }
+    // public byte GetVoxel(int x, int y, int z)
+    // {
+    //     if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
+    //         return 0;
+    //     return voxels[x, y, z];
+    // }
 
-    public void SetVoxel(int x, int y, int z, byte value)
-    {
-        if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
-            return;
-        voxels[x, y, z] = value;
-        GenerateMesh();
-    }
+    // public void SetVoxel(int x, int y, int z, byte value)
+    // {
+    //     if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
+    //         return;
+    //     voxels[x, y, z] = value;
+    //     GenerateMesh();
+    // }
 
-    public void GenerateChunk()
-    {
-        int worldOffsetX = chunkPosition.X * ChunkWidth;
-        int worldOffsetY = chunkPosition.Y * ChunkDepth;
-        int worldOffsetZ = chunkPosition.Z * ChunkDepth;
+    // public void GenerateChunk()
+    // {
+    //     int worldOffsetX = chunkPosition.X * ChunkWidth;
+    //     int worldOffsetY = chunkPosition.Y * ChunkDepth;
+    //     int worldOffsetZ = chunkPosition.Z * ChunkDepth;
 
-        for (int x = 0; x < ChunkWidth; x++)
-        for (int z = 0; z < ChunkDepth; z++)
-        {
-            float worldX = worldOffsetX + x;
-            float worldZ = worldOffsetZ + z;
+    //     for (int x = 0; x < ChunkWidth; x++)
+    //     for (int z = 0; z < ChunkDepth; z++)
+    //     {
+    //         float worldX = worldOffsetX + x;
+    //         float worldZ = worldOffsetZ + z;
 
-            int baseHeight     = 64;
-            int heightVariation = (int)(voxelWorld.noise.GetNoise(worldX * 0.9f, worldZ * 0.9f) * 10f);
-            int height          = baseHeight + heightVariation;
+    //         int baseHeight     = 64;
+    //         int heightVariation = (int)(voxelWorld.noise.GetNoise(worldX * 0.9f, worldZ * 0.9f) * 10f);
+    //         int height          = baseHeight + heightVariation;
 
-            for (int y = 0; y < ChunkHeight; y++)
-            {
-                float worldY  = worldOffsetY + y;
-                float caveGen = voxelWorld.noise.GetNoise(worldX * 0.9f, worldY * 0.9f, worldZ * 0.9f);
-                if      (caveGen > 0.3f)    voxels[x, y, z] = 0;
-                else if (y < height - 5)    voxels[x, y, z] = 1;
-                else if (y < height - 1)    voxels[x, y, z] = 2;
-                else if (y < height)        voxels[x, y, z] = 3;
-                else                        voxels[x, y, z] = 0;
-            }
-        }
-    }
+    //         for (int y = 0; y < ChunkHeight; y++)
+    //         {
+    //             float worldY  = worldOffsetY + y;
+    //             float caveGen = voxelWorld.noise.GetNoise(worldX * 0.9f, worldY * 0.9f, worldZ * 0.9f);
+    //             if      (caveGen > 0.3f)    voxels[x, y, z] = 0;
+    //             else if (y < height - 5)    voxels[x, y, z] = 1;
+    //             else if (y < height - 1)    voxels[x, y, z] = 2;
+    //             else if (y < height)        voxels[x, y, z] = 3;
+    //             else                        voxels[x, y, z] = 0;
+    //         }
+    //     }
+    // }
 
     public void GenerateMesh()
     {
@@ -122,20 +122,48 @@ public class InterpolatedCubeChunk : MonoBehaviour
         for (int y = 0; y < ChunkHeight; y++)
         for (int z = 0; z < ChunkDepth; z++)
         {
-            if (voxels[x, y, z] == 0) continue;
+            float centerD = SampleWorld(x, y, z);
+            if (centerD > 0) continue;
+            // if (voxels[x, y, z] == 0) continue;
 
-            if (y == ChunkHeight - 1 || voxels[x, y + 1, z] == 0)
+            float topD    = SampleWorld(x, y + 1, z);
+            float downD   = SampleWorld(x, y - 1, z);
+
+            float frontD  = SampleWorld(x, y, z + 1);
+            float backD   = SampleWorld(x, y, z - 1);
+
+            float rightD  = SampleWorld(x + 1, y, z);
+            float leftD   = SampleWorld(x - 1, y, z);
+
+            if (topD > 0)
                 AddFace(vertices, triangles, x, y, z, 0, cornerCache);
-            if (y == 0               || voxels[x, y - 1, z] == 0)
+            if (downD > 0)
                 AddFace(vertices, triangles, x, y, z, 1, cornerCache);
-            if (z == ChunkDepth - 1  || voxels[x, y, z + 1] == 0)
+
+            if (frontD > 0)
                 AddFace(vertices, triangles, x, y, z, 2, cornerCache);
-            if (z == 0               || voxels[x, y, z - 1] == 0)
+            if (backD > 0)
                 AddFace(vertices, triangles, x, y, z, 3, cornerCache);
-            if (x == ChunkWidth - 1  || voxels[x + 1, y, z] == 0)
+
+            if (rightD > 0)
                 AddFace(vertices, triangles, x, y, z, 4, cornerCache);
-            if (x == 0               || voxels[x - 1, y, z] == 0)
+            if (leftD > 0)
                 AddFace(vertices, triangles, x, y, z, 5, cornerCache);
+
+            // if (y == ChunkHeight - 1 || voxels[x, y + 1, z] == 0)
+            //     AddFace(vertices, triangles, x, y, z, 0, cornerCache);
+            // if (y == 0               || voxels[x, y - 1, z] == 0)
+            //     AddFace(vertices, triangles, x, y, z, 1, cornerCache);
+
+            // if (z == ChunkDepth - 1  || voxels[x, y, z + 1] == 0)
+            //     AddFace(vertices, triangles, x, y, z, 2, cornerCache);
+            // if (z == 0               || voxels[x, y, z - 1] == 0)
+            //     AddFace(vertices, triangles, x, y, z, 3, cornerCache);
+
+            // if (x == ChunkWidth - 1  || voxels[x + 1, y, z] == 0)
+            //     AddFace(vertices, triangles, x, y, z, 4, cornerCache);
+            // if (x == 0               || voxels[x - 1, y, z] == 0)
+            //     AddFace(vertices, triangles, x, y, z, 5, cornerCache);
         }
 
         if (vertices.Count == 0)
@@ -176,7 +204,6 @@ public class InterpolatedCubeChunk : MonoBehaviour
         uint baseIdx = (uint)vertices.Count;
         foreach (var (cx, cy, cz) in corners)
             vertices.Add(GetInterpolatedCorner(cx, cy, cz, cache));
-
 
         triangles.Add(baseIdx);
         triangles.Add(baseIdx + 1);
@@ -230,15 +257,23 @@ public class InterpolatedCubeChunk : MonoBehaviour
         return result;
     }
 
-    private float GetCornerDensity(int x, int y, int z) => SampleWorld(x, y, z) != 0 ? 1f : -1f;
+    private float GetCornerDensity(int x, int y, int z) => SampleWorld(x, y, z);
 
-    private byte SampleWorld(int localX, int localY, int localZ)
+    private float SampleWorld(int localX, int localY, int localZ)
     {
-        if (localX >= 0 && localX < ChunkWidth &&
-            localY >= 0 && localY < ChunkHeight &&
-            localZ >= 0 && localZ < ChunkDepth)
-            return voxels[localX, localY, localZ];
+        // TODO sample per block density instead of binary solid/air, to get better interpolation and smoother caves.
 
-        return GetVoxel(localX, localY, localZ);
+        // return GetVoxel(localX, localY, localZ) != 0 ? 1f : -1f;
+
+
+        int worldChunkX = chunkPosition.X * ChunkWidth;
+        int worldChunkY = chunkPosition.Y * ChunkDepth;
+        int worldChunkZ = chunkPosition.Z * ChunkDepth;
+
+        float worldX = worldChunkX + localX;
+        float worldY = worldChunkY + localY;
+        float worldZ  = worldChunkZ + localZ;
+
+        return voxelWorld.noise.GetNoise(worldX * 0.9f, worldY * 0.9f, worldZ * 0.9f);
     }
 }
