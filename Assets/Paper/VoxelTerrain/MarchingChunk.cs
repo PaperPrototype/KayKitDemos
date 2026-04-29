@@ -95,9 +95,19 @@ public class MarchingChunk : MonoBehaviour
         for (int y = 0; y <= ChunkHeight; y++)
         for (int z = 0; z <= ChunkDepth; z++)
         {
+            // Sample the block type at this corner (may cross into a neighboring chunk)
             byte b = SampleWorld(x, y, z);
+
+            // Store the block type so MarchCube can look up vertex colors later
             cornerBlock[x, y, z] = b;
-            density[x, y, z] = b != 0 ? 1f : -1f;
+
+            // Convert block presence into a signed density value:
+            // solid corners get +1, air corners get -1.
+            // The marching cubes surface is drawn where density crosses zero.
+            if (b != 0)
+                density[x, y, z] = 1f;   // solid
+            else
+                density[x, y, z] = -1f;  // air
         }
 
         List<Float3> vertices  = [];
@@ -148,7 +158,7 @@ public class MarchingChunk : MonoBehaviour
 
         int configIndex = 0;
         for (int i = 0; i < 8; i++)
-            if (cube[i] > 0f)
+            if (cube[i] < 0f)
                 configIndex |= 1 << i;
 
         if (configIndex == 0 || configIndex == 255)

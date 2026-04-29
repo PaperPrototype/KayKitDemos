@@ -1,10 +1,7 @@
 using Prowl.Runtime;
-using Prowl.Runtime.Rendering;
 using Prowl.Runtime.Resources;
 using Prowl.Vector;
-using Prowl.Vector.Geometry;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Auburn.FastNoiseLite;
 
 namespace Paper.VoxelTerrain;
@@ -23,7 +20,7 @@ public class VoxelWorld : MonoBehaviour
     private const float UpdateInterval = 0.5f;
     private float _updateTimer = 0f;
 
-    private Dictionary<Int3, VoxelChunk> chunks = [];
+    private Dictionary<Int3, MarchingChunk> chunks = [];
     public FastNoiseLite noise;
 
     // The chunk the player was in during the last update
@@ -109,7 +106,7 @@ public class VoxelWorld : MonoBehaviour
             chunkPos.Z * ChunkDepth
         );
 
-        VoxelChunk chunk = chunkGO.AddComponent<VoxelChunk>();
+        var chunk = chunkGO.AddComponent<MarchingChunk>();
         chunk.Initialize(chunkPos, this);
 
         // Register before generating mesh so neighbor chunks can query this chunk's
@@ -125,14 +122,14 @@ public class VoxelWorld : MonoBehaviour
         Int3[] neighborOffsets = [new(-1, 0, 0), new(1, 0, 0), new(0, 0, -1), new(0, 0, 1)];
         foreach (var offset in neighborOffsets)
         {
-            if (chunks.TryGetValue(chunkPos + offset, out VoxelChunk? neighbor))
+            if (chunks.TryGetValue(chunkPos + offset, out MarchingChunk? neighbor))
                 neighbor.GenerateMesh();
         }
     }
 
     private void DestroyChunk(Int3 chunkPos)
     {
-        if (!chunks.TryGetValue(chunkPos, out VoxelChunk? chunk)) return;
+        if (!chunks.TryGetValue(chunkPos, out MarchingChunk? chunk)) return;
 
         chunks.Remove(chunkPos);
         Scene.Remove(chunk.GameObject);
