@@ -8,6 +8,14 @@ Project Structure:
 /{Author}/{Project}/{...}
 ```
 
+### Paper/VoxelTerrain
+
+Demo scene: /Assets/Paper/VoxelTerrain/VoxelTerrain.scene
+
+Simple voxel terrain in prowl
+
+![](/Assets/Paper/VoxelTerrain/Screenshot2.png)
+
 ### Paper/Platformer
 
 README: [/Assets/Paper/Platformer/README.md](/Assets/Paper/Platformer/README.md)
@@ -17,14 +25,6 @@ Demo scene: /Assets/Paper/Platformer/Platformer.scene
 Fully working platformer demo
 
 ![](/Assets/Paper/Platformer/Screenshot.png)
-
-### Paper/VoxelTerrain
-
-Demo scene: /Assets/Paper/VoxelTerrain/VoxelTerrain.scene
-
-Simple voxel terrain in prowl
-
-![](/Assets/Paper/VoxelTerrain/Screenshot.png)
 
 ### KayKits/Animations
 
