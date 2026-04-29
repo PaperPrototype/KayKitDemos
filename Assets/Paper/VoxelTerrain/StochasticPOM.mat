@@ -2,7 +2,7 @@
   "$id": 1,
   "$type": "Prowl.Runtime.Resources.Material, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "_shader": {
-    "AssetID": "d29f8091-ba62-4bab-9398-4ab4eb61e9a1"
+    "AssetID": "b64de305-96cb-4426-8212-b5b79c62a6af"
   },
   "_properties": {
     "$id": 2,
@@ -19,10 +19,7 @@
 
     },
     "_floats": {
-      "_Parallax": 0.1F,
-      "_Tiling": 0.125F,
-      "_HeightBlendStrength": 0.4F,
-      "_TriplanarBlend": 2F
+      "_Parallax": 0.1F
     },
     "_ints": {
 
@@ -58,12 +55,9 @@
     "_MainTex",
     "_NormalTex",
     "_ParallaxMap",
-    "_Parallax",
-    "_Tiling",
-    "_HeightBlendStrength",
-    "_TriplanarBlend"
+    "_Parallax"
   ],
-  "AssetPath": "Paper/VoxelTerrain/TriplanarPOM.mat",
+  "AssetPath": "Paper/VoxelTerrain/StochasticPOM.mat",
   "AssetID": "00000000-0000-0000-0000-000000000000",
-  "Name": "TriplanarPOM"
+  "Name": "New Material"
 }

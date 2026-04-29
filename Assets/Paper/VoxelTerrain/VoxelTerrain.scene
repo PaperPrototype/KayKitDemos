@@ -1986,10 +1986,63 @@
             "$id": 85,
             "$type": "Paper.VoxelTerrain.VoxelWorld, KayKits1.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "Player": {
-              "$id": 4
+              "$id": 86,
+              "Name": "Cube",
+              "AssetPath": "",
+              "Identifier": "c58548d5-da5a-44e8-99ab-bf714f769ec9",
+              "Static": 0B,
+              "Enabled": 1B,
+              "EnabledInHierarchy": 1B,
+              "TagIndex": 0,
+              "LayerIndex": 0,
+              "HideFlags": 0,
+              "Transform": {
+                "$id": 87,
+                "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "_localPosition": {
+                  "X": 0F,
+                  "Y": 0F,
+                  "Z": 0F
+                },
+                "_localScale": {
+                  "X": 1F,
+                  "Y": 1F,
+                  "Z": 1F
+                },
+                "_localRotation": {
+                  "X": 0F,
+                  "Y": 0F,
+                  "Z": 0F,
+                  "W": 1F
+                }
+              },
+              "Components": [
+                {
+                  "$id": 88,
+                  "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                  "Mesh": {
+                    "AssetID": "97e8b0a9-e054-0d51-9663-eb372d776c90"
+                  },
+                  "Materials": [
+                    {
+                      "AssetID": "d7009b28-9353-6559-8847-62e877cec576"
+                    }
+                  ],
+                  "_identifier": "7509373e-4933-47e8-9c18-0f83cfad06ad",
+                  "_enabled": true,
+                  "_enabledInHierarchy": true,
+                  "HideFlags": 0,
+                  "AssetPath": "",
+                  "AssetID": "00000000-0000-0000-0000-000000000000",
+                  "Name": "NewMeshRenderer"
+                }
+              ],
+              "Children": [
+
+              ]
             },
             "Material": {
-              "AssetID": "ae627025-a778-4ee9-98b8-01b2c49a740e"
+              "AssetID": "78fcf4c4-ee0d-4f16-ae73-bb2f2e0c5d6e"
             },
             "noise": NULL,
             "_identifier": "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
@@ -2006,66 +2059,10 @@
         ]
       },
       {
-        "$id": 86,
+        "$id": 89,
         "Name": "Sphere",
         "AssetPath": "",
         "Identifier": "3b9ffb0a-3911-4ded-a56d-fd2ef0828e10",
-        "Static": 0B,
-        "Enabled": 1B,
-        "EnabledInHierarchy": 1B,
-        "TagIndex": 0,
-        "LayerIndex": 0,
-        "HideFlags": 0,
-        "Transform": {
-          "$id": 87,
-          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "_localPosition": {
-            "X": 0F,
-            "Y": 0F,
-            "Z": 0F
-          },
-          "_localScale": {
-            "X": 1F,
-            "Y": 1F,
-            "Z": 1F
-          },
-          "_localRotation": {
-            "X": 0F,
-            "Y": 0F,
-            "Z": 0F,
-            "W": 1F
-          }
-        },
-        "Components": [
-          {
-            "$id": 88,
-            "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Mesh": {
-              "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
-            },
-            "Materials": [
-              {
-                "AssetID": "ddb8669d-a9af-481f-924f-131bc05200e8"
-              }
-            ],
-            "_identifier": "a50a404b-fb40-41e7-85d4-ef33906bf2eb",
-            "_enabled": true,
-            "_enabledInHierarchy": true,
-            "HideFlags": 0,
-            "AssetPath": "",
-            "AssetID": "00000000-0000-0000-0000-000000000000",
-            "Name": "NewMeshRenderer"
-          }
-        ],
-        "Children": [
-
-        ]
-      },
-      {
-        "$id": 89,
-        "Name": "Cube",
-        "AssetPath": "",
-        "Identifier": "c58548d5-da5a-44e8-99ab-bf714f769ec9",
         "Static": 0B,
         "Enabled": 1B,
         "EnabledInHierarchy": 1B,
@@ -2097,14 +2094,14 @@
             "$id": 91,
             "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "Mesh": {
-              "AssetID": "97e8b0a9-e054-0d51-9663-eb372d776c90"
+              "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
             },
             "Materials": [
               {
-                "AssetID": "d7009b28-9353-6559-8847-62e877cec576"
+                "AssetID": "ddb8669d-a9af-481f-924f-131bc05200e8"
               }
             ],
-            "_identifier": "7509373e-4933-47e8-9c18-0f83cfad06ad",
+            "_identifier": "a50a404b-fb40-41e7-85d4-ef33906bf2eb",
             "_enabled": true,
             "_enabledInHierarchy": true,
             "HideFlags": 0,
@@ -2116,6 +2113,9 @@
         "Children": [
 
         ]
+      },
+      {
+        "$id": 86
       }
     ]
   },

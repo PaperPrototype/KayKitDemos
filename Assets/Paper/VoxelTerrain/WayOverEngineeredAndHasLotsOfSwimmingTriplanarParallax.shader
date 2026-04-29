@@ -101,57 +101,70 @@ Pass "Standard"
                 vec2 uvY = worldPos.xz * _Tiling;
                 vec2 uvZ = worldPos.xy * _Tiling;
 
-                // --- Seamless Triplanar POM: world-space ray march + blended height + horizon flattening ---
+                // --- Triplanar POM: per-axis 2D + blended height + horizon flattening ---
                 //
-                // SEAM fix: decompose viewDir into depth (dot(viewDir,N)) and surface-tangent
-                // drift (viewDir - depth*N). Both are smooth functions of N with no axis
-                // branches, so the march direction transitions continuously across the blend
-                // region. All UVs are derived from the same displaced world position, so no
-                // per-axis UV offset divergence is possible. Height sampling is triplanarly
-                // blended so all axes agree on the stopping depth.
+                // Fixes three distinct problems:
                 //
-                // GRAZING ANGLE fix: horizon flattening scales parallax by dot(viewDir,N),
-                // smoothly reducing it to zero at shallow angles to prevent extreme offsets.
+                // SWIMMING (view-dependent texture sliding): Previous world-space approach
+                // displaced curPos in 3D then derived all UVs as curPos*tiling — since
+                // triplanar UV IS world-position, any view-dependent world shift made the
+                // texture float through space as the camera moved. Fix: per-axis 2D marching
+                // keeps UVs as (worldPos*tiling + small_2D_delta), anchored to the surface.
+                //
+                // SEAM at axis transitions: per-axis independent stopping conditions gave
+                // each axis a different depth, so their UV offsets diverged at boundaries.
+                // Fix: all axes share the same triplanar-blended height for the depth
+                // comparison, so they always stop at the same fractional depth.
+                //
+                // GRAZING ANGLE blowup: near-parallel view angles made the UV step huge,
+                // amplifying both artifacts. Fix: horizon flattening scales parallax by
+                // dot(viewDir,N), smoothly zeroing it at grazing angles.
                 if (_Parallax > 0.0 && _ParallaxSteps > 0)
                 {
                     // Horizon flattening: full strength above ~17°, fades to 0 at surface
-                    float viewDotN = max(dot(viewDir, N), 0.001);
+                    float viewDotN = max(dot(viewDir, N), 0.0);
                     float effP     = _Parallax * clamp(viewDotN / 0.3, 0.0, 1.0);
 
-                    vec3 tangDrift = viewDir - viewDotN * N;
-                    vec3 worldStep = -tangDrift / (viewDotN * _Tiling) * effP / float(_ParallaxSteps);
+                    // Per-axis view dir in tangent space; clamp z to prevent grazing blowup
+                    vec3 vdX = vec3(viewDir.z, viewDir.y, viewDir.x * sign(N.x));
+                    vec3 vdY = vec3(viewDir.x, viewDir.z, viewDir.y * sign(N.y));
+                    vec3 vdZ = vec3(viewDir.x, viewDir.y, viewDir.z * sign(N.z));
 
-                    float stepSize   = 1.0 / float(_ParallaxSteps);
-                    float layerDepth = 0.0;
-                    vec3  curPos     = worldPos;
-                    vec3  prevPos    = worldPos;
-                    float mapH       = 1.0;
-                    float prevMapH   = 1.0;
+                    float stepsF = float(_ParallaxSteps);
+                    vec2 stepX = -vdX.xy / max(vdX.z, 0.1) * effP / stepsF;
+                    vec2 stepY = -vdY.xy / max(vdY.z, 0.1) * effP / stepsF;
+                    vec2 stepZ = -vdZ.xy / max(vdZ.z, 0.1) * effP / stepsF;
+
+                    float sizeInv = 1.0 / stepsF;
+                    float depth   = 0.0;
+                    vec2  curX = uvX, prevX = uvX;
+                    vec2  curY = uvY, prevY = uvY;
+                    vec2  curZ = uvZ, prevZ = uvZ;
+                    float mapH = 1.0, prevH = 1.0;
 
                     for (int i = 0; i < _ParallaxSteps; i++)
                     {
-                        prevPos    = curPos;
-                        prevMapH   = mapH;
-                        curPos    += worldStep;
-                        layerDepth += stepSize;
+                        prevX = curX; prevY = curY; prevZ = curZ;
+                        prevH = mapH;
+                        curX += stepX; curY += stepY; curZ += stepZ;
+                        depth += sizeInv;
 
-                        mapH = texture(_ParallaxMap, curPos.zy * _Tiling).g * weights.x
-                             + texture(_ParallaxMap, curPos.xz * _Tiling).g * weights.y
-                             + texture(_ParallaxMap, curPos.xy * _Tiling).g * weights.z;
+                        // Blended height: all axes agree on when to stop — no seam
+                        mapH = texture(_ParallaxMap, curX).g * weights.x
+                             + texture(_ParallaxMap, curY).g * weights.y
+                             + texture(_ParallaxMap, curZ).g * weights.z;
 
-                        if (layerDepth >= 1.0 - mapH) break;
+                        if (depth >= 1.0 - mapH) break;
                     }
 
-                    // Linear refinement between the last two steps
-                    float d0    = (layerDepth - stepSize) - (1.0 - prevMapH);
-                    float d1    = layerDepth - (1.0 - mapH);
-                    float denom = d1 - d0;
-                    float t     = abs(denom) > 0.0001 ? clamp(-d0 / denom, 0.0, 1.0) : 0.5;
-                    curPos = mix(prevPos, curPos, t);
-
-                    uvX = curPos.zy * _Tiling;
-                    uvY = curPos.xz * _Tiling;
-                    uvZ = curPos.xy * _Tiling;
+                    // Linear refinement between last two steps
+                    float d0  = (depth - sizeInv) - (1.0 - prevH);
+                    float d1  = depth - (1.0 - mapH);
+                    float den = d1 - d0;
+                    float t   = abs(den) > 0.0001 ? clamp(-d0 / den, 0.0, 1.0) : 0.5;
+                    uvX = mix(prevX, curX, t);
+                    uvY = mix(prevY, curY, t);
+                    uvZ = mix(prevZ, curZ, t);
                 }
 
                 // --- Height-lerp triplanar blend ---

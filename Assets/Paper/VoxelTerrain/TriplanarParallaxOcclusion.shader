@@ -17,7 +17,6 @@ Properties
     _ParallaxMap ("Height Map (G)", Texture2D) = "black"
     _Parallax ("Height Scale", Float) = 0.0
     _ParallaxSteps ("POM Steps", Int) = 16
-    _HeightBlendStrength ("Height Blend Strength", Float) = 0.0
 
     _TranslucencyMap ("Translucency (B) Occlusion (G)", Texture2D) = "white"
     _TranslucencyStrength ("Translucency Strength", Float) = 0.0
@@ -75,7 +74,6 @@ Pass "Standard"
             uniform sampler2D _ParallaxMap;
             uniform float _Parallax;
             uniform int _ParallaxSteps;
-            uniform float _HeightBlendStrength;
 
             uniform sampler2D _TranslucencyMap;
             uniform float _TranslucencyStrength;
@@ -101,25 +99,26 @@ Pass "Standard"
                 vec2 uvY = worldPos.xz * _Tiling;
                 vec2 uvZ = worldPos.xy * _Tiling;
 
-                // --- Seamless Triplanar POM: world-space ray march + blended height + horizon flattening ---
+                // Seamless Triplanar POM via surface-normal-projected world-space ray march.
                 //
-                // SEAM fix: decompose viewDir into depth (dot(viewDir,N)) and surface-tangent
-                // drift (viewDir - depth*N). Both are smooth functions of N with no axis
-                // branches, so the march direction transitions continuously across the blend
-                // region. All UVs are derived from the same displaced world position, so no
-                // per-axis UV offset divergence is possible. Height sampling is triplanarly
-                // blended so all axes agree on the stopping depth.
+                // The dominant-axis approach still has a seam: the step direction branches
+                // hard when one axis overtakes another, creating a visible discontinuity.
                 //
-                // GRAZING ANGLE fix: horizon flattening scales parallax by dot(viewDir,N),
-                // smoothly reducing it to zero at shallow angles to prevent extreme offsets.
+                // Fix: decompose viewDir into two smooth functions of N — no axis branches:
+                //   viewDotN  = dot(viewDir, N)          — depth penetration rate
+                //   tangDrift = viewDir - viewDotN * N   — surface-tangent drift (UV shift)
+                //
+                // For axis-aligned normals this is provably identical to the per-axis tangent
+                // frame formulation. For N=(0,1,0): viewDotN=viewDir.y, tangDrift=(vx,0,vz)
+                // — exactly the Y-axis TBN result. Intermediate normals interpolate smoothly.
                 if (_Parallax > 0.0 && _ParallaxSteps > 0)
                 {
-                    // Horizon flattening: full strength above ~17°, fades to 0 at surface
-                    float viewDotN = max(dot(viewDir, N), 0.001);
-                    float effP     = _Parallax * clamp(viewDotN / 0.3, 0.0, 1.0);
-
-                    vec3 tangDrift = viewDir - viewDotN * N;
-                    vec3 worldStep = -tangDrift / (viewDotN * _Tiling) * effP / float(_ParallaxSteps);
+                    float viewDotN  = max(dot(viewDir, N), 0.001);
+                    vec3  tangDrift = viewDir - viewDotN * N;
+                    // Negate: marching into surface shifts UVs opposite to projected view.
+                    // Divide by _Tiling to convert UV-space offset to world-space step.
+                    vec3 worldStep = -tangDrift / (viewDotN * _Tiling)
+                                   * _Parallax / float(_ParallaxSteps);
 
                     float stepSize   = 1.0 / float(_ParallaxSteps);
                     float layerDepth = 0.0;
@@ -154,29 +153,10 @@ Pass "Standard"
                     uvZ = curPos.xy * _Tiling;
                 }
 
-                // --- Height-lerp triplanar blend ---
-                // Bias blend weights by height so taller features dominate at axis
-                // transitions. Physically consistent with POM: the same height signal
-                // drives both the depth perception and the projection boundary.
-                // _HeightBlendStrength = 0: pure normal blend. 1: height-dominant blend.
-                vec3 fw = weights;
-                if (_HeightBlendStrength > 0.001)
-                {
-                    float hX = texture(_ParallaxMap, uvX).g;
-                    float hY = texture(_ParallaxMap, uvY).g;
-                    float hZ = texture(_ParallaxMap, uvZ).g;
-                    vec3  h  = weights + vec3(hX, hY, hZ);
-                    float hM = max(h.x, max(h.y, h.z));
-                    vec3  hB = max(h - (hM - 0.2), 0.0);
-                    hB /= (hB.x + hB.y + hB.z + 0.0001);
-                    fw  = mix(weights, hB, _HeightBlendStrength);
-                    fw /= (fw.x + fw.y + fw.z + 0.0001);
-                }
-
                 // Albedo
-                vec4 albedo = texture(_MainTex, uvX) * fw.x
-                            + texture(_MainTex, uvY) * fw.y
-                            + texture(_MainTex, uvZ) * fw.z;
+                vec4 albedo = texture(_MainTex, uvX) * weights.x
+                            + texture(_MainTex, uvY) * weights.y
+                            + texture(_MainTex, uvZ) * weights.z;
                 albedo *= vColor * _MainColor;
                 vec3 baseColor = gammaToLinearSpace(albedo.rgb);
 
@@ -191,27 +171,27 @@ Pass "Standard"
                 vec3 nWX = vec3(tnX.z * sign(N.x), tnX.y, tnX.x);
                 vec3 nWY = vec3(tnY.x, tnY.z * sign(N.y), tnY.y);
                 vec3 nWZ = vec3(tnZ.x, tnZ.y, tnZ.z * sign(N.z));
-                vec3 worldNormal = normalize(nWX * fw.x + nWY * fw.y + nWZ * fw.z);
+                vec3 worldNormal = normalize(nWX * weights.x + nWY * weights.y + nWZ * weights.z);
 
                 // Surface: R=AO, G=Roughness, B=Metallic
-                vec4 surface = texture(_SurfaceTex, uvX) * fw.x
-                             + texture(_SurfaceTex, uvY) * fw.y
-                             + texture(_SurfaceTex, uvZ) * fw.z;
+                vec4 surface = texture(_SurfaceTex, uvX) * weights.x
+                             + texture(_SurfaceTex, uvY) * weights.y
+                             + texture(_SurfaceTex, uvZ) * weights.z;
                 float ao        = 1.0 - surface.r;
                 float roughness = surface.g;
                 float metallic  = surface.b;
 
                 // Translucency map: G=extra occlusion, B=thickness
-                vec4 transOcc = texture(_TranslucencyMap, uvX) * fw.x
-                              + texture(_TranslucencyMap, uvY) * fw.y
-                              + texture(_TranslucencyMap, uvZ) * fw.z;
+                vec4 transOcc = texture(_TranslucencyMap, uvX) * weights.x
+                              + texture(_TranslucencyMap, uvY) * weights.y
+                              + texture(_TranslucencyMap, uvZ) * weights.z;
                 ao *= transOcc.g;
                 float translucency = transOcc.b * _TranslucencyStrength;
 
                 // Emission
-                vec3 emission = (texture(_EmissionTex, uvX).rgb * fw.x
-                               + texture(_EmissionTex, uvY).rgb * fw.y
-                               + texture(_EmissionTex, uvZ).rgb * fw.z) * _EmissionIntensity;
+                vec3 emission = (texture(_EmissionTex, uvX).rgb * weights.x
+                               + texture(_EmissionTex, uvY).rgb * weights.y
+                               + texture(_EmissionTex, uvZ).rgb * weights.z) * _EmissionIntensity;
 
                 // PBR lighting
                 vec3 lighting = CalculateForwardLighting(worldPos, worldNormal, viewDir,
