@@ -21,11 +21,25 @@ public class InterpolatedCubeChunk : MonoBehaviour
     private MeshRenderer? meshRenderer;
     private VoxelWorld voxelWorld;
 
-    private static readonly (int nx, int ny, int nz)[] NeighborDirs =
+    // The 8 voxels that share a grid corner, expressed as offsets in {-1, 0} per axis.
+    private static readonly (int ox, int oy, int oz)[] CubeCornerOffsets =
     [
-        ( 1,  0,  0), (-1,  0,  0),
-        ( 0,  1,  0), ( 0, -1,  0),
-        ( 0,  0,  1), ( 0,  0, -1),
+        (-1, -1, -1), // 0
+        ( 0, -1, -1), // 1
+        (-1,  0, -1), // 2
+        ( 0,  0, -1), // 3
+        (-1, -1,  0), // 4
+        ( 0, -1,  0), // 5
+        (-1,  0,  0), // 6
+        ( 0,  0,  0), // 7
+    ];
+
+    // All 12 edges of the local 2x2x2 cube (pairs of corner indices above).
+    private static readonly (int a, int b)[] CubeEdges =
+    [
+        (0, 1), (2, 3), (4, 5), (6, 7), // X-axis edges
+        (0, 2), (1, 3), (4, 6), (5, 7), // Y-axis edges
+        (0, 4), (1, 5), (2, 6), (3, 7), // Z-axis edges
     ];
 
     public void Initialize(Int3 chunkPos, VoxelWorld world)
@@ -158,29 +172,38 @@ public class InterpolatedCubeChunk : MonoBehaviour
         triangles.Add(baseIdx + 3);
     }
 
-    // For a corner at integer grid position (cx,cy,cz), find all 6 adjacent edges
-    // that cross the solid/air boundary and average their MC interpolated crossing
-    // positions.  If no crossings exist (interior or fully exterior corner) the
-    // corner stays at its original integer position.
+    // For a corner at integer grid position (cx,cy,cz):
+    // 1. Sample the density of each of the 8 voxels that share this corner.
+    // 2. Check all 12 edges of the local 2x2x2 cube for sign changes.
+    // 3. For each crossing edge compute the MC-interpolated surface position.
+    // 4. Average all crossing positions → final vertex position.
+    // If no edges cross (deep interior or exterior) the corner stays put.
     private Float3 GetInterpolatedCorner(int cx, int cy, int cz, Dictionary<(int, int, int), Float3> cache)
     {
         var key = (cx, cy, cz);
         if (cache.TryGetValue(key, out var cached)) return cached;
 
-        float d0 = GetCornerDensity(cx, cy, cz);
+        // Sample density at the 8 surrounding voxel positions.
+        float[] d = new float[8];
+        for (int i = 0; i < 8; i++)
+        {
+            (int ox, int oy, int oz) = CubeCornerOffsets[i];
+            d[i] = GetCornerDensity(cx + ox, cy + oy, cz + oz);
+        }
 
         float sx = 0f, sy = 0f, sz = 0f;
         int   crossings = 0;
 
-        foreach (var (nx, ny, nz) in NeighborDirs)
+        foreach ((int a, int b) in CubeEdges)
         {
-            float d1 = GetCornerDensity(cx + nx, cy + ny, cz + nz);
-            if ((d0 > 0f) != (d1 > 0f)) // sign change → surface crossing on this edge
+            if ((d[a] > 0f) != (d[b] > 0f)) // sign change → surface crossing
             {
-                float t = d0 / (d0 - d1); // MC interpolation parameter ∈ (0,1)
-                sx += cx + nx * t;
-                sy += cy + ny * t;
-                sz += cz + nz * t;
+                float t = d[a] / (d[a] - d[b]); // MC interpolation ∈ (0,1)
+                (int oax, int oay, int oaz) = CubeCornerOffsets[a];
+                (int obx, int oby, int obz) = CubeCornerOffsets[b];
+                sx += (cx + oax) + (obx - oax) * t;
+                sy += (cy + oay) + (oby - oay) * t;
+                sz += (cz + oaz) + (obz - oaz) * t;
                 crossings++;
             }
         }
