@@ -147,8 +147,6 @@ Pass "Standard"
                 return mean + (blended - mean) * inversesqrt(dot(bary, bary));
             }
 
-            // Samples a normal map with rotation correction so the result is expressed
-            // in the unrotated face tangent frame, ready for the per-face world transform.
             vec3 hexSampleNormal(sampler2D tex, vec2 uv,
                                  vec2 ox1, vec2 ox2, vec2 ox3,
                                  float r1, float r2, float r3, vec3 bary)
@@ -173,52 +171,41 @@ Pass "Standard"
                 vec3 viewDir = normalize(_WorldSpaceCameraPos.xyz - worldPos);
 
                 // -----------------------------------------------------------------------
-                // Six-face blend weights — positive and negative halves of each axis
-                // separated so top/bottom and each cardinal side can have distinct
-                // hex patterns and (optionally) height-biased blending.
-                //
-                // With sharpness >= 4, at most 3 weights are non-zero per pixel:
-                //   only the components of N that are positive (or negative) contribute.
-                //   A normal in one octant activates at most 3 of the 6 faces, and with
-                //   high sharpness typically just 1-2, matching the performance expectation
-                //   of hexaplanar: 1-3 samples per pixel in practice.
+                // Six-face weights: positive and negative halves of each axis, so top (+Y)
+                // and bottom (-Y) etc. are independently weighted. At most 3 of the 6
+                // weights are non-zero (N lives in one octant), and with sharpness >= 4
+                // typically only 1-2 are significant per pixel.
                 // -----------------------------------------------------------------------
                 const float W_MIN = 0.005;
 
-                vec3 nPos    = pow(max( N, vec3(0.0)), vec3(_TriplanarBlend));
-                vec3 nNeg    = pow(max(-N, vec3(0.0)), vec3(_TriplanarBlend));
-                float wPX    = nPos.x, wNX = nNeg.x;
-                float wPY    = nPos.y, wNY = nNeg.y;
-                float wPZ    = nPos.z, wNZ = nNeg.z;
-                float wSum   = wPX + wNX + wPY + wNY + wPZ + wNZ + 0.0001;
+                vec3 nPos  = pow(max( N, vec3(0.0)), vec3(_TriplanarBlend));
+                vec3 nNeg  = pow(max(-N, vec3(0.0)), vec3(_TriplanarBlend));
+                float wPX  = nPos.x, wNX = nNeg.x;
+                float wPY  = nPos.y, wNY = nNeg.y;
+                float wPZ  = nPos.z, wNZ = nNeg.z;
+                float wSum = wPX + wNX + wPY + wNY + wPZ + wNZ + 0.0001;
                 wPX /= wSum; wNX /= wSum;
                 wPY /= wSum; wNY /= wSum;
                 wPZ /= wSum; wNZ /= wSum;
 
                 // -----------------------------------------------------------------------
-                // Six-face world-space UVs.
-                //
-                // Each face uses the two world axes orthogonal to its normal as UV.
-                // Negative-direction faces flip one component so the hex grid differs
-                // from its positive counterpart — this derives from the face's tangent
-                // frame (T × B = N) and ensures correct normal-map reconstruction.
-                //
-                //   Face   UV                  Tangent T        Bitangent B      Normal
-                //   +X     ( z,  y)            (0, 0, 1)        (0, 1, 0)        (+1, 0, 0)
-                //   -X     (-z,  y)            (0, 0,-1)        (0, 1, 0)        (-1, 0, 0)
-                //   +Y     ( x,  z)            (1, 0, 0)        (0, 0, 1)        (0,+1, 0)
-                //   -Y     (-x, -z)            (-1,0, 0)        (0, 0,-1)        (0,-1, 0)
-                //   +Z     ( x,  y)            (1, 0, 0)        (0, 1, 0)        (0, 0,+1)
-                //   -Z     (-x,  y)            (-1,0, 0)        (0, 1, 0)        (0, 0,-1)
+                // Six-face UVs. Positive and negative faces on the same axis share the
+                // same projection plane, keeping the tangent frame identical so the
+                // triplanar normal formula (sign(N.axis) on the face-normal channel)
+                // works unchanged for all six directions.
+                // A half-UV offset on negative faces shifts them into different hex cells,
+                // giving distinct patterns without altering UV orientation.
                 // -----------------------------------------------------------------------
-                vec2 uvPX = vec2( worldPos.z,  worldPos.y) * _Tiling;
-                vec2 uvNX = vec2(-worldPos.z,  worldPos.y) * _Tiling;
-                vec2 uvPY = vec2( worldPos.x,  worldPos.z) * _Tiling;
-                vec2 uvNY = vec2(-worldPos.x, -worldPos.z) * _Tiling;
-                vec2 uvPZ = vec2( worldPos.x,  worldPos.y) * _Tiling;
-                vec2 uvNZ = vec2(-worldPos.x,  worldPos.y) * _Tiling;
+                const vec2 NEG_OFF = vec2(0.5, 0.0);
 
-                // Hex setup for each face (computed once from pre-POM UVs; surface-anchored)
+                vec2 uvPX = worldPos.zy * _Tiling;
+                vec2 uvNX = worldPos.zy * _Tiling + NEG_OFF;
+                vec2 uvPY = worldPos.xz * _Tiling;
+                vec2 uvNY = worldPos.xz * _Tiling + NEG_OFF;
+                vec2 uvPZ = worldPos.xy * _Tiling;
+                vec2 uvNZ = worldPos.xy * _Tiling + NEG_OFF;
+
+                // Hex setup per face — computed once from pre-POM (surface-anchored) UVs
                 vec2  ox1PX,ox2PX,ox3PX; float r1PX,r2PX,r3PX; vec3 baryPX;
                 vec2  ox1NX,ox2NX,ox3NX; float r1NX,r2NX,r3NX; vec3 baryNX;
                 vec2  ox1PY,ox2PY,ox3PY; float r1PY,r2PY,r3PY; vec3 baryPY;
@@ -233,21 +220,21 @@ Pass "Standard"
                 if (wPZ > W_MIN) hexSetup(uvPZ, ox1PZ,ox2PZ,ox3PZ, r1PZ,r2PZ,r3PZ, baryPZ);
                 if (wNZ > W_MIN) hexSetup(uvNZ, ox1NZ,ox2NZ,ox3NZ, r1NZ,r2NZ,r3NZ, baryNZ);
 
-                // Blended translation offsets for POM height march (rotation omitted:
-                // applying per-cell rotations mid-march causes depth discontinuities).
-                vec2 pomOffPX = ox1PX*baryPX.x + ox2PX*baryPX.y + ox3PX*baryPX.z;
-                vec2 pomOffNX = ox1NX*baryNX.x + ox2NX*baryNX.y + ox3NX*baryNX.z;
-                vec2 pomOffPY = ox1PY*baryPY.x + ox2PY*baryPY.y + ox3PY*baryPY.z;
-                vec2 pomOffNY = ox1NY*baryNY.x + ox2NY*baryNY.y + ox3NY*baryNY.z;
-                vec2 pomOffPZ = ox1PZ*baryPZ.x + ox2PZ*baryPZ.y + ox3PZ*baryPZ.z;
-                vec2 pomOffNZ = ox1NZ*baryNZ.x + ox2NZ*baryNZ.y + ox3NZ*baryNZ.z;
+                // Blended translation offsets for POM march.
+                // For negative faces, add NEG_OFF so the march stays in the same UV region
+                // as the pre-POM hex setup (hex cell identity is preserved across steps).
+                vec2 pomPX = ox1PX*baryPX.x + ox2PX*baryPX.y + ox3PX*baryPX.z;
+                vec2 pomNX = ox1NX*baryNX.x + ox2NX*baryNX.y + ox3NX*baryNX.z + NEG_OFF;
+                vec2 pomPY = ox1PY*baryPY.x + ox2PY*baryPY.y + ox3PY*baryPY.z;
+                vec2 pomNY = ox1NY*baryNY.x + ox2NY*baryNY.y + ox3NY*baryNY.z + NEG_OFF;
+                vec2 pomPZ = ox1PZ*baryPZ.x + ox2PZ*baryPZ.y + ox3PZ*baryPZ.z;
+                vec2 pomNZ = ox1NZ*baryNZ.x + ox2NZ*baryNZ.y + ox3NZ*baryNZ.z + NEG_OFF;
 
                 // -----------------------------------------------------------------------
-                // Seamless world-space POM over six faces.
-                // viewDir decomposed into depth rate (viewDotN) and surface-tangent drift —
-                // both smooth in N, no axis branches. Horizon flattening kills parallax at
-                // grazing angles. Height is blended across active faces using W_MIN guards
-                // so inactive faces skip their texture fetch every step.
+                // Seamless world-space POM across six faces.
+                // Same smooth N-decomposition as the triplanar shaders: no axis branch,
+                // no seam. Active faces (weight > W_MIN) skip their texture fetch when
+                // inactive, giving 1-3 samples per step matching the N octant.
                 // -----------------------------------------------------------------------
                 if (_Parallax > 0.0 && _ParallaxSteps > 0)
                 {
@@ -271,12 +258,12 @@ Pass "Standard"
                         layerDepth += stepSize;
 
                         mapH = 0.0;
-                        if (wPX > W_MIN) mapH += texture(_ParallaxMap, vec2( curPos.z,  curPos.y)*_Tiling + pomOffPX).g * wPX;
-                        if (wNX > W_MIN) mapH += texture(_ParallaxMap, vec2(-curPos.z,  curPos.y)*_Tiling + pomOffNX).g * wNX;
-                        if (wPY > W_MIN) mapH += texture(_ParallaxMap, vec2( curPos.x,  curPos.z)*_Tiling + pomOffPY).g * wPY;
-                        if (wNY > W_MIN) mapH += texture(_ParallaxMap, vec2(-curPos.x, -curPos.z)*_Tiling + pomOffNY).g * wNY;
-                        if (wPZ > W_MIN) mapH += texture(_ParallaxMap, vec2( curPos.x,  curPos.y)*_Tiling + pomOffPZ).g * wPZ;
-                        if (wNZ > W_MIN) mapH += texture(_ParallaxMap, vec2(-curPos.x,  curPos.y)*_Tiling + pomOffNZ).g * wNZ;
+                        if (wPX > W_MIN) mapH += texture(_ParallaxMap, curPos.zy * _Tiling + pomPX).g * wPX;
+                        if (wNX > W_MIN) mapH += texture(_ParallaxMap, curPos.zy * _Tiling + pomNX).g * wNX;
+                        if (wPY > W_MIN) mapH += texture(_ParallaxMap, curPos.xz * _Tiling + pomPY).g * wPY;
+                        if (wNY > W_MIN) mapH += texture(_ParallaxMap, curPos.xz * _Tiling + pomNY).g * wNY;
+                        if (wPZ > W_MIN) mapH += texture(_ParallaxMap, curPos.xy * _Tiling + pomPZ).g * wPZ;
+                        if (wNZ > W_MIN) mapH += texture(_ParallaxMap, curPos.xy * _Tiling + pomNZ).g * wNZ;
 
                         if (layerDepth >= 1.0 - mapH) break;
                     }
@@ -287,19 +274,18 @@ Pass "Standard"
                     float t     = abs(denom) > 0.0001 ? clamp(-d0 / denom, 0.0, 1.0) : 0.5;
                     curPos = mix(prevPos, curPos, t);
 
-                    uvPX = vec2( curPos.z,  curPos.y) * _Tiling;
-                    uvNX = vec2(-curPos.z,  curPos.y) * _Tiling;
-                    uvPY = vec2( curPos.x,  curPos.z) * _Tiling;
-                    uvNY = vec2(-curPos.x, -curPos.z) * _Tiling;
-                    uvPZ = vec2( curPos.x,  curPos.y) * _Tiling;
-                    uvNZ = vec2(-curPos.x,  curPos.y) * _Tiling;
+                    uvPX = curPos.zy * _Tiling;
+                    uvNX = curPos.zy * _Tiling + NEG_OFF;
+                    uvPY = curPos.xz * _Tiling;
+                    uvNY = curPos.xz * _Tiling + NEG_OFF;
+                    uvPZ = curPos.xy * _Tiling;
+                    uvNZ = curPos.xy * _Tiling + NEG_OFF;
                 }
 
                 // -----------------------------------------------------------------------
-                // Height-biased blend weights.
-                // Per-face height samples shift the face weights so taller features
-                // dominate at face transitions (e.g. a rock edge vs flat ground).
-                // The soft threshold (0.2 margin) keeps at least one face active.
+                // Height-biased blend weights (optional).
+                // Hex-sampled heights from the displaced surface push the final weights
+                // toward the taller feature at each face transition.
                 // -----------------------------------------------------------------------
                 float fwPX = wPX, fwNX = wNX;
                 float fwPY = wPY, fwNY = wNY;
@@ -319,23 +305,17 @@ Pass "Standard"
                     float bPY = wPY + hPY, bNY = wNY + hNY;
                     float bPZ = wPZ + hPZ, bNZ = wNZ + hNZ;
 
-                    float hM = max(max(max(bPX, bNX), max(bPY, bNY)), max(bPZ, bNZ));
-                    bPX = max(bPX - (hM - 0.2), 0.0);
-                    bNX = max(bNX - (hM - 0.2), 0.0);
-                    bPY = max(bPY - (hM - 0.2), 0.0);
-                    bNY = max(bNY - (hM - 0.2), 0.0);
-                    bPZ = max(bPZ - (hM - 0.2), 0.0);
-                    bNZ = max(bNZ - (hM - 0.2), 0.0);
+                    float hM  = max(max(max(bPX, bNX), max(bPY, bNY)), max(bPZ, bNZ));
+                    bPX = max(bPX - (hM - 0.2), 0.0); bNX = max(bNX - (hM - 0.2), 0.0);
+                    bPY = max(bPY - (hM - 0.2), 0.0); bNY = max(bNY - (hM - 0.2), 0.0);
+                    bPZ = max(bPZ - (hM - 0.2), 0.0); bNZ = max(bNZ - (hM - 0.2), 0.0);
 
                     float hSum = bPX + bNX + bPY + bNY + bPZ + bNZ + 0.0001;
                     bPX /= hSum; bNX /= hSum; bPY /= hSum; bNY /= hSum; bPZ /= hSum; bNZ /= hSum;
 
-                    fwPX = mix(wPX, bPX, _HeightBlendStrength);
-                    fwNX = mix(wNX, bNX, _HeightBlendStrength);
-                    fwPY = mix(wPY, bPY, _HeightBlendStrength);
-                    fwNY = mix(wNY, bNY, _HeightBlendStrength);
-                    fwPZ = mix(wPZ, bPZ, _HeightBlendStrength);
-                    fwNZ = mix(wNZ, bNZ, _HeightBlendStrength);
+                    fwPX = mix(wPX, bPX, _HeightBlendStrength); fwNX = mix(wNX, bNX, _HeightBlendStrength);
+                    fwPY = mix(wPY, bPY, _HeightBlendStrength); fwNY = mix(wNY, bNY, _HeightBlendStrength);
+                    fwPZ = mix(wPZ, bPZ, _HeightBlendStrength); fwNZ = mix(wNZ, bNZ, _HeightBlendStrength);
 
                     float fwSum = fwPX + fwNX + fwPY + fwNY + fwPZ + fwNZ + 0.0001;
                     fwPX /= fwSum; fwNX /= fwSum; fwPY /= fwSum;
@@ -343,7 +323,7 @@ Pass "Standard"
                 }
 
                 // -----------------------------------------------------------------------
-                // Albedo — full hex sample per active face, blended by final weights
+                // Albedo
                 // -----------------------------------------------------------------------
                 vec4 albedo = vec4(0.0);
                 if (fwPX > W_MIN) albedo += hexSample(_MainTex, uvPX, ox1PX,ox2PX,ox3PX, r1PX,r2PX,r3PX, baryPX) * fwPX;
@@ -356,27 +336,22 @@ Pass "Standard"
                 vec3 baseColor = gammaToLinearSpace(albedo.rgb);
 
                 // -----------------------------------------------------------------------
-                // Normal map — hex sample with UV-rotation correction, then face-specific
-                // tangent-frame → world-space transform.
+                // Normal map — same triplanar sign() formula as TriplanarParallaxOcclusion,
+                // applied per axis group. Positive and negative faces share the same tangent
+                // frame (same UV orientation), so sign(N.axis) on the face-normal channel
+                // is identical to the triplanar formula and gives seamless blending.
                 //
-                // Derivation: for each face UV = (u_axis, v_axis) × Tiling, the tangent
-                // frame is T = normalize(d(worldPos)/d(UV.x)), B = normalize(d(worldPos)/d(UV.y)).
-                // A tangent-space normal tn maps to world via: tn.x*T + tn.y*B + tn.z*N_face.
-                //
-                //   +X: T=(0,0, 1) B=(0,1,0) → world = ( tn.z,  tn.y,  tn.x)
-                //   -X: T=(0,0,-1) B=(0,1,0) → world = (-tn.z,  tn.y, -tn.x)
-                //   +Y: T=(1,0, 0) B=(0,0,1) → world = ( tn.x,  tn.z,  tn.y)
-                //   -Y: T=(-1,0,0) B=(0,0,-1)→ world = (-tn.x, -tn.z, -tn.y) -- flat(0,0,1)→(0,-1,0) ✓
-                //   +Z: T=(1,0, 0) B=(0,1,0) → world = ( tn.x,  tn.y,  tn.z)
-                //   -Z: T=(-1,0,0) B=(0,1,0) → world = (-tn.x,  tn.y, -tn.z)
+                //   X axis: (tn.z * sign(N.x), tn.y, tn.x)
+                //   Y axis: (tn.x, tn.z * sign(N.y), tn.y)
+                //   Z axis: (tn.x, tn.y, tn.z * sign(N.z))
                 // -----------------------------------------------------------------------
                 vec3 worldNormal = vec3(0.0);
-                if (fwPX > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvPX, ox1PX,ox2PX,ox3PX, r1PX,r2PX,r3PX, baryPX); worldNormal += vec3( tn.z,  tn.y,  tn.x) * fwPX; }
-                if (fwNX > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvNX, ox1NX,ox2NX,ox3NX, r1NX,r2NX,r3NX, baryNX); worldNormal += vec3(-tn.z,  tn.y, -tn.x) * fwNX; }
-                if (fwPY > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvPY, ox1PY,ox2PY,ox3PY, r1PY,r2PY,r3PY, baryPY); worldNormal += vec3( tn.x,  tn.z,  tn.y) * fwPY; }
-                if (fwNY > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvNY, ox1NY,ox2NY,ox3NY, r1NY,r2NY,r3NY, baryNY); worldNormal += vec3(-tn.x, -tn.z, -tn.y) * fwNY; }
-                if (fwPZ > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvPZ, ox1PZ,ox2PZ,ox3PZ, r1PZ,r2PZ,r3PZ, baryPZ); worldNormal += vec3( tn.x,  tn.y,  tn.z) * fwPZ; }
-                if (fwNZ > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvNZ, ox1NZ,ox2NZ,ox3NZ, r1NZ,r2NZ,r3NZ, baryNZ); worldNormal += vec3(-tn.x,  tn.y, -tn.z) * fwNZ; }
+                if (fwPX > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvPX, ox1PX,ox2PX,ox3PX, r1PX,r2PX,r3PX, baryPX); worldNormal += vec3(tn.z * sign(N.x), tn.y, tn.x) * fwPX; }
+                if (fwNX > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvNX, ox1NX,ox2NX,ox3NX, r1NX,r2NX,r3NX, baryNX); worldNormal += vec3(tn.z * sign(N.x), tn.y, tn.x) * fwNX; }
+                if (fwPY > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvPY, ox1PY,ox2PY,ox3PY, r1PY,r2PY,r3PY, baryPY); worldNormal += vec3(tn.x, tn.z * sign(N.y), tn.y) * fwPY; }
+                if (fwNY > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvNY, ox1NY,ox2NY,ox3NY, r1NY,r2NY,r3NY, baryNY); worldNormal += vec3(tn.x, tn.z * sign(N.y), tn.y) * fwNY; }
+                if (fwPZ > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvPZ, ox1PZ,ox2PZ,ox3PZ, r1PZ,r2PZ,r3PZ, baryPZ); worldNormal += vec3(tn.x, tn.y, tn.z * sign(N.z)) * fwPZ; }
+                if (fwNZ > W_MIN) { vec3 tn = hexSampleNormal(_NormalTex, uvNZ, ox1NZ,ox2NZ,ox3NZ, r1NZ,r2NZ,r3NZ, baryNZ); worldNormal += vec3(tn.x, tn.y, tn.z * sign(N.z)) * fwNZ; }
                 worldNormal = normalize(worldNormal);
 
                 // Surface: R=AO, G=Roughness, B=Metallic
@@ -416,7 +391,6 @@ Pass "Standard"
                 vec3 lighting = CalculateForwardLighting(worldPos, worldNormal, viewDir,
                                                          baseColor, metallic, roughness, ao);
 
-                // Translucency backscatter
                 if (translucency > 0.0 && _LightCount > 0)
                 {
                     for (int i = 0; i < _LightCount && i < MAX_FORWARD_LIGHTS; i++)
@@ -499,10 +473,10 @@ Pass "DepthNormals"
                           out vec3 bary)
             {
                 const float k=0.8660254, P3=1.04719755;
-                vec2 g=vec2(uv.x+uv.y*0.5, uv.y*k), i=floor(g), f=fract(g);
+                vec2 g=vec2(uv.x+uv.y*0.5,uv.y*k), i=floor(g), f=fract(g);
                 vec2 v1,v2,v3;
-                if (f.x+f.y < 1.0) { v1=i; v2=i+vec2(1,0); v3=i+vec2(0,1); bary=vec3(1.0-f.x-f.y,f.x,f.y); }
-                else                { v1=i+vec2(1,1); v2=i+vec2(0,1); v3=i+vec2(1,0); bary=vec3(f.x+f.y-1.0,1.0-f.x,1.0-f.y); }
+                if (f.x+f.y<1.0) { v1=i; v2=i+vec2(1,0); v3=i+vec2(0,1); bary=vec3(1.0-f.x-f.y,f.x,f.y); }
+                else              { v1=i+vec2(1,1); v2=i+vec2(0,1); v3=i+vec2(1,0); bary=vec3(f.x+f.y-1.0,1.0-f.x,1.0-f.y); }
                 ox1=sHash(v1); ox2=sHash(v2); ox3=sHash(v3);
                 r1=floor(rHash(v1)*6.0)*P3; r2=floor(rHash(v2)*6.0)*P3; r3=floor(rHash(v3)*6.0)*P3;
             }
@@ -524,26 +498,28 @@ Pass "DepthNormals"
                 vec3 n2=texture(tex,hexRot(uv,r2)+ox2).rgb*2.0-1.0;
                 vec3 n3=texture(tex,hexRot(uv,r3)+ox3).rgb*2.0-1.0;
                 float c1=cos(r1),sv1=sin(r1), c2=cos(r2),sv2=sin(r2), c3=cos(r3),sv3=sin(r3);
-                n1.xy=vec2(n1.x*c1-n1.y*sv1, n1.x*sv1+n1.y*c1);
-                n2.xy=vec2(n2.x*c2-n2.y*sv2, n2.x*sv2+n2.y*c2);
-                n3.xy=vec2(n3.x*c3-n3.y*sv3, n3.x*sv3+n3.y*c3);
+                n1.xy=vec2(n1.x*c1-n1.y*sv1,n1.x*sv1+n1.y*c1);
+                n2.xy=vec2(n2.x*c2-n2.y*sv2,n2.x*sv2+n2.y*c2);
+                n3.xy=vec2(n3.x*c3-n3.y*sv3,n3.x*sv3+n3.y*c3);
                 vec3 bl=n1*bary.x+n2*bary.y+n3*bary.z, mn=(n1+n2+n3)/3.0;
                 return normalize(mn+(bl-mn)*inversesqrt(dot(bary,bary)));
             }
 
             void main()
             {
-                const float W_MIN = 0.005;
-                vec3 N = normalize(vNormal);
+                const float W_MIN  = 0.005;
+                const vec2  NEG_OFF = vec2(0.5, 0.0);
+
+                vec3 N    = normalize(vNormal);
                 vec3 nPos = pow(max( N, vec3(0.0)), vec3(_TriplanarBlend));
                 vec3 nNeg = pow(max(-N, vec3(0.0)), vec3(_TriplanarBlend));
                 float wPX=nPos.x, wNX=nNeg.x, wPY=nPos.y, wNY=nNeg.y, wPZ=nPos.z, wNZ=nNeg.z;
                 float wS=wPX+wNX+wPY+wNY+wPZ+wNZ+0.0001;
                 wPX/=wS; wNX/=wS; wPY/=wS; wNY/=wS; wPZ/=wS; wNZ/=wS;
 
-                vec2 uvPX=vec2( worldPos.z, worldPos.y)*_Tiling, uvNX=vec2(-worldPos.z, worldPos.y)*_Tiling;
-                vec2 uvPY=vec2( worldPos.x, worldPos.z)*_Tiling, uvNY=vec2(-worldPos.x,-worldPos.z)*_Tiling;
-                vec2 uvPZ=vec2( worldPos.x, worldPos.y)*_Tiling, uvNZ=vec2(-worldPos.x, worldPos.y)*_Tiling;
+                vec2 uvPX=worldPos.zy*_Tiling,        uvNX=worldPos.zy*_Tiling+NEG_OFF;
+                vec2 uvPY=worldPos.xz*_Tiling,        uvNY=worldPos.xz*_Tiling+NEG_OFF;
+                vec2 uvPZ=worldPos.xy*_Tiling,        uvNZ=worldPos.xy*_Tiling+NEG_OFF;
 
                 vec2 ox1PX,ox2PX,ox3PX; float r1PX,r2PX,r3PX; vec3 baryPX;
                 vec2 ox1NX,ox2NX,ox3NX; float r1NX,r2NX,r3NX; vec3 baryNX;
@@ -561,22 +537,22 @@ Pass "DepthNormals"
                 if (_AlphaCutoff > 0.0)
                 {
                     vec4 a = vec4(0.0);
-                    if (wPX>W_MIN) a += hexSample(_MainTex,uvPX,ox1PX,ox2PX,ox3PX,r1PX,r2PX,r3PX,baryPX)*wPX;
-                    if (wNX>W_MIN) a += hexSample(_MainTex,uvNX,ox1NX,ox2NX,ox3NX,r1NX,r2NX,r3NX,baryNX)*wNX;
-                    if (wPY>W_MIN) a += hexSample(_MainTex,uvPY,ox1PY,ox2PY,ox3PY,r1PY,r2PY,r3PY,baryPY)*wPY;
-                    if (wNY>W_MIN) a += hexSample(_MainTex,uvNY,ox1NY,ox2NY,ox3NY,r1NY,r2NY,r3NY,baryNY)*wNY;
-                    if (wPZ>W_MIN) a += hexSample(_MainTex,uvPZ,ox1PZ,ox2PZ,ox3PZ,r1PZ,r2PZ,r3PZ,baryPZ)*wPZ;
-                    if (wNZ>W_MIN) a += hexSample(_MainTex,uvNZ,ox1NZ,ox2NZ,ox3NZ,r1NZ,r2NZ,r3NZ,baryNZ)*wNZ;
+                    if (wPX>W_MIN) a+=hexSample(_MainTex,uvPX,ox1PX,ox2PX,ox3PX,r1PX,r2PX,r3PX,baryPX)*wPX;
+                    if (wNX>W_MIN) a+=hexSample(_MainTex,uvNX,ox1NX,ox2NX,ox3NX,r1NX,r2NX,r3NX,baryNX)*wNX;
+                    if (wPY>W_MIN) a+=hexSample(_MainTex,uvPY,ox1PY,ox2PY,ox3PY,r1PY,r2PY,r3PY,baryPY)*wPY;
+                    if (wNY>W_MIN) a+=hexSample(_MainTex,uvNY,ox1NY,ox2NY,ox3NY,r1NY,r2NY,r3NY,baryNY)*wNY;
+                    if (wPZ>W_MIN) a+=hexSample(_MainTex,uvPZ,ox1PZ,ox2PZ,ox3PZ,r1PZ,r2PZ,r3PZ,baryPZ)*wPZ;
+                    if (wNZ>W_MIN) a+=hexSample(_MainTex,uvNZ,ox1NZ,ox2NZ,ox3NZ,r1NZ,r2NZ,r3NZ,baryNZ)*wNZ;
                     if (a.a * _MainColor.a < _AlphaCutoff) discard;
                 }
 
                 vec3 wn = vec3(0.0);
-                if (wPX>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvPX,ox1PX,ox2PX,ox3PX,r1PX,r2PX,r3PX,baryPX); wn+=vec3( tn.z, tn.y, tn.x)*wPX; }
-                if (wNX>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvNX,ox1NX,ox2NX,ox3NX,r1NX,r2NX,r3NX,baryNX); wn+=vec3(-tn.z, tn.y,-tn.x)*wNX; }
-                if (wPY>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvPY,ox1PY,ox2PY,ox3PY,r1PY,r2PY,r3PY,baryPY); wn+=vec3( tn.x, tn.z, tn.y)*wPY; }
-                if (wNY>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvNY,ox1NY,ox2NY,ox3NY,r1NY,r2NY,r3NY,baryNY); wn+=vec3(-tn.x,-tn.z,-tn.y)*wNY; }
-                if (wPZ>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvPZ,ox1PZ,ox2PZ,ox3PZ,r1PZ,r2PZ,r3PZ,baryPZ); wn+=vec3( tn.x, tn.y, tn.z)*wPZ; }
-                if (wNZ>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvNZ,ox1NZ,ox2NZ,ox3NZ,r1NZ,r2NZ,r3NZ,baryNZ); wn+=vec3(-tn.x, tn.y,-tn.z)*wNZ; }
+                if (wPX>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvPX,ox1PX,ox2PX,ox3PX,r1PX,r2PX,r3PX,baryPX); wn+=vec3(tn.z*sign(N.x),tn.y,tn.x)*wPX; }
+                if (wNX>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvNX,ox1NX,ox2NX,ox3NX,r1NX,r2NX,r3NX,baryNX); wn+=vec3(tn.z*sign(N.x),tn.y,tn.x)*wNX; }
+                if (wPY>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvPY,ox1PY,ox2PY,ox3PY,r1PY,r2PY,r3PY,baryPY); wn+=vec3(tn.x,tn.z*sign(N.y),tn.y)*wPY; }
+                if (wNY>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvNY,ox1NY,ox2NY,ox3NY,r1NY,r2NY,r3NY,baryNY); wn+=vec3(tn.x,tn.z*sign(N.y),tn.y)*wNY; }
+                if (wPZ>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvPZ,ox1PZ,ox2PZ,ox3PZ,r1PZ,r2PZ,r3PZ,baryPZ); wn+=vec3(tn.x,tn.y,tn.z*sign(N.z))*wPZ; }
+                if (wNZ>W_MIN) { vec3 tn=hexSampleNormal(_NormalTex,uvNZ,ox1NZ,ox2NZ,ox3NZ,r1NZ,r2NZ,r3NZ,baryNZ); wn+=vec3(tn.x,tn.y,tn.z*sign(N.z))*wNZ; }
 
                 normalOut = EncodeViewNormal(normalize(wn));
             }
@@ -620,66 +596,31 @@ Pass "StandardShadow"
             uniform float     _Tiling;
             uniform float     _TriplanarBlend;
 
-            vec2 sHash(vec2 p)
-            {
-                p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
-                return fract(sin(p) * 43758.5453123);
-            }
-            float rHash(vec2 p) { return fract(sin(dot(p, vec2(41.5, 93.7))) * 43758.5453123); }
-            vec2 hexRot(vec2 uv, float a) { float c=cos(a),s=sin(a); return vec2(uv.x*c-uv.y*s, uv.x*s+uv.y*c); }
-
-            void hexSetup(vec2 uv,
-                          out vec2 ox1, out vec2 ox2, out vec2 ox3,
-                          out float r1,  out float r2,  out float r3,
-                          out vec3 bary)
-            {
-                const float k=0.8660254, P3=1.04719755;
-                vec2 g=vec2(uv.x+uv.y*0.5, uv.y*k), i=floor(g), f=fract(g);
-                vec2 v1,v2,v3;
-                if (f.x+f.y < 1.0) { v1=i; v2=i+vec2(1,0); v3=i+vec2(0,1); bary=vec3(1.0-f.x-f.y,f.x,f.y); }
-                else                { v1=i+vec2(1,1); v2=i+vec2(0,1); v3=i+vec2(1,0); bary=vec3(f.x+f.y-1.0,1.0-f.x,1.0-f.y); }
-                ox1=sHash(v1); ox2=sHash(v2); ox3=sHash(v3);
-                r1=floor(rHash(v1)*6.0)*P3; r2=floor(rHash(v2)*6.0)*P3; r3=floor(rHash(v3)*6.0)*P3;
-            }
-
             void main()
             {
+                // Shadow pass: plain texture() lookups — no hex setup, no uninitialized
+                // variables. Matches the triplanar shadow pass approach exactly, just
+                // with 6 faces instead of 3.
                 if (_AlphaCutoff > 0.0)
                 {
-                    const float W_MIN = 0.005;
-                    vec3 N = normalize(vNormal);
+                    const vec2 NEG_OFF = vec2(0.5, 0.0);
+
+                    vec3 N    = normalize(vNormal);
                     vec3 nPos = pow(max( N, vec3(0.0)), vec3(_TriplanarBlend));
                     vec3 nNeg = pow(max(-N, vec3(0.0)), vec3(_TriplanarBlend));
                     float wPX=nPos.x, wNX=nNeg.x, wPY=nPos.y, wNY=nNeg.y, wPZ=nPos.z, wNZ=nNeg.z;
                     float wS=wPX+wNX+wPY+wNY+wPZ+wNZ+0.0001;
                     wPX/=wS; wNX/=wS; wPY/=wS; wNY/=wS; wPZ/=wS; wNZ/=wS;
 
-                    vec2 uvPX=vec2( worldPos.z, worldPos.y)*_Tiling, uvNX=vec2(-worldPos.z, worldPos.y)*_Tiling;
-                    vec2 uvPY=vec2( worldPos.x, worldPos.z)*_Tiling, uvNY=vec2(-worldPos.x,-worldPos.z)*_Tiling;
-                    vec2 uvPZ=vec2( worldPos.x, worldPos.y)*_Tiling, uvNZ=vec2(-worldPos.x, worldPos.y)*_Tiling;
+                    vec4 albedo = vec4(0.0);
+                    albedo += texture(_MainTex, worldPos.zy * _Tiling        ) * wPX;
+                    albedo += texture(_MainTex, worldPos.zy * _Tiling + NEG_OFF) * wNX;
+                    albedo += texture(_MainTex, worldPos.xz * _Tiling        ) * wPY;
+                    albedo += texture(_MainTex, worldPos.xz * _Tiling + NEG_OFF) * wNY;
+                    albedo += texture(_MainTex, worldPos.xy * _Tiling        ) * wPZ;
+                    albedo += texture(_MainTex, worldPos.xy * _Tiling + NEG_OFF) * wNZ;
 
-                    vec2 ox1PX,ox2PX,ox3PX; float r1PX,r2PX,r3PX; vec3 baryPX;
-                    vec2 ox1NX,ox2NX,ox3NX; float r1NX,r2NX,r3NX; vec3 baryNX;
-                    vec2 ox1PY,ox2PY,ox3PY; float r1PY,r2PY,r3PY; vec3 baryPY;
-                    vec2 ox1NY,ox2NY,ox3NY; float r1NY,r2NY,r3NY; vec3 baryNY;
-                    vec2 ox1PZ,ox2PZ,ox3PZ; float r1PZ,r2PZ,r3PZ; vec3 baryPZ;
-                    vec2 ox1NZ,ox2NZ,ox3NZ; float r1NZ,r2NZ,r3NZ; vec3 baryNZ;
-                    if (wPX>W_MIN) hexSetup(uvPX,ox1PX,ox2PX,ox3PX,r1PX,r2PX,r3PX,baryPX);
-                    if (wNX>W_MIN) hexSetup(uvNX,ox1NX,ox2NX,ox3NX,r1NX,r2NX,r3NX,baryNX);
-                    if (wPY>W_MIN) hexSetup(uvPY,ox1PY,ox2PY,ox3PY,r1PY,r2PY,r3PY,baryPY);
-                    if (wNY>W_MIN) hexSetup(uvNY,ox1NY,ox2NY,ox3NY,r1NY,r2NY,r3NY,baryNY);
-                    if (wPZ>W_MIN) hexSetup(uvPZ,ox1PZ,ox2PZ,ox3PZ,r1PZ,r2PZ,r3PZ,baryPZ);
-                    if (wNZ>W_MIN) hexSetup(uvNZ,ox1NZ,ox2NZ,ox3NZ,r1NZ,r2NZ,r3NZ,baryNZ);
-
-                    float alpha = 0.0;
-                    if (wPX>W_MIN) { vec4 s1=texture(_MainTex,hexRot(uvPX,r1PX)+ox1PX), s2=texture(_MainTex,hexRot(uvPX,r2PX)+ox2PX), s3=texture(_MainTex,hexRot(uvPX,r3PX)+ox3PX); alpha+=(s1.a*baryPX.x+s2.a*baryPX.y+s3.a*baryPX.z)*wPX; }
-                    if (wNX>W_MIN) { vec4 s1=texture(_MainTex,hexRot(uvNX,r1NX)+ox1NX), s2=texture(_MainTex,hexRot(uvNX,r2NX)+ox2NX), s3=texture(_MainTex,hexRot(uvNX,r3NX)+ox3NX); alpha+=(s1.a*baryNX.x+s2.a*baryNX.y+s3.a*baryNX.z)*wNX; }
-                    if (wPY>W_MIN) { vec4 s1=texture(_MainTex,hexRot(uvPY,r1PY)+ox1PY), s2=texture(_MainTex,hexRot(uvPY,r2PY)+ox2PY), s3=texture(_MainTex,hexRot(uvPY,r3PY)+ox3PY); alpha+=(s1.a*baryPY.x+s2.a*baryPY.y+s3.a*baryPY.z)*wPY; }
-                    if (wNY>W_MIN) { vec4 s1=texture(_MainTex,hexRot(uvNY,r1NY)+ox1NY), s2=texture(_MainTex,hexRot(uvNY,r2NY)+ox2NY), s3=texture(_MainTex,hexRot(uvNY,r3NY)+ox3NY); alpha+=(s1.a*baryNY.x+s2.a*baryNY.y+s3.a*baryNY.z)*wNY; }
-                    if (wPZ>W_MIN) { vec4 s1=texture(_MainTex,hexRot(uvPZ,r1PZ)+ox1PZ), s2=texture(_MainTex,hexRot(uvPZ,r2PZ)+ox2PZ), s3=texture(_MainTex,hexRot(uvPZ,r3PZ)+ox3PZ); alpha+=(s1.a*baryPZ.x+s2.a*baryPZ.y+s3.a*baryPZ.z)*wPZ; }
-                    if (wNZ>W_MIN) { vec4 s1=texture(_MainTex,hexRot(uvNZ,r1NZ)+ox1NZ), s2=texture(_MainTex,hexRot(uvNZ,r2NZ)+ox2NZ), s3=texture(_MainTex,hexRot(uvNZ,r3NZ)+ox3NZ); alpha+=(s1.a*baryNZ.x+s2.a*baryNZ.y+s3.a*baryNZ.z)*wNZ; }
-
-                    if (alpha * _MainColor.a < _AlphaCutoff) discard;
+                    if (albedo.a * _MainColor.a < _AlphaCutoff) discard;
                 }
                 gl_FragDepth = gl_FragCoord.z;
             }
