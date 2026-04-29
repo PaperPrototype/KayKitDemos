@@ -1,6 +1,6 @@
 CompanyName: "DefaultCompany"
 ProductName: "My Game"
 Version: "0.1.0"
-LastScenePath: "Demo.scene"
+LastScenePath: "Paper/VoxelTerrain/Scenes/VoxelTerrain.scene"
 $id: 1
 $type: "Prowl.Editor.GeneralSettings, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"

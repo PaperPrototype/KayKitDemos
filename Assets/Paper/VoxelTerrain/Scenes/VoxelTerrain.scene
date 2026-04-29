@@ -1987,7 +1987,7 @@
             "$type": "Paper.VoxelTerrain.VoxelWorld, KayKits1.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "Player": {
               "$id": 86,
-              "Name": "Cube",
+              "Name": "Cube (Triplanar POM)",
               "AssetPath": "",
               "Identifier": "c58548d5-da5a-44e8-99ab-bf714f769ec9",
               "Static": 0B,
@@ -2000,14 +2000,14 @@
                 "$id": 87,
                 "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "_localPosition": {
-                  "X": -1F,
-                  "Y": 4F,
-                  "Z": 3F
+                  "X": -8.538617F,
+                  "Y": 1.2349391F,
+                  "Z": 11.321855F
                 },
                 "_localScale": {
-                  "X": 1F,
-                  "Y": 1F,
-                  "Z": 1F
+                  "X": 5F,
+                  "Y": 5F,
+                  "Z": 5F
                 },
                 "_localRotation": {
                   "X": 0F,
@@ -2063,63 +2063,7 @@
       },
       {
         "$id": 89,
-        "Name": "Sphere (Hexaplanar)",
-        "AssetPath": "",
-        "Identifier": "a05c07f8-144e-4534-8d44-4d40876d4586",
-        "Static": 0B,
-        "Enabled": 1B,
-        "EnabledInHierarchy": 1B,
-        "TagIndex": 0,
-        "LayerIndex": 0,
-        "HideFlags": 0,
-        "Transform": {
-          "$id": 90,
-          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "_localPosition": {
-            "X": -10.46139F,
-            "Y": 0F,
-            "Z": -13.493379F
-          },
-          "_localScale": {
-            "X": 5F,
-            "Y": 5F,
-            "Z": 5F
-          },
-          "_localRotation": {
-            "X": 0F,
-            "Y": 0F,
-            "Z": 0F,
-            "W": 1F
-          }
-        },
-        "Components": [
-          {
-            "$id": 91,
-            "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Mesh": {
-              "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
-            },
-            "Materials": [
-              {
-                "AssetID": "0a746d9d-8eee-495f-9937-06bfac7ebbc2"
-              }
-            ],
-            "_identifier": "f3c4f0bf-d7ad-487a-be8e-642719826ced",
-            "_enabled": true,
-            "_enabledInHierarchy": true,
-            "HideFlags": 0,
-            "AssetPath": "",
-            "AssetID": "00000000-0000-0000-0000-000000000000",
-            "Name": "NewMeshRenderer"
-          }
-        ],
-        "Children": [
-
-        ]
-      },
-      {
-        "$id": 92,
-        "Name": "Sphere (Triplanar)",
+        "Name": "Sphere (Triplanar POM)",
         "AssetPath": "",
         "Identifier": "3b9ffb0a-3911-4ded-a56d-fd2ef0828e10",
         "Static": 0B,
@@ -2129,7 +2073,7 @@
         "LayerIndex": 0,
         "HideFlags": 0,
         "Transform": {
-          "$id": 93,
+          "$id": 90,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
             "X": -10.274872F,
@@ -2150,7 +2094,7 @@
         },
         "Components": [
           {
-            "$id": 94,
+            "$id": 91,
             "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "Mesh": {
               "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
@@ -2174,13 +2118,69 @@
         ]
       },
       {
-        "$id": 95,
-        "Name": "Sphere (Triplanar Height Blend)",
+        "$id": 92,
+        "Name": "Sphere (Triplanar Height Blend POM)",
         "AssetPath": "",
         "Identifier": "c38fad84-efb6-40bc-8dff-d8118cb88bd8",
         "Static": 0B,
         "Enabled": 1B,
-        "EnabledInHierarchy": 1B,
+        "EnabledInHierarchy": 0B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 93,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": -10.243981F,
+            "Y": -1.5497208E-06F,
+            "Z": -0.94650364F
+          },
+          "_localScale": {
+            "X": 5F,
+            "Y": 5F,
+            "Z": 5F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+          {
+            "$id": 94,
+            "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Mesh": {
+              "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
+            },
+            "Materials": [
+              {
+                "AssetID": "f2c90cd4-da42-43ae-aff8-7d1dc1dc7e07"
+              }
+            ],
+            "_identifier": "332bb05f-2d24-48c4-b9d5-892b840859fd",
+            "_enabled": true,
+            "_enabledInHierarchy": false,
+            "HideFlags": 0,
+            "AssetPath": "",
+            "AssetID": "00000000-0000-0000-0000-000000000000",
+            "Name": "NewMeshRenderer"
+          }
+        ],
+        "Children": [
+
+        ]
+      },
+      {
+        "$id": 95,
+        "Name": "Sphere (Hexaplanar)",
+        "AssetPath": "",
+        "Identifier": "a05c07f8-144e-4534-8d44-4d40876d4586",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 0B,
         "TagIndex": 0,
         "LayerIndex": 0,
         "HideFlags": 0,
@@ -2188,9 +2188,9 @@
           "$id": 96,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
-            "X": -10.113498F,
-            "Y": -5.9604645E-07F,
-            "Z": 11.1075945F
+            "X": -10.46139F,
+            "Y": 0F,
+            "Z": -13.493379F
           },
           "_localScale": {
             "X": 5F,
@@ -2213,10 +2213,122 @@
             },
             "Materials": [
               {
-                "AssetID": "f2c90cd4-da42-43ae-aff8-7d1dc1dc7e07"
+                "AssetID": "0a746d9d-8eee-495f-9937-06bfac7ebbc2"
               }
             ],
-            "_identifier": "332bb05f-2d24-48c4-b9d5-892b840859fd",
+            "_identifier": "f3c4f0bf-d7ad-487a-be8e-642719826ced",
+            "_enabled": true,
+            "_enabledInHierarchy": false,
+            "HideFlags": 0,
+            "AssetPath": "",
+            "AssetID": "00000000-0000-0000-0000-000000000000",
+            "Name": "NewMeshRenderer"
+          }
+        ],
+        "Children": [
+
+        ]
+      },
+      {
+        "$id": 98,
+        "Name": "Sphere (Stochastic Triplanar POM)",
+        "AssetPath": "",
+        "Identifier": "9a8008b7-43f9-4129-8614-c3085eb507af",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 0B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 99,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": -10.360962F,
+            "Y": 0F,
+            "Z": -25.476505F
+          },
+          "_localScale": {
+            "X": 5F,
+            "Y": 5F,
+            "Z": 5F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+          {
+            "$id": 100,
+            "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Mesh": {
+              "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
+            },
+            "Materials": [
+              {
+                "AssetID": "78fcf4c4-ee0d-4f16-ae73-bb2f2e0c5d6e"
+              }
+            ],
+            "_identifier": "0641163a-ff45-4151-95a5-fed793b4bc98",
+            "_enabled": true,
+            "_enabledInHierarchy": false,
+            "HideFlags": 0,
+            "AssetPath": "",
+            "AssetID": "00000000-0000-0000-0000-000000000000",
+            "Name": "NewMeshRenderer"
+          }
+        ],
+        "Children": [
+
+        ]
+      },
+      {
+        "$id": 101,
+        "Name": "Sphere (TriplanarVertexColors Shadergraph)",
+        "AssetPath": "",
+        "Identifier": "38039259-5fd6-42f6-87cb-a0675154c93e",
+        "Static": 0B,
+        "Enabled": 1B,
+        "EnabledInHierarchy": 1B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 102,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": -10.278984F,
+            "Y": 4.7683716E-07F,
+            "Z": 22.822683F
+          },
+          "_localScale": {
+            "X": 5F,
+            "Y": 5F,
+            "Z": 5F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+          {
+            "$id": 103,
+            "$type": "Prowl.Runtime.MeshRenderer, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Mesh": {
+              "AssetID": "45079293-ba9a-e95a-96e3-7b00055911c2"
+            },
+            "Materials": [
+              {
+                "AssetID": "04e77000-1949-4f81-8768-d37d8b5205b8"
+              }
+            ],
+            "_identifier": "85184587-2d1c-4a10-a553-acb9c3512c56",
             "_enabled": true,
             "_enabledInHierarchy": true,
             "HideFlags": 0,
@@ -2227,6 +2339,52 @@
         ],
         "Children": [
 
+        ]
+      },
+      {
+        "$id": 104,
+        "Name": "Abominations",
+        "AssetPath": "",
+        "Identifier": "733ab5fb-c104-4bf5-8d8d-9788d8386230",
+        "Static": 0B,
+        "Enabled": 0B,
+        "EnabledInHierarchy": 0B,
+        "TagIndex": 0,
+        "LayerIndex": 0,
+        "HideFlags": 0,
+        "Transform": {
+          "$id": 105,
+          "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "_localPosition": {
+            "X": 0.0756588F,
+            "Y": -9.536743E-06F,
+            "Z": -12.8718195F
+          },
+          "_localScale": {
+            "X": 1F,
+            "Y": 1F,
+            "Z": 1F
+          },
+          "_localRotation": {
+            "X": 0F,
+            "Y": 0F,
+            "Z": 0F,
+            "W": 1F
+          }
+        },
+        "Components": [
+
+        ],
+        "Children": [
+          {
+            "$id": 95
+          },
+          {
+            "$id": 98
+          },
+          {
+            "$id": 92
+          }
         ]
       }
     ]
@@ -2270,9 +2428,12 @@
       "100287d9-c954-4dfe-b16c-f4987b8a0a39",
       "f5286a40-8548-4bf9-8dee-864f7e2ece3e",
       "c58548d5-da5a-44e8-99ab-bf714f769ec9",
-      "a05c07f8-144e-4534-8d44-4d40876d4586",
       "3b9ffb0a-3911-4ded-a56d-fd2ef0828e10",
-      "c38fad84-efb6-40bc-8dff-d8118cb88bd8"
+      "c38fad84-efb6-40bc-8dff-d8118cb88bd8",
+      "a05c07f8-144e-4534-8d44-4d40876d4586",
+      "9a8008b7-43f9-4129-8614-c3085eb507af",
+      "38039259-5fd6-42f6-87cb-a0675154c93e",
+      "733ab5fb-c104-4bf5-8d8d-9788d8386230"
     ]
   },
   "_compIdentifiers": {
@@ -2289,9 +2450,11 @@
       "f26b2471-0166-461f-965c-12695e91d4dd",
       "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
       "7509373e-4933-47e8-9c18-0f83cfad06ad",
-      "f3c4f0bf-d7ad-487a-be8e-642719826ced",
       "a50a404b-fb40-41e7-85d4-ef33906bf2eb",
-      "332bb05f-2d24-48c4-b9d5-892b840859fd"
+      "332bb05f-2d24-48c4-b9d5-892b840859fd",
+      "f3c4f0bf-d7ad-487a-be8e-642719826ced",
+      "0641163a-ff45-4151-95a5-fed793b4bc98",
+      "85184587-2d1c-4a10-a553-acb9c3512c56"
     ]
   },
   "_compIdOffsets": {
@@ -2336,7 +2499,10 @@
       12,
       13,
       14,
-      15
+      15,
+      16,
+      17,
+      17
     ]
   },
   "Fog": {

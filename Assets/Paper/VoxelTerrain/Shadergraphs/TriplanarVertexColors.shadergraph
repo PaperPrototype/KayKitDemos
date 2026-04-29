@@ -2,7 +2,7 @@
   "$id": 1,
   "$type": "Prowl.Runtime.GraphTools.ShaderGraphs.ShaderGraph, Prowl.Editor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "Name": "New Shader Graph",
-  "AssetPath": "Paper/VoxelTerrain/WIP_Parralax.shadergraph",
+  "AssetPath": "Paper/VoxelTerrain/Shadergraphs/TriplanarVertexColors.shadergraph",
   "AssetID": "33b4a89f-e17a-45f0-b7e7-7df7bb3c2902",
   "Nodes": [
     {
