@@ -1,18 +1,17 @@
 /*
 This file implements a meshing approach that is a hybrid of VoxelChunk 
-    and MarchingChunk: it emits quads like VoxelChunk but displaces each of 
-    the 8 integer-grid corners to the MC edge-interpolated surface crossing 
-    position before emitting the quad.  This is a simple way to get smoother 
-    meshes without the complexity of full marching cubes with lookup tables 
-    and case handling.  The topology is the same as VoxelChunk so it shares 
-    the same vertex colors and fast quad emission, but the vertex positions 
-    are more expensive to compute (though still much cheaper than full MC) 
-    and the meshes are smoother and have better lighting.  This is the "best
-    of both worlds" approach that I ended up choosing.
+and MarchingChunk: it emits quads like VoxelChunk but displaces each of 
+the 8 integer-grid corners to the MC edge-interpolated surface crossing 
+position before emitting the quad.  This is a simple way to get smoother 
+meshes without the complexity of full marching cubes with lookup tables 
+and case handling.  The topology is the same as VoxelChunk so it shares 
+the same vertex colors and fast quad emission, but the vertex positions 
+are more expensive to compute and the meshes are smoother and have 
+better lighting.  This is the "best of both worlds" approach that I 
+ended up choosing.
 */
 
 using Prowl.Runtime;
-using Prowl.Runtime.Rendering;
 using Prowl.Runtime.Resources;
 using Prowl.Vector;
 using System.Collections.Generic;
@@ -22,7 +21,7 @@ namespace Paper.VoxelTerrain;
 
 // Cube-face meshing (same topology as VoxelChunk) but each of the 8 integer-grid
 // corners is displaced to the MC edge-interpolated surface crossing position before
-// the quads are emitted.  No lookup tables — just corner displacement.
+// the quads are emitted.  No lookup table meshing, just corner displacement.
 public class InterpolatedCubeChunk : MonoBehaviour
 {
     private const int ChunkWidth  = 16;
@@ -46,6 +45,14 @@ public class InterpolatedCubeChunk : MonoBehaviour
         (-1,  0,  0), // 6
         ( 0,  0,  0), // 7
     ];
+
+    private Float2[] faceUVs = new Float2[4]
+    {
+        new Float2(0.0f, 0.0f),
+        new Float2(1.0f, 0.0f),
+        new Float2(1.0f, 1.0f),
+        new Float2(0.0f, 1.0f)
+    };
 
     // All 12 edges of the local 2x2x2 cube (pairs of corner indices above).
     private static readonly (int a, int b)[] CubeEdges =
@@ -113,6 +120,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
 
         List<Float3> vertices  = [];
         List<uint>   triangles = [];
+        List<Float2> uvs       = [];
 
         // Displaced corner positions are cached so adjacent faces share the same
         // interpolated corner without recomputing it.
@@ -136,19 +144,19 @@ public class InterpolatedCubeChunk : MonoBehaviour
             float leftD   = SampleWorld(x - 1, y, z);
 
             if (topD > 0)
-                AddFace(vertices, triangles, x, y, z, 0, cornerCache);
+                AddFace(vertices, triangles, uvs, x, y, z, 0, cornerCache);
             if (downD > 0)
-                AddFace(vertices, triangles, x, y, z, 1, cornerCache);
+                AddFace(vertices, triangles, uvs, x, y, z, 1,  cornerCache);
 
             if (frontD > 0)
-                AddFace(vertices, triangles, x, y, z, 2, cornerCache);
+                AddFace(vertices, triangles, uvs, x, y, z, 2, cornerCache);
             if (backD > 0)
-                AddFace(vertices, triangles, x, y, z, 3, cornerCache);
+                AddFace(vertices, triangles, uvs, x, y, z, 3, cornerCache);
 
             if (rightD > 0)
-                AddFace(vertices, triangles, x, y, z, 4, cornerCache);
+                AddFace(vertices, triangles, uvs, x, y, z, 4, cornerCache);
             if (leftD > 0)
-                AddFace(vertices, triangles, x, y, z, 5, cornerCache);
+                AddFace(vertices, triangles, uvs, x, y, z, 5, cornerCache);
 
             // if (y == ChunkHeight - 1 || voxels[x, y + 1, z] == 0)
             //     AddFace(vertices, triangles, x, y, z, 0, cornerCache);
@@ -176,6 +184,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
         Mesh mesh = new();
         mesh.Vertices = vertices.ToArray();
         mesh.Indices  = triangles.ToArray();
+        mesh.UV       = uvs.ToArray();
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
         mesh.RecalculateTangents();
@@ -186,7 +195,9 @@ public class InterpolatedCubeChunk : MonoBehaviour
     }
 
     private void AddFace(
-        List<Float3> vertices, List<uint> triangles,
+        List<Float3> vertices, 
+        List<uint> triangles,
+        List<Float2> uvs,
         int x, int y, int z, int face,
         Dictionary<(int, int, int), Float3> cache)
     {
@@ -211,6 +222,8 @@ public class InterpolatedCubeChunk : MonoBehaviour
         triangles.Add(baseIdx);
         triangles.Add(baseIdx + 2);
         triangles.Add(baseIdx + 3);
+
+        uvs.AddRange(faceUVs);
     }
 
     // For a corner at integer grid position (cx,cy,cz):
