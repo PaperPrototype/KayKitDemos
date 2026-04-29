@@ -392,8 +392,6 @@ public class VoxelChunk : MonoBehaviour
         if (localX >= 0 && localX < ChunkWidth && localY >= 0 && localY < ChunkHeight && localZ >= 0 && localZ < ChunkDepth)
             return voxels[localX, localY, localZ] != 0;
 
-        int worldX = chunkPosition.X * ChunkWidth + localX;
-        int worldZ = chunkPosition.Z * ChunkDepth + localZ;
-        return voxelWorld.GetVoxel(new Int3(worldX, localY, worldZ)) != 0;
+        return GetVoxel(localX, localY, localZ) != 0;
     }
 }
