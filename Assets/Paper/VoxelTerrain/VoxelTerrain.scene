@@ -167,7 +167,7 @@
                 "$type": "Prowl.Runtime.DirectionalLight, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "ShadowResolution": 1024,
                 "Cascades": 4,
-                "ShadowDistance": 100F,
+                "ShadowDistance": 1000F,
                 "Color": {
                   "R": 1F,
                   "G": 1F,
@@ -177,7 +177,7 @@
                 "Intensity": 5F,
                 "ShadowStrength": 1F,
                 "ShadowBias": 0.001F,
-                "ShadowNormalBias": 0F,
+                "ShadowNormalBias": 1F,
                 "CastShadows": true,
                 "ShadowQuality": 1,
                 "_identifier": "f67f538b-3fb2-4452-a374-09abecd6dedb",
@@ -2000,9 +2000,9 @@
                 "$id": 87,
                 "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "_localPosition": {
-                  "X": 0F,
-                  "Y": 0F,
-                  "Z": 0F
+                  "X": -1F,
+                  "Y": 4F,
+                  "Z": 3F
                 },
                 "_localScale": {
                   "X": 1F,
@@ -2025,7 +2025,7 @@
                   },
                   "Materials": [
                     {
-                      "AssetID": "d7009b28-9353-6559-8847-62e877cec576"
+                      "AssetID": "ae627025-a778-4ee9-98b8-01b2c49a740e"
                     }
                   ],
                   "_identifier": "7509373e-4933-47e8-9c18-0f83cfad06ad",

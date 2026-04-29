@@ -2,7 +2,7 @@
   "$id": 1,
   "$type": "Prowl.Runtime.Resources.Material, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
   "_shader": {
-    "AssetID": "2801c469-95df-4821-a4e8-4af6a73eff19"
+    "AssetID": "b058fc3f-c8e0-4510-b970-9a06fe38b890"
   },
   "_properties": {
     "$id": 2,
@@ -19,7 +19,7 @@
 
     },
     "_floats": {
-      "_Parallax": 0.1F,
+      "_Parallax": 0.01F,
       "_Tiling": 0.125F,
       "_HeightBlendStrength": 1F,
       "_TriplanarBlend": 1F
