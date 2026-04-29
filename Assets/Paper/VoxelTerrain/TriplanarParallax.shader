@@ -99,20 +99,58 @@ Pass "Standard"
                 vec2 uvY = worldPos.xz * _Tiling;
                 vec2 uvZ = worldPos.xy * _Tiling;
 
-                // Parallax Occlusion Mapping — per-axis with analytically derived tangent frames.
-                // Each axis has a fixed TBN in world space; we project viewDir into each:
-                //   X: T=(0,0,1) B=(0,1,0)  face=(sign(N.x),0,0)  → vdTS=(V.z, V.y, V.x*sign)
-                //   Y: T=(1,0,0) B=(0,0,1)  face=(0,sign(N.y),0)  → vdTS=(V.x, V.z, V.y*sign)
-                //   Z: T=(1,0,0) B=(0,1,0)  face=(0,0,sign(N.z))  → vdTS=(V.x, V.y, V.z*sign)
+                // Seamless Triplanar POM via surface-normal-projected world-space ray march.
+                //
+                // The dominant-axis approach still has a seam: the step direction branches
+                // hard when one axis overtakes another, creating a visible discontinuity.
+                //
+                // Fix: decompose viewDir into two smooth functions of N — no axis branches:
+                //   viewDotN  = dot(viewDir, N)          — depth penetration rate
+                //   tangDrift = viewDir - viewDotN * N   — surface-tangent drift (UV shift)
+                //
+                // For axis-aligned normals this is provably identical to the per-axis tangent
+                // frame formulation. For N=(0,1,0): viewDotN=viewDir.y, tangDrift=(vx,0,vz)
+                // — exactly the Y-axis TBN result. Intermediate normals interpolate smoothly.
                 if (_Parallax > 0.0 && _ParallaxSteps > 0)
                 {
-                    vec3 vdX = vec3(viewDir.z, viewDir.y, viewDir.x * sign(N.x));
-                    vec3 vdY = vec3(viewDir.x, viewDir.z, viewDir.y * sign(N.y));
-                    vec3 vdZ = vec3(viewDir.x, viewDir.y, viewDir.z * sign(N.z));
+                    float viewDotN  = max(dot(viewDir, N), 0.001);
+                    vec3  tangDrift = viewDir - viewDotN * N;
+                    // Negate: marching into surface shifts UVs opposite to projected view.
+                    // Divide by _Tiling to convert UV-space offset to world-space step.
+                    vec3 worldStep = -tangDrift / (viewDotN * _Tiling)
+                                   * _Parallax / float(_ParallaxSteps);
 
-                    uvX = ParallaxOcclusionMapping(_ParallaxMap, uvX, vdX, _Parallax, _ParallaxSteps);
-                    uvY = ParallaxOcclusionMapping(_ParallaxMap, uvY, vdY, _Parallax, _ParallaxSteps);
-                    uvZ = ParallaxOcclusionMapping(_ParallaxMap, uvZ, vdZ, _Parallax, _ParallaxSteps);
+                    float stepSize   = 1.0 / float(_ParallaxSteps);
+                    float layerDepth = 0.0;
+                    vec3  curPos     = worldPos;
+                    vec3  prevPos    = worldPos;
+                    float mapH       = 1.0;
+                    float prevMapH   = 1.0;
+
+                    for (int i = 0; i < _ParallaxSteps; i++)
+                    {
+                        prevPos    = curPos;
+                        prevMapH   = mapH;
+                        curPos    += worldStep;
+                        layerDepth += stepSize;
+
+                        mapH = texture(_ParallaxMap, curPos.zy * _Tiling).g * weights.x
+                             + texture(_ParallaxMap, curPos.xz * _Tiling).g * weights.y
+                             + texture(_ParallaxMap, curPos.xy * _Tiling).g * weights.z;
+
+                        if (layerDepth >= 1.0 - mapH) break;
+                    }
+
+                    // Linear refinement between the last two steps
+                    float d0    = (layerDepth - stepSize) - (1.0 - prevMapH);
+                    float d1    = layerDepth - (1.0 - mapH);
+                    float denom = d1 - d0;
+                    float t     = abs(denom) > 0.0001 ? clamp(-d0 / denom, 0.0, 1.0) : 0.5;
+                    curPos = mix(prevPos, curPos, t);
+
+                    uvX = curPos.zy * _Tiling;
+                    uvY = curPos.xz * _Tiling;
+                    uvZ = curPos.xy * _Tiling;
                 }
 
                 // Albedo
