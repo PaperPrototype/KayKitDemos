@@ -77,7 +77,7 @@
                   {
                     "$id": 7,
                     "$type": "Prowl.Runtime.Rendering.TonemapperEffect, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                    "Type": 4,
+                    "Type": 6,
                     "Contrast": 1.1F,
                     "Saturation": 1.1F,
                     "Enabled": true
@@ -97,7 +97,7 @@
                 "FieldOfView": 60F,
                 "OrthographicSize": 0.5F,
                 "NearClipPlane": 0.1F,
-                "FarClipPlane": 100F,
+                "FarClipPlane": 1000F,
                 "Depth": -1,
                 "Pipeline": NULL,
                 "Target": NULL,
@@ -174,7 +174,7 @@
                   "B": 1F,
                   "A": 1F
                 },
-                "Intensity": 1F,
+                "Intensity": 5F,
                 "ShadowStrength": 1F,
                 "ShadowBias": 0.001F,
                 "ShadowNormalBias": 0F,
@@ -2042,7 +2042,7 @@
               ]
             },
             "Material": {
-              "AssetID": "78fcf4c4-ee0d-4f16-ae73-bb2f2e0c5d6e"
+              "AssetID": "ae627025-a778-4ee9-98b8-01b2c49a740e"
             },
             "noise": NULL,
             "_identifier": "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
@@ -2098,7 +2098,7 @@
             },
             "Materials": [
               {
-                "AssetID": "ddb8669d-a9af-481f-924f-131bc05200e8"
+                "AssetID": "ae627025-a778-4ee9-98b8-01b2c49a740e"
               }
             ],
             "_identifier": "a50a404b-fb40-41e7-85d4-ef33906bf2eb",
