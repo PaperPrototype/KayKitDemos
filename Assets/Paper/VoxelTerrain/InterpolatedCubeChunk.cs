@@ -1,3 +1,16 @@
+/*
+This file implements a meshing approach that is a hybrid of VoxelChunk 
+    and MarchingChunk: it emits quads like VoxelChunk but displaces each of 
+    the 8 integer-grid corners to the MC edge-interpolated surface crossing 
+    position before emitting the quad.  This is a simple way to get smoother 
+    meshes without the complexity of full marching cubes with lookup tables 
+    and case handling.  The topology is the same as VoxelChunk so it shares 
+    the same vertex colors and fast quad emission, but the vertex positions 
+    are more expensive to compute (though still much cheaper than full MC) 
+    and the meshes are smoother and have better lighting.  This is the "best
+    of both worlds" approach that I ended up choosing.
+*/
+
 using Prowl.Runtime;
 using Prowl.Runtime.Rendering;
 using Prowl.Runtime.Resources;
@@ -176,7 +189,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
     // 1. Sample the density of each of the 8 voxels that share this corner.
     // 2. Check all 12 edges of the local 2x2x2 cube for sign changes.
     // 3. For each crossing edge compute the MC-interpolated surface position.
-    // 4. Average all crossing positions → final vertex position.
+    // 4. Average all crossing positions -> final vertex position.
     // If no edges cross (deep interior or exterior) the corner stays put.
     private Float3 GetInterpolatedCorner(int cx, int cy, int cz, Dictionary<(int, int, int), Float3> cache)
     {
