@@ -52,13 +52,13 @@ public class VoxelChunk : MonoBehaviour
         new Color(0.27f, 0.62f, 0.18f, 1f),      // Grass    - green
     };
 
-    private static readonly float[] BlockSmoothingLevels = new float[]
-    {
-        1.0f,    // Air
-        0.0f,  // Stone
-        0.7f,  // Dirt
-        1.0f,  // Grass
-    };
+    // private static readonly float[] BlockSmoothingLevels = new float[]
+    // {
+    //     1.0f,  // Air
+    //     0.0f,  // Stone
+    //     0.7f,  // Dirt
+    //     1.0f,  // Grass
+    // };
     
     public void Initialize(Int3 chunkPos, VoxelWorld voxelWorld)
     {
