@@ -25,8 +25,10 @@ namespace Paper.VoxelTerrain;
 public class InterpolatedCubeChunk : MonoBehaviour
 {
     private const int ChunkWidth  = 16;
-    private const int ChunkHeight = 256;
+    private const int ChunkHeight = 64; // for performance I reduce chunk height since I only care about the bottom area of the terrain for now
     private const int ChunkDepth  = 16;
+
+    private const int WorldHeight = 256; // used for normalizing Y when sampling noise, to get consistent terrain across different chunk heights.
 
     private Int3 chunkPosition;
     // private byte[,,] voxels = new byte[ChunkWidth, ChunkHeight, ChunkDepth];
@@ -286,19 +288,25 @@ public class InterpolatedCubeChunk : MonoBehaviour
         float worldY = worldChunkY + localY;
         float worldZ  = worldChunkZ + localZ;
 
-        // // height falloff so noise gets smaller (zero) as we go up, to reduce floating islands and make caves less tall.
-        // float heightFalloff = 1f - (worldY / (ChunkHeight * 4f));
-        // heightFalloff = Maths.Max(heightFalloff, 0f);
+        // add gradient from bottom up so terrain is much more likely to be solid near the bottom and less likely near the top
+        float normalizedY = worldY / WorldHeight;
+
+        float heightCurveValue = voxelWorld.HeightCurve.Evaluate(normalizedY);
+
+        float groundHeight = 20f; // base ground height
 
         // add gradient from bottom up so terrain is much more likely to be solid near the bottom and less likely near the top
-        float normalizedY = worldY / ChunkHeight;
-        // normalizedY = Maths.Min(normalizedY, 1f);
+        float normalizedGroundY = worldY / groundHeight;
 
-        // float heightFalloff = 1f - (normalizedY * normalizedY * normalizedY);
-        // heightFalloff = Maths.Max(heightFalloff, 0f);
+        float varianceFrequency = 1.5f; // controls horizontal feature size`
+        float heightVariation = Maths.Clamp((voxelWorld.noise.GetNoise(worldX * varianceFrequency, worldZ * varianceFrequency) + 1f) * 0.5f * normalizedGroundY * groundHeight,
+            0f, groundHeight
+        ) + 1f;
+
+        float heightVariationStrengthFrequency = 0.5f;
+        float heightVariationStrengthNoise = (voxelWorld.noise.GetNoise(worldX * heightVariationStrengthFrequency, worldY * heightVariationStrengthFrequency, worldZ * heightVariationStrengthFrequency) + 1f) * 0.5f;
 
         float frequency = 2f; // controls horizontal feature size
-
-        return Maths.Clamp(voxelWorld.noise.GetNoise(worldX * frequency, worldY * frequency, worldZ * frequency) + normalizedY, -1f, 1f);
+        return Maths.Clamp(voxelWorld.noise.GetNoise(worldX * frequency, worldY * frequency, worldZ * frequency) + heightCurveValue + (heightVariation * heightVariationStrengthNoise), -1f, 1f);
     }
 }

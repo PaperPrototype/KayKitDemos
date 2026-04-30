@@ -9,12 +9,14 @@ namespace Paper.VoxelTerrain;
 public class VoxelWorld : MonoBehaviour
 {
     public GameObject Player;
+    public AnimationCurve HeightCurve;
+    // public float HeightCurveStrength = 28f;
     public AssetRef<Material> Material;
 
     private const int ChunkWidth = 16;
     private const int ChunkHeight = 256;
     private const int ChunkDepth = 16;
-    private const int RenderDistance = 3;
+    private const int RenderDistance = 10;
 
     // How often (in seconds) to check if the player has crossed a chunk boundary
     private const float UpdateInterval = 0.5f;

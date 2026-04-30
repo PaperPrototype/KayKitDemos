@@ -1,0 +1,79 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.Resources.Material, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "_shader": {
+    "AssetID": "6ef66bc2-bb86-4d46-b54d-8b220e9aba00"
+  },
+  "_properties": {
+    "$id": 2,
+    "_colors": {
+
+    },
+    "_vectors2": {
+
+    },
+    "_vectors3": {
+
+    },
+    "_vectors4": {
+
+    },
+    "_floats": {
+      "_Parallax": 0.1F,
+      "_Tiling": 0.125F,
+      "_TopTiling": 0.125F
+    },
+    "_ints": {
+
+    },
+    "_matrices": {
+
+    },
+    "_matrixArr": {
+
+    },
+    "_textures": {
+      "_MainTex": {
+        "AssetID": "80ad85d6-8826-4757-92cb-246cec2004df"
+      },
+      "_NormalTex": {
+        "AssetID": "3523ee51-42c3-4958-8aa4-cd2e0f5b721f"
+      },
+      "_ParallaxMap": {
+        "AssetID": "016032a3-2c7b-4a4d-88fe-e3752db27d39"
+      },
+      "_TopTex": {
+        "AssetID": "0bc7014c-c0f0-45ef-ae57-df8378d07455"
+      },
+      "_TopNormalTex": {
+        "AssetID": "b009ea38-02a9-44c0-a618-904c3ad8da13"
+      },
+      "_TopParallaxMap": {
+        "AssetID": "87ed4add-60ba-4c2b-a87c-1e560a317701"
+      }
+    },
+    "_textures3D": {
+
+    },
+    "_buffers": {
+
+    },
+    "_bufferBindings": {
+
+    }
+  },
+  "_overrides": [
+    "_MainTex",
+    "_NormalTex",
+    "_ParallaxMap",
+    "_Parallax",
+    "_Tiling",
+    "_TopTiling",
+    "_TopTex",
+    "_TopNormalTex",
+    "_TopParallaxMap"
+  ],
+  "AssetPath": "Paper/VoxelTerrain/Materials/LayeredTriplanarPOM.mat",
+  "AssetID": "00000000-0000-0000-0000-000000000000",
+  "Name": "New Material"
+}
