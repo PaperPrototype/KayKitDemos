@@ -34,9 +34,9 @@ Properties
     _TopParallaxMap ("Top Height Map (G)", Texture2D) = "black"
     _TopParallax ("Top Height Scale", Float) = 0.0
 
-    // N.y range over which rock transitions to grass
-    _TopBlendStart ("Top Blend Start (N.y)", Float) = 0.5
-    _TopBlendEnd ("Top Blend End (N.y)", Float) = 0.8
+    // Higher = grass appears only on more directly upward-facing surfaces (sharper rock/grass edge)
+    // Lower = grass bleeds further onto slopes. ~16 works well for axis-aligned voxel meshes.
+    _TopBlendSharpness ("Top Blend Sharpness", Float) = 1.0
 }
 
 Pass "Standard"
@@ -102,16 +102,17 @@ Pass "Standard"
             uniform sampler2D _TopSurfaceTex;
             uniform sampler2D _TopParallaxMap;
             uniform float _TopParallax;
-            uniform float _TopBlendStart;
-            uniform float _TopBlendEnd;
+            uniform float _TopBlendSharpness;
 
             void main()
             {
                 vec3 N = normalize(vNormal);
                 vec3 viewDir = normalize(_WorldSpaceCameraPos.xyz - worldPos);
 
-                // How much this surface faces up — drives rock-to-grass blend
-                float topFactor = smoothstep(_TopBlendStart, _TopBlendEnd, N.y);
+                // How much this surface faces up — drives rock-to-grass blend.
+                // Power function: high exponent snaps to 0/1 quickly so averaged vertex normals
+                // at face boundaries don't bleed the blend into the interior of each face.
+                float topFactor = pow(clamp(N.y, 0.0, 1.0), _TopBlendSharpness);
 
                 // Triplanar blend weights
                 vec3 absN = abs(N);
@@ -292,8 +293,7 @@ Pass "DepthNormals"
             uniform float _Tiling;
             uniform float _TopTiling;
             uniform float _TriplanarBlend;
-            uniform float _TopBlendStart;
-            uniform float _TopBlendEnd;
+            uniform float _TopBlendSharpness;
 
             void main()
             {
@@ -302,7 +302,7 @@ Pass "DepthNormals"
                 vec3 weights = pow(absN, vec3(_TriplanarBlend));
                 weights /= (weights.x + weights.y + weights.z + 0.0001);
 
-                float topFactor = smoothstep(_TopBlendStart, _TopBlendEnd, N.y);
+                float topFactor = pow(clamp(N.y, 0.0, 1.0), _TopBlendSharpness);
 
                 if (_AlphaCutoff > 0.0)
                 {

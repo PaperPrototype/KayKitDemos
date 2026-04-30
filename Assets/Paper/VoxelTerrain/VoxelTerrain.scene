@@ -63,10 +63,10 @@
                 "Z": 1F
               },
               "_localRotation": {
-                "X": -0.25805587F,
-                "Y": 0.7167053F,
-                "Z": 0.33268356F,
-                "W": 0.5559337F
+                "X": 0F,
+                "Y": 0F,
+                "Z": 0F,
+                "W": 1F
               }
             },
             "Components": [
@@ -1989,7 +1989,7 @@
               "$id": 86,
               "Name": "Cube (Triplanar POM)",
               "AssetPath": "",
-              "Identifier": "b31d6ef4-74f2-43c3-b215-00f2c2eaf7e8",
+              "Identifier": "b436c1c3-22bf-4ac6-b84f-e62d9389a152",
               "Static": 0B,
               "Enabled": 1B,
               "EnabledInHierarchy": 1B,
@@ -2028,7 +2028,7 @@
                       "AssetID": "ae627025-a778-4ee9-98b8-01b2c49a740e"
                     }
                   ],
-                  "_identifier": "e0ea8642-f276-498f-b582-3bc9228d3edf",
+                  "_identifier": "f274a8e4-0a52-4f1e-ac5c-8f0dccafaacb",
                   "_enabled": true,
                   "_enabledInHierarchy": true,
                   "HideFlags": 0,
@@ -2094,9 +2094,9 @@
           "$id": 91,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
-            "X": -8.538617F,
+            "X": 0.503211F,
             "Y": 1.2349391F,
-            "Z": 11.321855F
+            "Z": 1.0219383F
           },
           "_localScale": {
             "X": 5F,
@@ -2374,9 +2374,9 @@
           "$id": 106,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
-            "X": -10.278984F,
+            "X": -9.34778F,
             "Y": 4.7683716E-07F,
-            "Z": 22.822683F
+            "Z": 24.880304F
           },
           "_localScale": {
             "X": 5F,
@@ -2476,9 +2476,9 @@
           "$id": 111,
           "$type": "Prowl.Vector.Transform, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "_localPosition": {
-            "X": -10.478459F,
-            "Y": -2.527237E-05F,
-            "Z": 36.917797F
+            "X": -20.418966F,
+            "Y": -4.6253204E-05F,
+            "Z": -1.5002921F
           },
           "_localScale": {
             "X": 5F,
