@@ -30,7 +30,14 @@ public class InterpolatedCubeChunk : MonoBehaviour
 
     private const int WorldHeight = 256; // used for normalizing Y when sampling noise, to get consistent terrain across different chunk heights.
 
+    // Density grid covers local coords [-1, ChunkWidth] x [-1, ChunkHeight] x [-1, ChunkDepth]
+    private const int DensityGridX = ChunkWidth  + 2; // 18
+    private const int DensityGridY = ChunkHeight + 2; // 258
+    private const int DensityGridZ = ChunkDepth  + 2; // 18
+    private readonly float[] _densityGrid = new float[DensityGridX * DensityGridY * DensityGridZ];
+
     private Int3 chunkPosition;
+    
     // private byte[,,] voxels = new byte[ChunkWidth, ChunkHeight, ChunkDepth];
     private MeshRenderer? meshRenderer;
     private Rigidbody3D? rigidbody3D;
@@ -73,19 +80,39 @@ public class InterpolatedCubeChunk : MonoBehaviour
         voxelWorld    = world;
         chunkPosition = chunkPos;
         meshRenderer  = AddComponent<MeshRenderer>();
-        rigidbody3D   = AddComponent<Rigidbody3D>();
-        rigidbody3D.Mass = 1f;
-        rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
-        meshCollider  = AddComponent<MeshCollider>();
-        meshCollider.Convex = false;
         meshRenderer.Material = world.Material;
+        // Physics components are created lazily when collision is first enabled
+        // with a valid mesh, to avoid "MeshCollider: no mesh assigned" warnings.
     }
 
     public void SetCollisionEnabled(bool enabled)
     {
         if (_collisionEnabled == enabled) return;
         _collisionEnabled = enabled;
-        meshCollider!.Mesh = enabled ? _cachedMesh : null;
+
+        if (enabled)
+        {
+            if (_cachedMesh is not null)
+            {
+                if (meshCollider is null) CreatePhysicsComponents();
+                else meshCollider.Mesh = _cachedMesh;
+            }
+            // If _cachedMesh is null the next GenerateMesh call will wire it up.
+        }
+        else if (meshCollider is not null)
+        {
+            meshCollider.Mesh = null!;
+        }
+    }
+
+    private void CreatePhysicsComponents()
+    {
+        rigidbody3D = AddComponent<Rigidbody3D>();
+        rigidbody3D.Mass = 1f;
+        rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
+        meshCollider = AddComponent<MeshCollider>();
+        meshCollider.Convex = false;
+        meshCollider.Mesh = _cachedMesh;
     }
 
     // public byte GetVoxel(int x, int y, int z)
@@ -148,18 +175,18 @@ public class InterpolatedCubeChunk : MonoBehaviour
         for (int y = 0; y < ChunkHeight; y++)
         for (int z = 0; z < ChunkDepth; z++)
         {
-            float centerD = SampleWorld(x, y, z);
+            float centerD = LookupDensity(x, y, z);
             if (centerD > 0) continue;
             // if (voxels[x, y, z] == 0) continue;
 
-            float topD    = SampleWorld(x, y + 1, z);
-            float downD   = SampleWorld(x, y - 1, z);
+            float topD    = LookupDensity(x, y + 1, z);
+            float downD   = LookupDensity(x, y - 1, z);
 
-            float frontD  = SampleWorld(x, y, z + 1);
-            float backD   = SampleWorld(x, y, z - 1);
+            float frontD  = LookupDensity(x, y, z + 1);
+            float backD   = LookupDensity(x, y, z - 1);
 
-            float rightD  = SampleWorld(x + 1, y, z);
-            float leftD   = SampleWorld(x - 1, y, z);
+            float rightD  = LookupDensity(x + 1, y, z);
+            float leftD   = LookupDensity(x - 1, y, z);
 
             if (topD > 0)
                 AddFace(vertices, triangles, uvs, x, y, z, 0, cornerCache);
@@ -197,7 +224,8 @@ public class InterpolatedCubeChunk : MonoBehaviour
             if (meshRenderer?.Mesh.Res != null)
                 meshRenderer.Mesh = null!;
             _cachedMesh = null;
-            meshCollider!.Mesh = null;
+            if (meshCollider is not null)
+                meshCollider.Mesh = null!;
             return;
         }
 
@@ -210,7 +238,12 @@ public class InterpolatedCubeChunk : MonoBehaviour
         mesh.RecalculateTangents();
         _cachedMesh = mesh;
         meshRenderer!.Mesh = mesh;
-        meshCollider!.Mesh = _collisionEnabled ? mesh : null;
+
+        if (_collisionEnabled)
+        {
+            if (meshCollider is null) CreatePhysicsComponents();
+            else meshCollider.Mesh = mesh;
+        }
 
         stopWatch.Stop();
         Prowl.Runtime.Debug.Log("ICube Meshing took " + stopWatch.ElapsedMilliseconds + "ms");
@@ -292,9 +325,20 @@ public class InterpolatedCubeChunk : MonoBehaviour
         return result;
     }
 
-    private float GetCornerDensity(int x, int y, int z) => SampleWorld(x, y, z);
+    public void BakeDensityGrid()
+    {
+        for (int x = -1; x <= ChunkWidth;  x++)
+        for (int y = -1; y <= ChunkHeight; y++)
+        for (int z = -1; z <= ChunkDepth;  z++)
+            _densityGrid[(x + 1) * DensityGridY * DensityGridZ + (y + 1) * DensityGridZ + (z + 1)] = ComputeDensity(x, y, z);
+    }
 
-    private float SampleWorld(int localX, int localY, int localZ)
+    private float LookupDensity(int x, int y, int z)
+        => _densityGrid[(x + 1) * DensityGridY * DensityGridZ + (y + 1) * DensityGridZ + (z + 1)];
+
+    private float GetCornerDensity(int x, int y, int z) => LookupDensity(x, y, z);
+
+    private float ComputeDensity(int localX, int localY, int localZ)
     {
         // TODO sample per block density instead of binary solid/air, to get better interpolation and smoother caves.
 

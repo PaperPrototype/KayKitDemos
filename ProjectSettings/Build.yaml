@@ -1,10 +1,10 @@
 Scenes:
-  - Path: "Paper/Platformer/Platformer.scene"
-    SceneGuid: "a5e9b072-cbd2-4960-8f09-d2016fc1d12b"
+  - Path: "Paper/VoxelTerrain/VoxelTerrain.scene"
+    SceneGuid: "03ce48f1-3b02-4cea-91a9-19c256010e9d"
     Enabled: true
     $id: 2
 Config: 1
-OutputDirectory: "Builds/v5/MacOS"
+OutputDirectory: "Builds/v1/MacOS"
 PackagingMode: 1
 AssetMode: 1
 MaxPakSizeMB: 2048

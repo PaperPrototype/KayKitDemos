@@ -170,16 +170,8 @@ public class VoxelWorld : MonoBehaviour
         int dz = chunkPos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
         chunk.SetCollisionEnabled(dx <= CollisionDistance && dz <= CollisionDistance);
 
+        chunk.BakeDensityGrid();
         chunk.GenerateMesh();
-
-        // Re-mesh adjacent already-loaded neighbors so they can incorporate this
-        // chunk's border data into their smoothing.
-        Int3[] neighborOffsets = [new(-1, 0, 0), new(1, 0, 0), new(0, 0, -1), new(0, 0, 1)];
-        foreach (var offset in neighborOffsets)
-        {
-            if (chunks.TryGetValue(chunkPos + offset, out InterpolatedCubeChunk? neighbor))
-                neighbor.GenerateMesh();
-        }
     }
 
     private void DestroyChunk(Int3 chunkPos)
