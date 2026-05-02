@@ -77,6 +77,7 @@
                   {
                     "$id": 7,
                     "$type": "Prowl.Runtime.Rendering.TonemapperEffect, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "Type": 4,
                     "Contrast": 1.1F,
                     "Saturation": 1.1F,
                     "Enabled": true

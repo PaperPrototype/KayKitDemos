@@ -20,7 +20,8 @@
     },
     "_floats": {
       "_Tiling": 0.125F,
-      "_Parallax": 0.1F
+      "_Parallax": 0.1F,
+      "_TriplanarBlend": 1F
     },
     "_ints": {
 
@@ -57,9 +58,10 @@
     "_Parallax",
     "_NormalTex",
     "_MainTex",
-    "_ParallaxMap"
+    "_ParallaxMap",
+    "_TriplanarBlend"
   ],
-  "AssetPath": "Paper/VoxelTerrain/TriplanarHeightBlendPOM.mat",
+  "AssetPath": "Paper/VoxelTerrain/Abominations/Materials/TriplanarHeightBlendPOM.mat",
   "AssetID": "00000000-0000-0000-0000-000000000000",
   "Name": "TriplanarHeightBlendPOM"
 }

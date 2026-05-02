@@ -6,7 +6,7 @@ Properties
     _MainTex ("Rock Albedo", Texture2D) = "grid"
     _MainColor ("Rock Tint", Color) = (1.0, 1.0, 1.0, 1.0)
     _Tiling ("Rock Tiling", Float) = 1.0
-    _TriplanarBlend ("Blend Sharpness", Float) = 4.0
+    _TriplanarBlend ("Blend Sharpness", Float) = 1.0
 
     _NormalTex ("Rock Normal", Texture2D) = "normal"
     _SurfaceTex ("Rock Surface (AO, Roughness, Metallicness)", Texture2D) = "surface"

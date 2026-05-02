@@ -1,0 +1,83 @@
+{
+  "$id": 1,
+  "$type": "Prowl.Runtime.Resources.Material, Prowl.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "_shader": {
+    "AssetID": "6ef66bc2-bb86-4d46-b54d-8b220e9aba00"
+  },
+  "_properties": {
+    "$id": 2,
+    "_colors": {
+
+    },
+    "_vectors2": {
+
+    },
+    "_vectors3": {
+
+    },
+    "_vectors4": {
+
+    },
+    "_floats": {
+      "_Parallax": 0.05F,
+      "_TopTiling": 0.125F,
+      "_Tiling": 0.125F,
+      "_TopParallax": 0.05F,
+      "_TopBlendSharpness": 1F
+    },
+    "_ints": {
+
+    },
+    "_matrices": {
+
+    },
+    "_matrixArr": {
+
+    },
+    "_textures": {
+      "_MainTex": {
+        "AssetID": "d39d4d4c-f6df-46e2-8efe-c1029ad1254b"
+      },
+      "_NormalTex": {
+        "AssetID": "a78fa6ef-58c1-4fdf-9a1c-ead3ddaf10d6"
+      },
+      "_ParallaxMap": {
+        "AssetID": "79b9d9fd-fc86-4b20-99dc-217e43531276"
+      },
+      "_TopTex": {
+        "AssetID": "5c6d46eb-007c-4c28-a819-e380d1466495"
+      },
+      "_TopNormalTex": {
+        "AssetID": "9b8c8f15-ff4c-409a-a500-913e49c31e0c"
+      },
+      "_TopParallaxMap": {
+        "AssetID": "04e8f5c8-aadd-44ca-988e-204fb6b35be6"
+      }
+    },
+    "_textures3D": {
+
+    },
+    "_buffers": {
+
+    },
+    "_bufferBindings": {
+
+    }
+  },
+  "_overrides": [
+    "_MainTex",
+    "_NormalTex",
+    "_ParallaxMap",
+    "_Parallax",
+    "_TopTex",
+    "_TopNormalTex",
+    "_TopParallaxMap",
+    "_TopTiling",
+    "_Tiling",
+    "_TopParallax",
+    "_TopBlendSharpness"
+  ],
+  "AssetPath": "Paper/VoxelTerrain/Materials/LayeredTriplanarPOM3.mat",
+  "AssetID": "00000000-0000-0000-0000-000000000000",
+  "Name": "LayeredTriplanarPOM3"
+}

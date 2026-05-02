@@ -19,7 +19,8 @@
 
     },
     "_floats": {
-      "_Parallax": 0.1F
+      "_Parallax": 0.1F,
+      "_Tiling": 1F
     },
     "_ints": {
 
@@ -55,9 +56,10 @@
     "_MainTex",
     "_NormalTex",
     "_ParallaxMap",
-    "_Parallax"
+    "_Parallax",
+    "_Tiling"
   ],
-  "AssetPath": "Paper/VoxelTerrain/StochasticPOM.mat",
+  "AssetPath": "Paper/VoxelTerrain/Abominations/Materials/StochasticPOM.mat",
   "AssetID": "00000000-0000-0000-0000-000000000000",
-  "Name": "New Material"
+  "Name": "StochasticPOM"
 }

@@ -1814,8 +1814,7 @@
               "$value": [
                 {
                   "$id": 81,
-                  "Path": "g0.c0.Radius",
-                  "Value": 0.4F
+                  "Path": "g0.c0.Radius"
                 }
               ]
             },

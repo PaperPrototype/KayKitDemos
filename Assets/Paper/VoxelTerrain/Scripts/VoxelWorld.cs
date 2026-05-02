@@ -13,16 +13,21 @@ public class VoxelWorld : MonoBehaviour
     // public float HeightCurveStrength = 28f;
     public AssetRef<Material> Material;
 
+    public int RenderDistance = 4;
+    public int CollisionDistance = 1;
+
     private const int ChunkWidth = 16;
     private const int ChunkHeight = 256;
     private const int ChunkDepth = 16;
-    private const int RenderDistance = 10;
 
     // How often (in seconds) to check if the player has crossed a chunk boundary
     private const float UpdateInterval = 0.5f;
     private float _updateTimer = 0f;
 
     private Dictionary<Int3, InterpolatedCubeChunk> chunks = [];
+    private Queue<Int3> _chunkLoadQueue = new();
+    private HashSet<Int3> _pendingChunks = new();
+
     public FastNoiseLite noise;
 
     // The chunk the player was in during the last update
@@ -33,11 +38,15 @@ public class VoxelWorld : MonoBehaviour
         noise = new FastNoiseLite();
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
         UpdateChunksAroundPlayer(force: true);
+        ProcessChunkQueue(); // Create the player's chunk immediately on start
     }
 
     public override void Update()
     {
         if (Player == null) return;
+
+        // Load one queued chunk per frame to avoid lag spikes
+        ProcessChunkQueue();
 
         _updateTimer -= Time.DeltaTime;
         if (_updateTimer > 0f) return;
@@ -49,9 +58,11 @@ public class VoxelWorld : MonoBehaviour
             (int)Maths.Floor(Player.Transform.Position.Z)
         ));
 
-        // Only rebuild if the player has moved into a different chunk
         if (currentPlayerChunk != _lastPlayerChunk)
+        {
             UpdateChunksAroundPlayer(force: false);
+            ProcessChunkQueue(); // Immediately load the new player chunk on boundary crossing
+        }
     }
 
     private void UpdateChunksAroundPlayer(bool force)
@@ -86,16 +97,54 @@ public class VoxelWorld : MonoBehaviour
             if (!desired.Contains(pos))
                 toRemove.Add(pos);
         }
-
         foreach (var pos in toRemove)
             DestroyChunk(pos);
 
-        // Load chunks that are missing
+        // Rebuild the load queue sorted closest-first so the player's chunk loads first
+        _chunkLoadQueue.Clear();
+        _pendingChunks.Clear();
+
+        var toLoad = new List<Int3>();
         foreach (var pos in desired)
-        {
             if (!chunks.ContainsKey(pos))
-                CreateChunk(pos);
+                toLoad.Add(pos);
+
+        toLoad.Sort((a, b) => ChebyshevDist(a, playerChunk).CompareTo(ChebyshevDist(b, playerChunk)));
+
+        foreach (var pos in toLoad)
+        {
+            _chunkLoadQueue.Enqueue(pos);
+            _pendingChunks.Add(pos);
         }
+
+        // Update collision on already-loaded chunks
+        UpdateCollisionForChunks(playerChunk);
+    }
+
+    private void ProcessChunkQueue()
+    {
+        if (_chunkLoadQueue.Count == 0) return;
+        var pos = _chunkLoadQueue.Dequeue();
+        _pendingChunks.Remove(pos);
+        if (!chunks.ContainsKey(pos))
+            CreateChunk(pos);
+    }
+
+    private void UpdateCollisionForChunks(Int3 playerChunk)
+    {
+        foreach (var (pos, chunk) in chunks)
+        {
+            int dx = pos.X - playerChunk.X; if (dx < 0) dx = -dx;
+            int dz = pos.Z - playerChunk.Z; if (dz < 0) dz = -dz;
+            chunk.SetCollisionEnabled(dx <= CollisionDistance && dz <= CollisionDistance);
+        }
+    }
+
+    private static int ChebyshevDist(Int3 a, Int3 b)
+    {
+        int dx = a.X - b.X; if (dx < 0) dx = -dx;
+        int dz = a.Z - b.Z; if (dz < 0) dz = -dz;
+        return dx > dz ? dx : dz;
     }
 
     private void CreateChunk(Int3 chunkPos)
@@ -116,7 +165,11 @@ public class VoxelWorld : MonoBehaviour
         chunks[chunkPos] = chunk;
         Scene.Add(chunkGO);
 
-        // chunk.GenerateChunk();
+        // Set collision state before meshing so GenerateMesh respects it
+        int dx = chunkPos.X - _lastPlayerChunk.X; if (dx < 0) dx = -dx;
+        int dz = chunkPos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
+        chunk.SetCollisionEnabled(dx <= CollisionDistance && dz <= CollisionDistance);
+
         chunk.GenerateMesh();
 
         // Re-mesh adjacent already-loaded neighbors so they can incorporate this

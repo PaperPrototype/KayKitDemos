@@ -25,7 +25,7 @@ namespace Paper.VoxelTerrain;
 public class InterpolatedCubeChunk : MonoBehaviour
 {
     private const int ChunkWidth  = 16;
-    private const int ChunkHeight = 64; // for performance I reduce chunk height since I only care about the bottom area of the terrain for now
+    private const int ChunkHeight = 256; // for performance I reduce chunk height since I only care about the bottom area of the terrain for now
     private const int ChunkDepth  = 16;
 
     private const int WorldHeight = 256; // used for normalizing Y when sampling noise, to get consistent terrain across different chunk heights.
@@ -33,7 +33,11 @@ public class InterpolatedCubeChunk : MonoBehaviour
     private Int3 chunkPosition;
     // private byte[,,] voxels = new byte[ChunkWidth, ChunkHeight, ChunkDepth];
     private MeshRenderer? meshRenderer;
+    private Rigidbody3D? rigidbody3D;
+    private MeshCollider? meshCollider;
     private VoxelWorld voxelWorld;
+    private Mesh? _cachedMesh;
+    private bool _collisionEnabled;
 
     // The 8 voxels that share a grid corner, expressed as offsets in {-1, 0} per axis.
     private static readonly (int ox, int oy, int oz)[] CubeCornerOffsets =
@@ -69,7 +73,19 @@ public class InterpolatedCubeChunk : MonoBehaviour
         voxelWorld    = world;
         chunkPosition = chunkPos;
         meshRenderer  = AddComponent<MeshRenderer>();
+        rigidbody3D   = AddComponent<Rigidbody3D>();
+        rigidbody3D.Mass = 1f;
+        rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
+        meshCollider  = AddComponent<MeshCollider>();
+        meshCollider.Convex = false;
         meshRenderer.Material = world.Material;
+    }
+
+    public void SetCollisionEnabled(bool enabled)
+    {
+        if (_collisionEnabled == enabled) return;
+        _collisionEnabled = enabled;
+        meshCollider!.Mesh = enabled ? _cachedMesh : null;
     }
 
     // public byte GetVoxel(int x, int y, int z)
@@ -180,6 +196,8 @@ public class InterpolatedCubeChunk : MonoBehaviour
         {
             if (meshRenderer?.Mesh.Res != null)
                 meshRenderer.Mesh = null!;
+            _cachedMesh = null;
+            meshCollider!.Mesh = null;
             return;
         }
 
@@ -190,7 +208,9 @@ public class InterpolatedCubeChunk : MonoBehaviour
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
         mesh.RecalculateTangents();
+        _cachedMesh = mesh;
         meshRenderer!.Mesh = mesh;
+        meshCollider!.Mesh = _collisionEnabled ? mesh : null;
 
         stopWatch.Stop();
         Prowl.Runtime.Debug.Log("ICube Meshing took " + stopWatch.ElapsedMilliseconds + "ms");

@@ -19,8 +19,10 @@
 
     },
     "_floats": {
-      "_Parallax": 0.1F,
-      "_HeightBlendStrength": 0.1F
+      "_Parallax": 0.01F,
+      "_HeightBlendStrength": 0.1F,
+      "_Tiling": 0.125F,
+      "_TriplanarBlend": 1F
     },
     "_ints": {
 
@@ -57,9 +59,11 @@
     "_NormalTex",
     "_ParallaxMap",
     "_Parallax",
-    "_HeightBlendStrength"
+    "_HeightBlendStrength",
+    "_Tiling",
+    "_TriplanarBlend"
   ],
-  "AssetPath": "Paper/VoxelTerrain/HexaplanarPOM.mat",
+  "AssetPath": "Paper/VoxelTerrain/Abominations/Materials/HexaplanarPOM.mat",
   "AssetID": "00000000-0000-0000-0000-000000000000",
   "Name": "HexaplanarPOM"
 }

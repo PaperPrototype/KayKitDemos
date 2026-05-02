@@ -23,10 +23,8 @@
       "_Tiling": 0.125F,
       "_TopTiling": 0.125F,
       "_TopParallax": 0.01F,
-      "_ScatteringScale": 1F,
       "_TopBlendEnd": 0.9F,
       "_TopBlendStart": 0.5F,
-      "_TopBlendSharpness": 1F,
       "_TriplanarBlend": 1F
     },
     "_ints": {
@@ -79,10 +77,8 @@
     "_TopNormalTex",
     "_TopParallaxMap",
     "_TopParallax",
-    "_ScatteringScale",
     "_TopBlendEnd",
     "_TopBlendStart",
-    "_TopBlendSharpness",
     "_TriplanarBlend"
   ],
   "AssetPath": "Paper/VoxelTerrain/Materials/LayeredTriplanarPOM.mat",
