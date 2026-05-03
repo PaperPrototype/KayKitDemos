@@ -1820,6 +1820,7 @@
             },
             "RenderDistance": 10,
             "CollisionDistance": 1,
+            "LoadMode": 1,
             "noise": NULL,
             "_identifier": "646e2944-4a99-409f-b5fb-bb5135bfb7c3",
             "_enabled": true,

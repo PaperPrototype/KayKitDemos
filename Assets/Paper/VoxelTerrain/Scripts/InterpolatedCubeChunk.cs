@@ -1,19 +1,20 @@
 /*
-This file implements a meshing approach that is a hybrid of VoxelChunk 
-and MarchingChunk: it emits quads like VoxelChunk but displaces each of 
-the 8 integer-grid corners to the MC edge-interpolated surface crossing 
-position before emitting the quad.  This is a simple way to get smoother 
-meshes without the complexity of full marching cubes with lookup tables 
-and case handling.  The topology is the same as VoxelChunk so it shares 
-the same vertex colors and fast quad emission, but the vertex positions 
-are more expensive to compute and the meshes are smoother and have 
-better lighting.  This is the "best of both worlds" approach that I 
+This file implements a meshing approach that is a hybrid of VoxelChunk
+and MarchingChunk: it emits quads like VoxelChunk but displaces each of
+the 8 integer-grid corners to the MC edge-interpolated surface crossing
+position before emitting the quad.  This is a simple way to get smoother
+meshes without the complexity of full marching cubes with lookup tables
+and case handling.  The topology is the same as VoxelChunk so it shares
+the same vertex colors and fast quad emission, but the vertex positions
+are more expensive to compute and the meshes are smoother and have
+better lighting.  This is the "best of both worlds" approach that I
 ended up choosing.
 */
 
 using Prowl.Runtime;
 using Prowl.Runtime.Resources;
 using Prowl.Vector;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -25,20 +26,18 @@ namespace Paper.VoxelTerrain;
 public class InterpolatedCubeChunk : MonoBehaviour
 {
     private const int ChunkWidth  = 16;
-    private const int ChunkHeight = 256; // for performance I reduce chunk height since I only care about the bottom area of the terrain for now
+    private const int ChunkHeight = 48; // terrain peaks around y=20; 48 gives safe headroom
     private const int ChunkDepth  = 16;
 
-    private const int WorldHeight = 256; // used for normalizing Y when sampling noise, to get consistent terrain across different chunk heights.
+    private const int WorldHeight = 256; // used for normalizing world-Y when sampling noise
 
     // Density grid covers local coords [-1, ChunkWidth] x [-1, ChunkHeight] x [-1, ChunkDepth]
     private const int DensityGridX = ChunkWidth  + 2; // 18
-    private const int DensityGridY = ChunkHeight + 2; // 258
+    private const int DensityGridY = ChunkHeight + 2; // 50
     private const int DensityGridZ = ChunkDepth  + 2; // 18
     private readonly float[] _densityGrid = new float[DensityGridX * DensityGridY * DensityGridZ];
 
     private Int3 chunkPosition;
-    
-    // private byte[,,] voxels = new byte[ChunkWidth, ChunkHeight, ChunkDepth];
     private MeshRenderer? meshRenderer;
     private Rigidbody3D? rigidbody3D;
     private MeshCollider? meshCollider;
@@ -59,13 +58,13 @@ public class InterpolatedCubeChunk : MonoBehaviour
         ( 0,  0,  0), // 7
     ];
 
-    private Float2[] faceUVs = new Float2[4]
-    {
+    private static readonly Float2[] faceUVs =
+    [
         new Float2(0.0f, 0.0f),
         new Float2(1.0f, 0.0f),
         new Float2(1.0f, 1.0f),
         new Float2(0.0f, 1.0f)
-    };
+    ];
 
     // All 12 edges of the local 2x2x2 cube (pairs of corner indices above).
     private static readonly (int a, int b)[] CubeEdges =
@@ -97,7 +96,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
                 if (meshCollider is null) CreatePhysicsComponents();
                 else meshCollider.Mesh = _cachedMesh;
             }
-            // If _cachedMesh is null the next GenerateMesh call will wire it up.
+            // If _cachedMesh is null the next ApplyMesh call will wire it up.
         }
         else if (meshCollider is not null)
         {
@@ -115,60 +114,23 @@ public class InterpolatedCubeChunk : MonoBehaviour
         meshCollider.Mesh = _cachedMesh;
     }
 
-    // public byte GetVoxel(int x, int y, int z)
-    // {
-    //     if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
-    //         return 0;
-    //     return voxels[x, y, z];
-    // }
+    public void BakeDensityGrid()
+    {
+        for (int x = -1; x <= ChunkWidth;  x++)
+        for (int y = -1; y <= ChunkHeight; y++)
+        for (int z = -1; z <= ChunkDepth;  z++)
+            _densityGrid[(x + 1) * DensityGridY * DensityGridZ + (y + 1) * DensityGridZ + (z + 1)] = ComputeDensity(x, y, z);
+    }
 
-    // public void SetVoxel(int x, int y, int z, byte value)
-    // {
-    //     if (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkDepth)
-    //         return;
-    //     voxels[x, y, z] = value;
-    //     GenerateMesh();
-    // }
-
-    // public void GenerateChunk()
-    // {
-    //     int worldOffsetX = chunkPosition.X * ChunkWidth;
-    //     int worldOffsetY = chunkPosition.Y * ChunkDepth;
-    //     int worldOffsetZ = chunkPosition.Z * ChunkDepth;
-
-    //     for (int x = 0; x < ChunkWidth; x++)
-    //     for (int z = 0; z < ChunkDepth; z++)
-    //     {
-    //         float worldX = worldOffsetX + x;
-    //         float worldZ = worldOffsetZ + z;
-
-    //         int baseHeight     = 64;
-    //         int heightVariation = (int)(voxelWorld.noise.GetNoise(worldX * 0.9f, worldZ * 0.9f) * 10f);
-    //         int height          = baseHeight + heightVariation;
-
-    //         for (int y = 0; y < ChunkHeight; y++)
-    //         {
-    //             float worldY  = worldOffsetY + y;
-    //             float caveGen = voxelWorld.noise.GetNoise(worldX * 0.9f, worldY * 0.9f, worldZ * 0.9f);
-    //             if      (caveGen > 0.3f)    voxels[x, y, z] = 0;
-    //             else if (y < height - 5)    voxels[x, y, z] = 1;
-    //             else if (y < height - 1)    voxels[x, y, z] = 2;
-    //             else if (y < height)        voxels[x, y, z] = 3;
-    //             else                        voxels[x, y, z] = 0;
-    //         }
-    //     }
-    // }
-
-    public void GenerateMesh()
+    // Builds vertex/triangle/uv data and returns a ready-to-use Mesh, or null for empty chunks.
+    // Safe to call from a background thread — only reads _densityGrid and creates a new Mesh object.
+    public Mesh? BuildMeshData()
     {
         var stopWatch = Stopwatch.StartNew();
 
-        List<Float3> vertices  = [];
-        List<uint>   triangles = [];
-        List<Float2> uvs       = [];
-
-        // Displaced corner positions are cached so adjacent faces share the same
-        // interpolated corner without recomputing it.
+        List<Float3> vertices  = new(2048);
+        List<uint>   triangles = new(3072);
+        List<Float2> uvs       = new(2048);
         var cornerCache = new Dictionary<(int, int, int), Float3>();
 
         for (int x = 0; x < ChunkWidth; x++)
@@ -177,57 +139,23 @@ public class InterpolatedCubeChunk : MonoBehaviour
         {
             float centerD = LookupDensity(x, y, z);
             if (centerD > 0) continue;
-            // if (voxels[x, y, z] == 0) continue;
 
-            float topD    = LookupDensity(x, y + 1, z);
-            float downD   = LookupDensity(x, y - 1, z);
+            float topD   = LookupDensity(x, y + 1, z);
+            float downD  = LookupDensity(x, y - 1, z);
+            float frontD = LookupDensity(x, y, z + 1);
+            float backD  = LookupDensity(x, y, z - 1);
+            float rightD = LookupDensity(x + 1, y, z);
+            float leftD  = LookupDensity(x - 1, y, z);
 
-            float frontD  = LookupDensity(x, y, z + 1);
-            float backD   = LookupDensity(x, y, z - 1);
-
-            float rightD  = LookupDensity(x + 1, y, z);
-            float leftD   = LookupDensity(x - 1, y, z);
-
-            if (topD > 0)
-                AddFace(vertices, triangles, uvs, x, y, z, 0, cornerCache);
-            if (downD > 0)
-                AddFace(vertices, triangles, uvs, x, y, z, 1,  cornerCache);
-
-            if (frontD > 0)
-                AddFace(vertices, triangles, uvs, x, y, z, 2, cornerCache);
-            if (backD > 0)
-                AddFace(vertices, triangles, uvs, x, y, z, 3, cornerCache);
-
-            if (rightD > 0)
-                AddFace(vertices, triangles, uvs, x, y, z, 4, cornerCache);
-            if (leftD > 0)
-                AddFace(vertices, triangles, uvs, x, y, z, 5, cornerCache);
-
-            // if (y == ChunkHeight - 1 || voxels[x, y + 1, z] == 0)
-            //     AddFace(vertices, triangles, x, y, z, 0, cornerCache);
-            // if (y == 0               || voxels[x, y - 1, z] == 0)
-            //     AddFace(vertices, triangles, x, y, z, 1, cornerCache);
-
-            // if (z == ChunkDepth - 1  || voxels[x, y, z + 1] == 0)
-            //     AddFace(vertices, triangles, x, y, z, 2, cornerCache);
-            // if (z == 0               || voxels[x, y, z - 1] == 0)
-            //     AddFace(vertices, triangles, x, y, z, 3, cornerCache);
-
-            // if (x == ChunkWidth - 1  || voxels[x + 1, y, z] == 0)
-            //     AddFace(vertices, triangles, x, y, z, 4, cornerCache);
-            // if (x == 0               || voxels[x - 1, y, z] == 0)
-            //     AddFace(vertices, triangles, x, y, z, 5, cornerCache);
+            if (topD   > 0) AddFace(vertices, triangles, uvs, x, y, z, 0, cornerCache);
+            if (downD  > 0) AddFace(vertices, triangles, uvs, x, y, z, 1, cornerCache);
+            if (frontD > 0) AddFace(vertices, triangles, uvs, x, y, z, 2, cornerCache);
+            if (backD  > 0) AddFace(vertices, triangles, uvs, x, y, z, 3, cornerCache);
+            if (rightD > 0) AddFace(vertices, triangles, uvs, x, y, z, 4, cornerCache);
+            if (leftD  > 0) AddFace(vertices, triangles, uvs, x, y, z, 5, cornerCache);
         }
 
-        if (vertices.Count == 0)
-        {
-            if (meshRenderer?.Mesh.Res != null)
-                meshRenderer.Mesh = null!;
-            _cachedMesh = null;
-            if (meshCollider is not null)
-                meshCollider.Mesh = null!;
-            return;
-        }
+        if (vertices.Count == 0) return null;
 
         Mesh mesh = new();
         mesh.Vertices = vertices.ToArray();
@@ -236,7 +164,26 @@ public class InterpolatedCubeChunk : MonoBehaviour
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
         mesh.RecalculateTangents();
+
+        stopWatch.Stop();
+        Prowl.Runtime.Debug.Log("ICube Meshing took " + stopWatch.ElapsedMilliseconds + "ms");
+        return mesh;
+    }
+
+    // Applies a completed mesh (or null for empty) to the renderer and physics. Must run on main thread.
+    public void ApplyMesh(Mesh? mesh)
+    {
         _cachedMesh = mesh;
+
+        if (mesh is null)
+        {
+            if (meshRenderer?.Mesh.Res != null)
+                meshRenderer.Mesh = null!;
+            if (meshCollider is not null)
+                meshCollider.Mesh = null!;
+            return;
+        }
+
         meshRenderer!.Mesh = mesh;
 
         if (_collisionEnabled)
@@ -244,32 +191,33 @@ public class InterpolatedCubeChunk : MonoBehaviour
             if (meshCollider is null) CreatePhysicsComponents();
             else meshCollider.Mesh = mesh;
         }
-
-        stopWatch.Stop();
-        Prowl.Runtime.Debug.Log("ICube Meshing took " + stopWatch.ElapsedMilliseconds + "ms");
     }
 
     private void AddFace(
-        List<Float3> vertices, 
+        List<Float3> vertices,
         List<uint> triangles,
         List<Float2> uvs,
         int x, int y, int z, int face,
         Dictionary<(int, int, int), Float3> cache)
     {
-        var cornerLookup = new(int cx, int cy, int cz)[][]{
-            [(x,   y+1, z  ), (x,   y+1, z+1), (x+1, y+1, z+1), (x+1, y+1, z  )], // Top    (+Y)
-            [(x,   y,   z+1), (x,   y,   z  ), (x+1, y,   z  ), (x+1, y,   z+1)], // Bottom (-Y)
-            [(x,   y,   z+1), (x+1, y,   z+1), (x+1, y+1, z+1), (x,   y+1, z+1)], // Front  (+Z)
-            [(x+1, y,   z  ), (x,   y,   z  ), (x,   y+1, z  ), (x+1, y+1, z  )], // Back   (-Z)
-            [(x+1, y,   z+1), (x+1, y,   z  ), (x+1, y+1, z  ), (x+1, y+1, z+1)], // Right  (+X)
-            [(x,   y,   z  ), (x,   y,   z+1), (x,   y+1, z+1), (x,   y+1, z  )], // Left   (-X)
+        (int cx0, int cy0, int cz0,
+         int cx1, int cy1, int cz1,
+         int cx2, int cy2, int cz2,
+         int cx3, int cy3, int cz3) = face switch
+        {
+            0 => (x,   y+1, z,   x,   y+1, z+1, x+1, y+1, z+1, x+1, y+1, z  ), // Top    (+Y)
+            1 => (x,   y,   z+1, x,   y,   z,   x+1, y,   z,   x+1, y,   z+1), // Bottom (-Y)
+            2 => (x,   y,   z+1, x+1, y,   z+1, x+1, y+1, z+1, x,   y+1, z+1), // Front  (+Z)
+            3 => (x+1, y,   z,   x,   y,   z,   x,   y+1, z,   x+1, y+1, z  ), // Back   (-Z)
+            4 => (x+1, y,   z+1, x+1, y,   z,   x+1, y+1, z,   x+1, y+1, z+1), // Right  (+X)
+            _ => (x,   y,   z,   x,   y,   z+1, x,   y+1, z+1, x,   y+1, z  ), // Left   (-X)
         };
 
-        var corners = cornerLookup[face];
-
         uint baseIdx = (uint)vertices.Count;
-        foreach (var (cx, cy, cz) in corners)
-            vertices.Add(GetInterpolatedCorner(cx, cy, cz, cache));
+        vertices.Add(GetInterpolatedCorner(cx0, cy0, cz0, cache));
+        vertices.Add(GetInterpolatedCorner(cx1, cy1, cz1, cache));
+        vertices.Add(GetInterpolatedCorner(cx2, cy2, cz2, cache));
+        vertices.Add(GetInterpolatedCorner(cx3, cy3, cz3, cache));
 
         triangles.Add(baseIdx);
         triangles.Add(baseIdx + 1);
@@ -292,12 +240,11 @@ public class InterpolatedCubeChunk : MonoBehaviour
         var key = (cx, cy, cz);
         if (cache.TryGetValue(key, out var cached)) return cached;
 
-        // Sample density at the 8 surrounding voxel positions.
-        float[] d = new float[8];
+        Span<float> d = stackalloc float[8];
         for (int i = 0; i < 8; i++)
         {
             (int ox, int oy, int oz) = CubeCornerOffsets[i];
-            d[i] = GetCornerDensity(cx + ox, cy + oy, cz + oz);
+            d[i] = LookupDensity(cx + ox, cy + oy, cz + oz);
         }
 
         float sx = 0f, sy = 0f, sz = 0f;
@@ -325,52 +272,35 @@ public class InterpolatedCubeChunk : MonoBehaviour
         return result;
     }
 
-    public void BakeDensityGrid()
-    {
-        for (int x = -1; x <= ChunkWidth;  x++)
-        for (int y = -1; y <= ChunkHeight; y++)
-        for (int z = -1; z <= ChunkDepth;  z++)
-            _densityGrid[(x + 1) * DensityGridY * DensityGridZ + (y + 1) * DensityGridZ + (z + 1)] = ComputeDensity(x, y, z);
-    }
-
     private float LookupDensity(int x, int y, int z)
         => _densityGrid[(x + 1) * DensityGridY * DensityGridZ + (y + 1) * DensityGridZ + (z + 1)];
 
-    private float GetCornerDensity(int x, int y, int z) => LookupDensity(x, y, z);
-
     private float ComputeDensity(int localX, int localY, int localZ)
     {
-        // TODO sample per block density instead of binary solid/air, to get better interpolation and smoother caves.
-
-        // return GetVoxel(localX, localY, localZ) != 0 ? 1f : -1f;
-
         int worldChunkX = chunkPosition.X * ChunkWidth;
         int worldChunkY = chunkPosition.Y * ChunkHeight;
         int worldChunkZ = chunkPosition.Z * ChunkDepth;
 
         float worldX = worldChunkX + localX;
         float worldY = worldChunkY + localY;
-        float worldZ  = worldChunkZ + localZ;
+        float worldZ = worldChunkZ + localZ;
 
-        // add gradient from bottom up so terrain is much more likely to be solid near the bottom and less likely near the top
         float normalizedY = worldY / WorldHeight;
-
         float heightCurveValue = voxelWorld.HeightCurve.Evaluate(normalizedY);
 
-        float groundHeight = 20f; // base ground height
-
-        // add gradient from bottom up so terrain is much more likely to be solid near the bottom and less likely near the top
+        float groundHeight = 20f;
         float normalizedGroundY = worldY / groundHeight;
 
-        float varianceFrequency = 1.5f; // controls horizontal feature size`
-        float heightVariation = Maths.Clamp((voxelWorld.noise.GetNoise(worldX * varianceFrequency, worldZ * varianceFrequency) + 1f) * 0.5f * normalizedGroundY * groundHeight,
+        float varianceFrequency = 1.5f;
+        float heightVariation = Maths.Clamp(
+            (voxelWorld.noise.GetNoise(worldX * varianceFrequency, worldZ * varianceFrequency) + 1f) * 0.5f * normalizedGroundY * groundHeight,
             0f, groundHeight
         ) + 1f;
 
         float heightVariationStrengthFrequency = 0.5f;
         float heightVariationStrengthNoise = (voxelWorld.noise.GetNoise(worldX * heightVariationStrengthFrequency, worldY * heightVariationStrengthFrequency, worldZ * heightVariationStrengthFrequency) + 1f) * 0.5f;
 
-        float frequency = 2f; // controls horizontal feature size
+        float frequency = 2f;
         return Maths.Clamp(voxelWorld.noise.GetNoise(worldX * frequency, worldY * frequency, worldZ * frequency) + heightCurveValue + (heightVariation * heightVariationStrengthNoise), -1f, 1f);
     }
 }
