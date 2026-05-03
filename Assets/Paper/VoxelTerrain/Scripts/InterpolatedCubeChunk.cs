@@ -25,7 +25,7 @@ namespace Paper.VoxelTerrain;
 public class InterpolatedCubeChunk : MonoBehaviour
 {
     private const int ChunkWidth  = 16;
-    private const int ChunkHeight = 48; // terrain peaks around y=20; 48 gives safe headroom
+    private const int ChunkHeight = 128; // terrain peaks around y=20; 48 gives safe headroom
     private const int ChunkDepth  = 16;
 
     private const int WorldHeight = 256; // used for normalizing world-Y when sampling noise
