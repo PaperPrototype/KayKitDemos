@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Auburn.FastNoiseLite;
+using System.Diagnostics;
 
 namespace Paper.VoxelTerrain;
 
@@ -37,6 +38,8 @@ public class VoxelWorld : MonoBehaviour
 
     private Int3 _lastPlayerChunk = new(int.MaxValue, 0, int.MaxValue);
 
+    Stopwatch _stopwatch = new Stopwatch();
+
     public override void OnEnable()
     {
         noise = new FastNoiseLite();
@@ -49,7 +52,8 @@ public class VoxelWorld : MonoBehaviour
     {
         if (Player is null) return;
 
-        while (_mainThreadQueue.TryDequeue(out var action))
+        // Process one upload per frame to avoid spiking when many Tasks finish at once
+        if (_mainThreadQueue.TryDequeue(out var action))
             action();
 
         ProcessChunkQueue();
@@ -74,6 +78,7 @@ public class VoxelWorld : MonoBehaviour
 
     private void UpdateChunksAroundPlayer(Int3 playerChunk)
     {
+        _stopwatch.Restart();
         _lastPlayerChunk = playerChunk;
 
         HashSet<Int3> desired = [];
@@ -103,8 +108,13 @@ public class VoxelWorld : MonoBehaviour
             _chunkLoadQueue.Enqueue(pos);
             _pendingChunks.Add(pos);
         }
+        _stopwatch.Stop();
+        Prowl.Runtime.Debug.Log("Update Chunks took " + _stopwatch.ElapsedMilliseconds + "ms");
 
+        _stopwatch.Restart();
         UpdateCollisionForChunks(playerChunk);
+        _stopwatch.Stop();
+        Prowl.Runtime.Debug.Log("Update Collision took " + _stopwatch.ElapsedMilliseconds + "ms");
     }
 
     private void ProcessChunkQueue()
@@ -135,6 +145,8 @@ public class VoxelWorld : MonoBehaviour
 
     private void CreateChunk(Int3 chunkPos)
     {
+        var sw = Stopwatch.StartNew();
+
         GameObject chunkGO = new($"Chunk_{chunkPos.X}_{chunkPos.Y}_{chunkPos.Z}");
         chunkGO.Transform.SetParent(Transform);
         chunkGO.Transform.Position = new Float3(
@@ -142,11 +154,14 @@ public class VoxelWorld : MonoBehaviour
             chunkPos.Y * ChunkHeight,
             chunkPos.Z * ChunkDepth
         );
-
         var chunk = chunkGO.AddComponent<InterpolatedCubeChunk>()!;
         chunk.Initialize(chunkPos, this);
         chunks[chunkPos] = chunk;
+        Prowl.Runtime.Debug.Log($"[{LoadMode}] GameObject+AddComponent: {sw.ElapsedMilliseconds}ms");
+
+        sw.Restart();
         Scene.Add(chunkGO);
+        Prowl.Runtime.Debug.Log($"[{LoadMode}] Scene.Add: {sw.ElapsedMilliseconds}ms");
 
         int dx = chunkPos.X - _lastPlayerChunk.X; if (dx < 0) dx = -dx;
         int dz = chunkPos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
@@ -154,8 +169,17 @@ public class VoxelWorld : MonoBehaviour
 
         if (LoadMode == ChunkLoadMode.SingleThreaded)
         {
+            sw.Restart();
             chunk.BakeDensityGrid();
-            chunk.ApplyMesh(chunk.BuildMeshData());
+            Prowl.Runtime.Debug.Log($"[SingleThreaded] BakeDensityGrid: {sw.ElapsedMilliseconds}ms");
+
+            sw.Restart();
+            var mesh = chunk.BuildMeshData();
+            Prowl.Runtime.Debug.Log($"[SingleThreaded] BuildMeshData: {sw.ElapsedMilliseconds}ms");
+
+            sw.Restart();
+            chunk.ApplyMesh(mesh);
+            Prowl.Runtime.Debug.Log($"[SingleThreaded] ApplyMesh: {sw.ElapsedMilliseconds}ms");
             return;
         }
 
@@ -164,12 +188,22 @@ public class VoxelWorld : MonoBehaviour
         // owned by the Task until ApplyMesh hands it to the main thread.
         Task.Run(() =>
         {
+            var tsw = Stopwatch.StartNew();
             chunk.BakeDensityGrid();
+            Prowl.Runtime.Debug.Log($"[Multithreaded Task] BakeDensityGrid: {tsw.ElapsedMilliseconds}ms");
+
+            tsw.Restart();
             var mesh = chunk.BuildMeshData();
+            Prowl.Runtime.Debug.Log($"[Multithreaded Task] BuildMeshData: {tsw.ElapsedMilliseconds}ms");
+
             _mainThreadQueue.Enqueue(() =>
             {
                 if (chunks.ContainsKey(chunkPos))
+                {
+                    var usw = Stopwatch.StartNew();
                     chunk.ApplyMesh(mesh);
+                    Prowl.Runtime.Debug.Log($"[Multithreaded Upload] ApplyMesh: {usw.ElapsedMilliseconds}ms");
+                }
             });
         });
     }
