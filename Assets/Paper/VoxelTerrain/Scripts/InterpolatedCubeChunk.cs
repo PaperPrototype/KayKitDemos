@@ -16,7 +16,6 @@ using Prowl.Runtime.Resources;
 using Prowl.Vector;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Paper.VoxelTerrain;
 
@@ -126,8 +125,6 @@ public class InterpolatedCubeChunk : MonoBehaviour
     // Safe to call from a background thread — only reads _densityGrid and creates a new Mesh object.
     public Mesh? BuildMeshData()
     {
-        var stopWatch = Stopwatch.StartNew();
-
         List<Float3> vertices  = new(2048);
         List<uint>   triangles = new(3072);
         List<Float2> uvs       = new(2048);
@@ -165,8 +162,6 @@ public class InterpolatedCubeChunk : MonoBehaviour
         mesh.RecalculateBounds();
         mesh.RecalculateTangents();
 
-        stopWatch.Stop();
-        Prowl.Runtime.Debug.Log("ICube Meshing took " + stopWatch.ElapsedMilliseconds + "ms");
         return mesh;
     }
 

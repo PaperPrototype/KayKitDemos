@@ -238,7 +238,7 @@
             "Material": {
               "AssetID": "59d99493-81c1-45f2-b1c6-e4fc803560ca"
             },
-            "RenderDistance": 3,
+            "RenderDistance": 10,
             "CollisionDistance": 1,
             "LoadMode": 1,
             "noise": NULL,

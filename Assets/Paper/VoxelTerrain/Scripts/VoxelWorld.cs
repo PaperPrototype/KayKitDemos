@@ -2,11 +2,10 @@ using Prowl.Runtime;
 using Prowl.Runtime.Resources;
 using Prowl.Vector;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Auburn.FastNoiseLite;
-using System.Diagnostics;
 
 namespace Paper.VoxelTerrain;
 
@@ -32,13 +31,20 @@ public class VoxelWorld : MonoBehaviour
     private Dictionary<Int3, InterpolatedCubeChunk> chunks = [];
     private Queue<Int3> _chunkLoadQueue = new();
     private HashSet<Int3> _pendingChunks = new();
-    private readonly ConcurrentQueue<Action> _mainThreadQueue = new();
+
+    // Lockless: each pending chunk holds its Task directly — no queue, no locks.
+    // The main thread checks IsCompleted each frame without blocking.
+    private readonly List<(Int3 pos, InterpolatedCubeChunk chunk, long goMs, long addMs,
+        Task<(Mesh? mesh, long bakeMs, long buildMs)> task)> _pendingTasks = [];
+
+    // Timing accumulators for rolling average
+    private int  _logCount;
+    private long _totalGoMs, _totalAddMs, _totalBakeMs, _totalBuildMs, _totalApplyMs;
+    private const int LogEvery = 10;
 
     public FastNoiseLite noise;
 
     private Int3 _lastPlayerChunk = new(int.MaxValue, 0, int.MaxValue);
-
-    Stopwatch _stopwatch = new Stopwatch();
 
     public override void OnEnable()
     {
@@ -52,9 +58,29 @@ public class VoxelWorld : MonoBehaviour
     {
         if (Player is null) return;
 
-        // Process one upload per frame to avoid spiking when many Tasks finish at once
-        if (_mainThreadQueue.TryDequeue(out var action))
-            action();
+        // Check pending tasks for completion — lockless, no blocking
+        for (int i = 0; i < _pendingTasks.Count; i++)
+        {
+            var (pos, ch, goMs, addMs, task) = _pendingTasks[i];
+            if (!task.IsCompleted) continue;
+
+            _pendingTasks.RemoveAt(i);
+
+            if (task.IsFaulted)
+            {
+                Prowl.Runtime.Debug.Log($"[Multithreaded] Chunk {pos} failed: {task.Exception?.GetBaseException().Message}");
+                break;
+            }
+
+            if (chunks.ContainsKey(pos))
+            {
+                var (mesh, bakeMs, buildMs) = task.Result;
+                var sw = Stopwatch.StartNew();
+                ch.ApplyMesh(mesh);
+                LogTiming(goMs, addMs, bakeMs, buildMs, sw.ElapsedMilliseconds);
+            }
+            break; // one upload per frame
+        }
 
         ProcessChunkQueue();
 
@@ -66,7 +92,7 @@ public class VoxelWorld : MonoBehaviour
         if (playerChunk != _lastPlayerChunk)
         {
             UpdateChunksAroundPlayer(playerChunk);
-            ProcessChunkQueue(); // immediately load the new player chunk on boundary crossing
+            ProcessChunkQueue();
         }
     }
 
@@ -78,7 +104,6 @@ public class VoxelWorld : MonoBehaviour
 
     private void UpdateChunksAroundPlayer(Int3 playerChunk)
     {
-        _stopwatch.Restart();
         _lastPlayerChunk = playerChunk;
 
         HashSet<Int3> desired = [];
@@ -108,13 +133,8 @@ public class VoxelWorld : MonoBehaviour
             _chunkLoadQueue.Enqueue(pos);
             _pendingChunks.Add(pos);
         }
-        _stopwatch.Stop();
-        Prowl.Runtime.Debug.Log("Update Chunks took " + _stopwatch.ElapsedMilliseconds + "ms");
 
-        _stopwatch.Restart();
         UpdateCollisionForChunks(playerChunk);
-        _stopwatch.Stop();
-        Prowl.Runtime.Debug.Log("Update Collision took " + _stopwatch.ElapsedMilliseconds + "ms");
     }
 
     private void ProcessChunkQueue()
@@ -146,7 +166,6 @@ public class VoxelWorld : MonoBehaviour
     private void CreateChunk(Int3 chunkPos)
     {
         var sw = Stopwatch.StartNew();
-
         GameObject chunkGO = new($"Chunk_{chunkPos.X}_{chunkPos.Y}_{chunkPos.Z}");
         chunkGO.Transform.SetParent(Transform);
         chunkGO.Transform.Position = new Float3(
@@ -157,11 +176,11 @@ public class VoxelWorld : MonoBehaviour
         var chunk = chunkGO.AddComponent<InterpolatedCubeChunk>()!;
         chunk.Initialize(chunkPos, this);
         chunks[chunkPos] = chunk;
-        Prowl.Runtime.Debug.Log($"[{LoadMode}] GameObject+AddComponent: {sw.ElapsedMilliseconds}ms");
+        long goMs = sw.ElapsedMilliseconds;
 
         sw.Restart();
         Scene.Add(chunkGO);
-        Prowl.Runtime.Debug.Log($"[{LoadMode}] Scene.Add: {sw.ElapsedMilliseconds}ms");
+        long addMs = sw.ElapsedMilliseconds;
 
         int dx = chunkPos.X - _lastPlayerChunk.X; if (dx < 0) dx = -dx;
         int dz = chunkPos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
@@ -171,41 +190,61 @@ public class VoxelWorld : MonoBehaviour
         {
             sw.Restart();
             chunk.BakeDensityGrid();
-            Prowl.Runtime.Debug.Log($"[SingleThreaded] BakeDensityGrid: {sw.ElapsedMilliseconds}ms");
+            long bakeMs = sw.ElapsedMilliseconds;
 
             sw.Restart();
             var mesh = chunk.BuildMeshData();
-            Prowl.Runtime.Debug.Log($"[SingleThreaded] BuildMeshData: {sw.ElapsedMilliseconds}ms");
+            long buildMs = sw.ElapsedMilliseconds;
 
             sw.Restart();
             chunk.ApplyMesh(mesh);
-            Prowl.Runtime.Debug.Log($"[SingleThreaded] ApplyMesh: {sw.ElapsedMilliseconds}ms");
+            long applyMs = sw.ElapsedMilliseconds;
+
+            LogTiming(goMs, addMs, bakeMs, buildMs, applyMs);
             return;
         }
 
         // BakeDensityGrid and BuildMeshData are safe off-thread:
-        // noise/curve reads are stateless, and the Mesh object is exclusively
-        // owned by the Task until ApplyMesh hands it to the main thread.
-        Task.Run(() =>
+        // noise/curve reads are stateless, and the Mesh is exclusively
+        // owned by the Task until IsCompleted is true and we call ApplyMesh.
+        var task = Task.Run<(Mesh? mesh, long bakeMs, long buildMs)>(() =>
         {
             var tsw = Stopwatch.StartNew();
             chunk.BakeDensityGrid();
-            Prowl.Runtime.Debug.Log($"[Multithreaded Task] BakeDensityGrid: {tsw.ElapsedMilliseconds}ms");
+            long bakeMs = tsw.ElapsedMilliseconds;
 
             tsw.Restart();
             var mesh = chunk.BuildMeshData();
-            Prowl.Runtime.Debug.Log($"[Multithreaded Task] BuildMeshData: {tsw.ElapsedMilliseconds}ms");
+            long buildMs = tsw.ElapsedMilliseconds;
 
-            _mainThreadQueue.Enqueue(() =>
-            {
-                if (chunks.ContainsKey(chunkPos))
-                {
-                    var usw = Stopwatch.StartNew();
-                    chunk.ApplyMesh(mesh);
-                    Prowl.Runtime.Debug.Log($"[Multithreaded Upload] ApplyMesh: {usw.ElapsedMilliseconds}ms");
-                }
-            });
+            return (mesh, bakeMs, buildMs);
         });
+
+        _pendingTasks.Add((chunkPos, chunk, goMs, addMs, task));
+    }
+
+    private void LogTiming(long goMs, long addMs, long bakeMs, long buildMs, long applyMs)
+    {
+        _totalGoMs    += goMs;
+        _totalAddMs   += addMs;
+        _totalBakeMs  += bakeMs;
+        _totalBuildMs += buildMs;
+        _totalApplyMs += applyMs;
+        _logCount++;
+
+        if (_logCount < LogEvery) return;
+
+        float n = LogEvery;
+        Prowl.Runtime.Debug.Log(
+            $"[{LoadMode}] Avg over {LogEvery} chunks — " +
+            $"GameObject: {_totalGoMs/n:F1}ms  " +
+            $"Scene.Add: {_totalAddMs/n:F1}ms  " +
+            $"Bake: {_totalBakeMs/n:F1}ms  " +
+            $"Build: {_totalBuildMs/n:F1}ms  " +
+            $"Apply: {_totalApplyMs/n:F1}ms");
+
+        _totalGoMs = _totalAddMs = _totalBakeMs = _totalBuildMs = _totalApplyMs = 0;
+        _logCount = 0;
     }
 
     private void DestroyChunk(Int3 chunkPos)
