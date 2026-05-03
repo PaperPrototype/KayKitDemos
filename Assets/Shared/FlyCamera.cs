@@ -20,6 +20,9 @@ public class FlyCamera : MonoBehaviour
 
     public override void Update()
     {
+        if (Input.GetMouseButtonDown(0)) Input.LockCursor();
+        if (Input.GetKeyDown(KeyCode.Escape)) Input.UnlockCursor();
+
         Float2 mouseDelta = Input.MouseDelta;
         _yaw += mouseDelta.X * LookSensitivity;
         _pitch += mouseDelta.Y * LookSensitivity;
