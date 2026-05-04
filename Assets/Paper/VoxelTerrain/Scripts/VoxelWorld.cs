@@ -76,7 +76,11 @@ public class VoxelWorld : MonoBehaviour
             {
                 var (mesh, bakeMs, buildMs) = task.Result;
                 var sw = Stopwatch.StartNew();
-                ch.ApplyMesh(mesh);
+                ch.SetMesh(mesh);
+                int dx = pos.X - _lastPlayerChunk.X; if (dx < 0) dx = -dx;
+                int dz = pos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
+                if (dx <= CollisionDistance && dz <= CollisionDistance)
+                    ch.AddCollision();
                 LogTiming(goMs, addMs, bakeMs, buildMs, sw.ElapsedMilliseconds);
             }
             break; // one upload per frame
@@ -152,7 +156,8 @@ public class VoxelWorld : MonoBehaviour
         {
             int dx = pos.X - playerChunk.X; if (dx < 0) dx = -dx;
             int dz = pos.Z - playerChunk.Z; if (dz < 0) dz = -dz;
-            chunk.SetCollisionEnabled(dx <= CollisionDistance && dz <= CollisionDistance);
+            bool enabled = dx <= CollisionDistance && dz <= CollisionDistance;
+            if (enabled) chunk.AddCollision();
         }
     }
 
@@ -182,10 +187,6 @@ public class VoxelWorld : MonoBehaviour
         Scene.Add(chunkGO);
         long addMs = sw.ElapsedMilliseconds;
 
-        int dx = chunkPos.X - _lastPlayerChunk.X; if (dx < 0) dx = -dx;
-        int dz = chunkPos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
-        chunk.SetCollisionEnabled(dx <= CollisionDistance && dz <= CollisionDistance);
-
         if (LoadMode == ChunkLoadMode.SingleThreaded)
         {
             sw.Restart();
@@ -197,16 +198,21 @@ public class VoxelWorld : MonoBehaviour
             long buildMs = sw.ElapsedMilliseconds;
 
             sw.Restart();
-            chunk.ApplyMesh(mesh);
+            chunk.SetMesh(mesh);
             long applyMs = sw.ElapsedMilliseconds;
 
             LogTiming(goMs, addMs, bakeMs, buildMs, applyMs);
+
+            int dx = chunkPos.X - _lastPlayerChunk.X; if (dx < 0) dx = -dx;
+            int dz = chunkPos.Z - _lastPlayerChunk.Z; if (dz < 0) dz = -dz;
+            bool colEnabled = dx <= CollisionDistance && dz <= CollisionDistance;
+            if (colEnabled) chunk.AddCollision();
             return;
         }
 
         // BakeDensityGrid and BuildMeshData are safe off-thread:
         // noise/curve reads are stateless, and the Mesh is exclusively
-        // owned by the Task until IsCompleted is true and we call ApplyMesh.
+        // owned by the Task until IsCompleted is true and we call SetMesh.
         var task = Task.Run<(Mesh? mesh, long bakeMs, long buildMs)>(() =>
         {
             var tsw = Stopwatch.StartNew();

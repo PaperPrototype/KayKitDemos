@@ -39,10 +39,10 @@ public class InterpolatedCubeChunk : MonoBehaviour
     private Int3 chunkPosition;
     private MeshRenderer? meshRenderer;
     private Rigidbody3D? rigidbody3D;
-    private MeshCollider? meshCollider;
+    private VoxelCollider? meshCollider;
     private VoxelWorld voxelWorld;
     private Mesh? _cachedMesh;
-    private bool _collisionEnabled;
+    // private bool _collisionEnabled;
 
     // The 8 voxels that share a grid corner, expressed as offsets in {-1, 0} per axis.
     private static readonly (int ox, int oy, int oz)[] CubeCornerOffsets =
@@ -81,36 +81,6 @@ public class InterpolatedCubeChunk : MonoBehaviour
         meshRenderer.Material = world.Material;
         // Physics components are created lazily when collision is first enabled
         // with a valid mesh, to avoid "MeshCollider: no mesh assigned" warnings.
-    }
-
-    public void SetCollisionEnabled(bool enabled)
-    {
-        if (_collisionEnabled == enabled) return;
-        _collisionEnabled = enabled;
-
-        if (enabled)
-        {
-            if (_cachedMesh is not null)
-            {
-                if (meshCollider is null) CreatePhysicsComponents();
-                else meshCollider.Mesh = _cachedMesh;
-            }
-            // If _cachedMesh is null the next ApplyMesh call will wire it up.
-        }
-        else if (meshCollider is not null)
-        {
-            meshCollider.Mesh = null!;
-        }
-    }
-
-    private void CreatePhysicsComponents()
-    {
-        rigidbody3D = AddComponent<Rigidbody3D>();
-        rigidbody3D.Mass = 1f;
-        rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
-        meshCollider = AddComponent<MeshCollider>();
-        meshCollider.Convex = false;
-        meshCollider.Mesh = _cachedMesh;
     }
 
     public void BakeDensityGrid()
@@ -165,27 +135,40 @@ public class InterpolatedCubeChunk : MonoBehaviour
         return mesh;
     }
 
-    // Applies a completed mesh (or null for empty) to the renderer and physics. Must run on main thread.
-    public void ApplyMesh(Mesh? mesh)
+    // Sets the chunk's mesh on the renderer only. Must run on main thread.
+    // Pass null to clear the chunk (e.g. when a rebuild produces an empty chunk after voxel edits).
+    public void SetMesh(Mesh? mesh)
     {
         _cachedMesh = mesh;
 
         if (mesh is null)
         {
-            if (meshRenderer?.Mesh.Res != null)
-                meshRenderer.Mesh = null!;
-            if (meshCollider is not null)
-                meshCollider.Mesh = null!;
+            // Clear a previously assigned mesh so a rebuilt empty chunk doesn't leave stale geometry visible.
+            meshRenderer!.Mesh = default;
+            meshCollider?.ComputeColliderShape(null);
             return;
         }
 
         meshRenderer!.Mesh = mesh;
+    }
 
-        if (_collisionEnabled)
+    // Enables physics collision for this chunk using the current cached mesh.
+    // Only called for chunks within CollisionDistance of the player — skipped for distant chunks.
+    // Physics components are created lazily here rather than in SetMesh so distant chunks
+    // never pay the cost of building a triangle mesh collider.
+    public void AddCollision()
+    {
+        if (_cachedMesh is null) return;
+
+        if (rigidbody3D is null)
         {
-            if (meshCollider is null) CreatePhysicsComponents();
-            else meshCollider.Mesh = mesh;
+            rigidbody3D = AddComponent<Rigidbody3D>();
+            rigidbody3D.Mass = 1f;
+            rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
+            meshCollider = AddComponent<VoxelCollider>();
         }
+
+        meshCollider!.ComputeColliderShape(_cachedMesh);
     }
 
     private void AddFace(
