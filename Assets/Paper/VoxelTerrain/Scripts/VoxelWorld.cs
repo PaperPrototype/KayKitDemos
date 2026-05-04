@@ -217,6 +217,8 @@ public class VoxelWorld : MonoBehaviour
             var mesh = chunk.BuildMeshData();
             long buildMs = tsw.ElapsedMilliseconds;
 
+            if (mesh is not null) chunk.BakeCollisionData(mesh);
+
             return (mesh, bakeMs, buildMs);
         });
 
