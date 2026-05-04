@@ -16,6 +16,7 @@ using Prowl.Runtime.Resources;
 using Prowl.Vector;
 using System;
 using System.Collections.Generic;
+using Jitter2.Collision.Shapes;
 
 namespace Paper.VoxelTerrain;
 
@@ -43,6 +44,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
     private VoxelWorld voxelWorld;
     private Mesh? _cachedMesh;
     private bool _collisionEnabled;
+    private TriangleMesh? _bakedCollisionMesh;
 
     // The 8 voxels that share a grid corner, expressed as offsets in {-1, 0} per axis.
     private static readonly (int ox, int oy, int oz)[] CubeCornerOffsets =
@@ -93,7 +95,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
             if (_cachedMesh is not null)
             {
                 if (meshCollider is null) CreatePhysicsComponents();
-                else meshCollider.Mesh = _cachedMesh;
+                else AssignMeshToCollider(_cachedMesh);
             }
             // If _cachedMesh is null the next ApplyMesh call will wire it up.
         }
@@ -103,6 +105,13 @@ public class InterpolatedCubeChunk : MonoBehaviour
         }
     }
 
+    // Safe to call from a background thread after BuildMeshData. Pre-bakes the physics BVH
+    // so CreatePhysicsComponents can use it without stalling the main thread.
+    public void BakeCollisionData(Mesh mesh)
+    {
+        _bakedCollisionMesh = MeshCollider.BakeMesh(mesh);
+    }
+
     private void CreatePhysicsComponents()
     {
         rigidbody3D = AddComponent<Rigidbody3D>();
@@ -110,7 +119,17 @@ public class InterpolatedCubeChunk : MonoBehaviour
         rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
         meshCollider = AddComponent<MeshCollider>();
         meshCollider.Convex = false;
-        meshCollider.Mesh = _cachedMesh;
+        meshCollider!.AutoBake = false;
+        AssignMeshToCollider(_cachedMesh!);
+    }
+
+    private void AssignMeshToCollider(Mesh mesh)
+    {
+        if (_bakedCollisionMesh is not null)
+        {
+            meshCollider.SetTriangleMesh(_bakedCollisionMesh);
+        }
+        meshCollider!.Mesh = mesh;
     }
 
     public void BakeDensityGrid()
@@ -184,7 +203,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
         if (_collisionEnabled)
         {
             if (meshCollider is null) CreatePhysicsComponents();
-            else meshCollider.Mesh = mesh;
+            else AssignMeshToCollider(mesh);
         }
     }
 
