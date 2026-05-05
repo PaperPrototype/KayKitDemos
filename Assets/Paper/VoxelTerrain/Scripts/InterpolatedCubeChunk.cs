@@ -144,6 +144,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
         {
             // Clear a previously assigned mesh so a rebuilt empty chunk doesn't leave stale geometry visible.
             meshRenderer!.Mesh = default;
+
             meshCollider?.ComputeColliderShape(null);
             return;
         }
@@ -163,6 +164,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
         {
             rigidbody3D = AddComponent<Rigidbody3D>();
             rigidbody3D.Mass = 1f;
+            rigidbody3D.AffectedByGravity = false;
             rigidbody3D.MotionType = Jitter2.Dynamics.MotionType.Static;
             meshCollider = AddComponent<VoxelCollider>();
         }

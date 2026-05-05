@@ -18,10 +18,10 @@ public sealed class VoxelCollider : Collider
     // Cached convex hull shape and its tessellation for gizmo drawing
 
     [SerializeIgnore] private Mesh? _mesh;
-    [SerializeIgnore] private bool _convex;
+    [SerializeIgnore] private bool _convex = false;
     [SerializeIgnore] private ConvexHullShape? _cachedConvexShape;
     [SerializeIgnore] private List<JTriangle>? _cachedHullTris;
-    [SerializeIgnore] private RigidBodyShape[] _cachedRigidBodyShapes = null;
+    [SerializeIgnore] private RigidBodyShape[]? _cachedRigidBodyShapes;
 
     public void ComputeColliderShape(Mesh? mesh, bool convex = false)
     {
@@ -31,6 +31,7 @@ public sealed class VoxelCollider : Collider
         if (mesh is null)
         {
             _cachedRigidBodyShapes = [];
+            OnValidate();
             return;
         }
 
@@ -54,6 +55,8 @@ public sealed class VoxelCollider : Collider
                 shapes[i] = new TriangleShape(triMesh, i);
             _cachedRigidBodyShapes = shapes;
         }
+
+        OnValidate();
     }
 
     public override RigidBodyShape[] CreateShapes()
