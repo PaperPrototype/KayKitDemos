@@ -19,6 +19,7 @@ public class VoxelWorld : MonoBehaviour
 
     public int RenderDistance = 4;
     public int CollisionDistance = 1;
+
     public ChunkLoadMode LoadMode = ChunkLoadMode.Multithreaded;
 
     private const int ChunkWidth  = 16;

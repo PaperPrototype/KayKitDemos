@@ -1,11 +1,6 @@
-// This file is part of the Prowl Game Engine
-// Licensed under the MIT License. See the LICENSE file in the project root for details.
-
 using System.Collections.Generic;
-
 using Jitter2.Collision.Shapes;
 using Jitter2.LinearMath;
-
 using Prowl.Echo;
 using Prowl.Runtime;
 using Prowl.Runtime.Resources;
@@ -20,7 +15,7 @@ namespace Paper.VoxelTerrain;
 [ComponentIcon("\uf1b3")] // Cubes
 public sealed class VoxelCollider : Collider
 {
-    // Cached convex hull shape and its tessellation for gizmo drawing — rebuilt when mesh or convex flag changes.
+    // Cached convex hull shape and its tessellation for gizmo drawing
 
     [SerializeIgnore] private Mesh? _mesh;
     [SerializeIgnore] private bool _convex;
@@ -64,11 +59,6 @@ public sealed class VoxelCollider : Collider
     public override RigidBodyShape[] CreateShapes()
     {
         return _cachedRigidBodyShapes;
-    }
-
-    public override void OnValidate()
-    {
-        base.OnValidate();
     }
 
     public override void DrawGizmos()

@@ -32,7 +32,7 @@ public class InterpolatedCubeChunk : MonoBehaviour
 
     // Density grid covers local coords [-1, ChunkWidth] x [-1, ChunkHeight] x [-1, ChunkDepth]
     private const int DensityGridX = ChunkWidth  + 2; // 18
-    private const int DensityGridY = ChunkHeight + 2; // 50
+    private const int DensityGridY = ChunkHeight + 2; // 130
     private const int DensityGridZ = ChunkDepth  + 2; // 18
     private readonly float[] _densityGrid = new float[DensityGridX * DensityGridY * DensityGridZ];
 
@@ -42,7 +42,6 @@ public class InterpolatedCubeChunk : MonoBehaviour
     private VoxelCollider? meshCollider;
     private VoxelWorld voxelWorld;
     private Mesh? _cachedMesh;
-    // private bool _collisionEnabled;
 
     // The 8 voxels that share a grid corner, expressed as offsets in {-1, 0} per axis.
     private static readonly (int ox, int oy, int oz)[] CubeCornerOffsets =
